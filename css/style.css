@@ -387,6 +387,13 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .xtag .flag { width: 18px; height: 13px; }
 @media (max-width: 520px) { .pl { font-size: .72rem; padding: 3px 6px; } .pl.miss .combo { width: 120px; } }
 
+.kosum .path { margin-top: 14px; }
+.kosum .mhead { display: none; }
+.kosum .mhead, .kosum .mrow { grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr); }
+.kosum .leg, .kosum .legs-m { display: none; }
+.kosum .mrow { padding: 4px 10px; font-size: .86rem; }
+.kosum .mtable { gap: 4px; }
+
 /* Storytelling */
 .story { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 6px 22px; font-size: 1.08rem; line-height: 1.65; animation: fadeUp .5s ease both; }
 .story p { animation: fadeUp .6s ease both; }

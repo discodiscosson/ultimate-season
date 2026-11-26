@@ -91,7 +91,7 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
       return { total: picks * pickPts(r) + marks + rivals * RIVAL_POINTS, picks, hit, wrong, marks, finalists: finalists.length, rivals };
     }
     // Results are shown per round, except in hidden mode where they are revealed round by round after the final
-    const shown = (r) => (cfg.hidden ? S.reveal && r <= S.r : S.picksIn[r]);
+    const shown = (r) => (cfg.hidden ? S.reveal && (S.overview || r <= S.r) : S.picksIn[r]);
     const points = () => ST.reduce((s, _, r) => s + (cfg.hidden ? (shown(r) ? score(r).total : 0)
       : S.submitted[r] ? score(r).total : S.picksIn[r] ? score(r).picks * pickPts(r) : 0), 0);
 
@@ -364,7 +364,7 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         ask = r < LAST ? 'Picks locked in' : `Your champion: ${nm(S.picks[r][0])}`;
         hint = r < LAST
           ? 'Your picks go through to the next round, right or wrong. The results are revealed after the final.'
-          : 'Now let’s see how it really went, round by round.';
+          : 'Now let’s see how it really went.';
         foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'Reveal the results'}</button>`;
       } else if (cfg.hidden && S.reveal) {
         const unreal = ST[r].ties.filter((_, i) => { const [a, b] = tieTeams(r, i), re = realTeams(r, i); return !(re.includes(a) && re.includes(b)); }).length;
@@ -463,8 +463,22 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
       resolve({ score: points(), max: MAX, lines: out });
     }
 
+    function overviewHTML() {
+      const champ = ST[LAST].ties[0]?.winner, mine = S.picks[LAST][0];
+      const anyUnreal = ST.some((_, r) => ST[r].ties.some((__, i) => { const [a, b] = tieTeams(r, i), re = realTeams(r, i); return !(re.includes(a) && re.includes(b)); }));
+      const rounds = ST.map((st, r) => {
+        const sc = score(r);
+        return `<h3 class="path">${esc(st.name)} <span class="muted">${sc.picks}/${st.ties.length} right, ${sc.total} pts</span></h3>${advTableHTML(r)}`;
+      }).join('');
+      return `<div class="bar"><h2>${esc(cfg.doneTitle)}</h2><span class="score">${points()} / ${MAX} pts</span></div>
+        ${champ ? `<p class="champ">${flagHTML(T[champ].country)} ${esc(nm(champ))} are the champions</p>` : ''}
+        <p class="hint">${mine ? `Your champion: ${esc(nm(mine))}${mine === champ ? ' ✓' : ''}.` : ''}${anyUnreal ? ' Dashed ties never happened in your bracket.' : ''}</p>
+        <div class="kosum">${rounds}</div>
+        <div class="foot"><span></span><button class="btn" data-act="q-overdone">See your results</button></div>`;
+    }
+
     function render() {
-      el.innerHTML = S.summary ? summaryHTML() : roundHTML();
+      el.innerHTML = S.overview ? overviewHTML() : S.summary ? summaryHTML() : roundHTML();
       S.justDrew = false; S.justDone = null; S.askAnim = false;
       onStep?.(S.summary ? ST.length : S.r);
     }
@@ -627,7 +641,8 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
           if (cfg.skipSummary) { finishGame(); return; }
           S.summary = true; render(); scrollTo(0, 0); return;
         }
-        if (cfg.hidden && S.r === LAST) { S.reveal = true; S.r = 0; render(); scrollTo(0, 0); return; }
+        // Hidden mode: after the final, one overview page with every round's results
+        if (cfg.hidden && S.r === LAST) { S.reveal = true; S.overview = true; render(); scrollTo(0, 0); return; }
         if (S.r < LAST) {
           S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : firstUnpicked(S.r);
           // Knockouts: the winners move into the next round with the draw animation, even without a story text
@@ -637,7 +652,7 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         }
         else if (cfg.skipSummary) finishGame();
         else { S.summary = true; render(); scrollTo(0, 0); }
-      } else if (act === 'q-done') finishGame();
+      } else if (act === 'q-done' || act === 'q-overdone') finishGame();
     });
 
     if (isCountry(S.r)) S.focus = firstOpenTie(S.r); else S.focus = firstUnpicked(S.r);

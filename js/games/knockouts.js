@@ -16,7 +16,7 @@ export const KNOCKOUTS = {
   autoDraw: true,
   hidden: true, // hard mode; set to false to reveal each round and send the real winners through
   newLabel: 'Straight from the league phase',
-  doneTitle: 'Knockout phase done',
+  doneTitle: 'Knockout phase: the results',
   skipSummary: true, // the season results page comes straight after the final
 };
 
