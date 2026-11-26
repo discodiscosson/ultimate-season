@@ -94,6 +94,10 @@ INTROS = {
        "[Europa League play-off round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#Play-off_round). "
        "The losers of the League Path were transferred to the "
        "[Europa League league phase](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#League_phase).",
+ 'q_po': "The draw for the play-off round was held on 4 August 2025. The first legs were played on 19 and 20 August, "
+         "and the second legs were played on 26 and 27 August 2025.\n\n"
+         "The winners of the ties advanced to the league phase. The losers were transferred to the "
+         "[Europa League league phase](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League_league_phase).",
 }
 
 SEEDED = ['che','liv','mci','bay','bar','tot','spo','ars']

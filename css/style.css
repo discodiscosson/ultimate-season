@@ -199,6 +199,10 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .tmain { display: inline-flex; align-items: center; gap: 8px; }
 .tsub { display: flex; gap: 6px; }
 .tsub:empty { display: none; }
+.tsub .combo { width: 200px; max-width: 100%; }
+.rv { font-size: .85rem; color: var(--muted); }
+.rv.empty { font-style: italic; opacity: .7; }
+.rv .cty { font-size: .85rem; }
 .trophy { font-size: .95em; }
 .mtable.adv .badge { font-size: .72rem; }
 .mrow.focus .tbtn { padding: 8px 10px; }

@@ -28,7 +28,7 @@ export function play({ el, season, start = 0, onStep }) {
     const hasRival = (r) => r === LAST && !isCountry(r);
     const hasFinalists = (r) => !isCountry(r) && r !== LAST;
     // Rounds shown as a results table (with story, draw and one tie in focus); the play-off still uses cards
-    const isTable = (r) => isCountry(r) || hasFinalists(r);
+    const isTable = () => true;
     const isFinalist = (t) => (T[t].finals || []).length > 0;
     const rivalsOf = (t) => T[t].rivals || [];
 
@@ -269,19 +269,38 @@ export function play({ el, season, start = 0, onStep }) {
       // Name, flag and tick on the first line; the final badge on its own line underneath
       const main = side === 0 ? `${tick}${name}${flag}` : `${flag}${name}${tick}`;
       const inner = `<span class="tmain">${main}</span><span class="tsub">${badge}</span>`;
+      let sub = badge;
+      if (hasRival(r) && pickIn && rivalsOf(t).length) {
+        const key = rk(t);
+        if (fin) sub = `<span class="rv">${rivalAnswer(t)}</span>`;
+        else if (S.focus === i) sub = comboHTML({ key, src: 'club', draft: S.drafts[key], invalid: S.touched[key] && S.drafts[key] && !S.sel[key], label: `Biggest rival of ${nm(t)}` });
+        else sub = S.sel[key] ? `<span class="rv">vs ${esc(S.sel[key])}</span>` : '<span class="rv empty">Rival?</span>';
+      }
+      const inner2 = `<span class="tmain">${main}</span><span class="tsub">${sub}</span>`;
       const act = !pickIn ? `data-act="q-pickt" data-i="${i}" data-t="${t}" aria-pressed="${pick === t}"`
-        : !fin ? `data-act="q-markt" data-t="${t}" aria-pressed="${marked}"` : '';
-      return act ? `<button class="${cls.join(' ')} t${side + 1}" ${act}>${inner}</button>` : `<div class="${cls.join(' ')} t${side + 1}">${inner}</div>`;
+        : !fin && hasFinalists(r) ? `data-act="q-markt" data-t="${t}" aria-pressed="${marked}"` : '';
+      return act ? `<button class="${cls.join(' ')} t${side + 1}" ${act}>${inner}</button>` : `<div class="${cls.join(' ')} t${side + 1}">${inner2}</div>`;
     }
+
+    const rivalPhase = (r) => hasRival(r) && S.picksIn[r] && !S.submitted[r];
+    const rivalTieDone = (r, i) => tieTeams(r, i).every((t) => !rivalsOf(t).length || S.sel[rk(t)]);
+    const firstRivalOpen = (r) => { const i = ST[r].ties.findIndex((_, k) => !rivalTieDone(r, k)); return i < 0 ? 0 : i; };
+    const nextRivalOpen = (r, from) => {
+      const n = ST[r].ties.length;
+      for (let k = 1; k <= n; k++) { const i = (from + k) % n; if (!rivalTieDone(r, i)) return i; }
+      return null;
+    };
 
     function advTableHTML(r) {
       const pickIn = S.picksIn[r];
       const rows = ST[r].ties.map((tie, i) => {
         const [a, b] = tieTeams(r, i);
-        const focused = !pickIn && S.focus === i;
+        const rp = rivalPhase(r);
+        const focused = (!pickIn || rp) && S.focus === i;
         const [l1, l2] = pickIn ? legsOf(tie) : ['', ''];
-        const cls = [focused && 'focus', pickIn && 'done', !pickIn && S.picks[r][i] && 'filled'].filter(Boolean).join(' ');
-        return `<div class="mrow ${cls}">
+        const cls = [focused && 'focus', pickIn && 'done', ((!pickIn && S.picks[r][i]) || (rp && rivalTieDone(r, i))) && 'filled'].filter(Boolean).join(' ');
+        const attrs = rp && !focused ? ` data-act="q-focus" data-i="${i}" role="button" tabindex="0"` : '';
+        return `<div class="mrow ${cls}"${attrs}>
           <div class="tc t1">${advTeam(r, i, a, tie, 0)}</div>
           <div class="agg">${pickIn ? aggText(tie) : '<span class="vs">–</span>'}${pickIn ? `<span class="legs-m">${[l1, l2].join(', ')}</span>` : ''}</div>
           <div class="tc t2">${advTeam(r, i, b, tie, 1)}</div>
@@ -289,6 +308,11 @@ export function play({ el, season, start = 0, onStep }) {
         </div>`;
       }).join('');
       return `<div class="mtable adv"><div class="mhead"><span class="t1">Team 1</span><span class="agg">Agg.</span><span class="t2">Team 2</span><span class="leg">1st leg</span><span class="leg">2nd leg</span></div>${rows}</div>`;
+    }
+
+    function advFoot(r) {
+      const rn = rivalTeams(r).length, rf = rivalTeams(r).filter((t) => S.sel[rk(t)]).length;
+      return `<span class="hint" style="margin:0">${rf} of ${rn} rivals</span><button class="btn" data-act="q-subrivals" ${rf === rn ? '' : 'disabled'}>Submit rivals</button>`;
     }
 
     function advRoundHTML(r) {
@@ -299,13 +323,19 @@ export function play({ el, season, start = 0, onStep }) {
         ask = 'Who went through?';
         hint = `Click the team that won each tie (${PICK_POINTS} pts each). The results are revealed when you submit.`;
         foot = `<span class="hint" style="margin:0">${picked} of ${n} picks</span><button class="btn" data-act="q-subpicks" ${picked === n ? '' : 'disabled'}>Submit picks</button>`;
+      } else if (!fin && hasRival(r)) {
+        ask = 'Who are their biggest rivals?';
+        hint = `You picked ${s.picks} of ${n} right. Now name each team’s biggest rival and pick it from the list (${RIVAL_POINTS} pt each).`;
+        foot = advFoot(r);
       } else if (!fin) {
         ask = 'Who has played in a final?';
         hint = `You picked ${s.picks} of ${n} right. Now click every team that has ever played in a European Cup or Champions League final (+1 for each one found, −1 for each wrong mark).`;
         foot = `<span class="hint" style="margin:0">${S.marks[r].size} marked</span><button class="btn" data-act="q-subfinal">Submit finalists</button>`;
       } else {
         ask = '';
-        hint = `${s.picks} of ${n} picks right. Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}. ${s.total} pts this round.`;
+        hint = hasRival(r)
+          ? `${s.picks} of ${n} picks right. Rivals: ${s.rivals} of ${rivalTeams(r).length}. ${s.total} pts this round.`
+          : `${s.picks} of ${n} picks right. Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}. ${s.total} pts this round.`;
         foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'See summary'}</button>`;
       }
       return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
@@ -332,7 +362,7 @@ export function play({ el, season, start = 0, onStep }) {
       const r = S.r, st = ST[r], sub = S.submitted[r];
       if (isTable(r) && S.phase[r] === 'intro') return introHTML(r);
       if (isTable(r) && S.phase[r] === 'draw') return drawHTML(r);
-      if (hasFinalists(r)) return advRoundHTML(r);
+      if (!isCountry(r)) return advRoundHTML(r);
       const ties = isCountry(r) ? null : st.ties.map((tie, i) => {
         const [a, b] = tie.slots.map((s) => s.team);
         const row = isCountry(r) ? (t) => countryRow(r, t, tie) : (t) => advanceRow(r, i, t, tie);
@@ -443,7 +473,12 @@ export function play({ el, season, start = 0, onStep }) {
         if (cell) { cell.textContent = nm(tieTeams(r, i)[side]); cell.classList.add('pop'); }
       }, 150);
     }
-    const updateFooter = () => { const f = el.querySelector('#q-foot'); if (f && !S.submitted[S.r]) f.innerHTML = footer(S.r); };
+    const updateFooter = () => {
+      const f = el.querySelector('#q-foot');
+      if (!f || S.submitted[S.r]) return;
+      if (rivalPhase(S.r)) f.innerHTML = advFoot(S.r);
+      else if (isCountry(S.r)) f.innerHTML = footer(S.r);
+    };
     const nextOpen = (after) => {
       const all = isCountry(S.r) ? NEW[S.r] : rivalTeams(S.r).map(rk);
       const i = after ? all.indexOf(after) + 1 : 0;
@@ -452,13 +487,17 @@ export function play({ el, season, start = 0, onStep }) {
 
     const focusTie = () => {
       const row = el.querySelector('.mrow.focus');
-      const input = row?.querySelector('input[data-cf], .tbtn');
+      const inputs = row ? [...row.querySelectorAll('input[data-cf], .tbtn')] : [];
+      const input = inputs.find((x) => x.dataset.cf && !S.sel[x.dataset.cf]) || inputs[0];
       if (input) input.focus(); else if (row) el.querySelector('[data-act="q-submit"]')?.focus();
     };
     bindCombos(el, S, {
       onChange: (k) => { S.touched[k] = true; updateFooter(); },
       onDone: (k) => {
-        if (!isCountry(S.r)) { focusField(el, nextOpen(k)); return; }
+        if (!isCountry(S.r)) {
+          if (rivalTieDone(S.r, S.focus)) { const n = nextRivalOpen(S.r, S.focus); if (n !== null) S.focus = n; }
+          render(); focusTie(); return;
+        }
         S.editing[k] = false;
         if (tieDone(S.r, S.focus)) { S.justDone = S.focus; const n = nextOpenTie(S.r, S.focus); if (n !== null) S.focus = n; }
         render(); focusTie();
@@ -492,9 +531,15 @@ export function play({ el, season, start = 0, onStep }) {
       }
       if (act === 'q-subpicks') {
         if (Object.keys(S.picks[r]).length !== ST[r].ties.length) return;
-        S.picksIn[r] = true; S.askAnim = true; render(); scrollTo(0, 0); return;
+        S.picksIn[r] = true; S.askAnim = true;
+        if (hasRival(r)) S.focus = firstRivalOpen(r);
+        render(); scrollTo(0, 0); if (hasRival(r)) focusTie(); return;
       }
       if (act === 'q-subfinal') { S.submitted[r] = true; render(); scrollTo(0, 0); return; }
+      if (act === 'q-subrivals') {
+        if (!rivalTeams(r).every((t) => S.sel[rk(t)])) return;
+        S.submitted[r] = true; render(); scrollTo(0, 0); return;
+      }
       if (act === 'q-edit') { S.editing[b.dataset.t] = true; render(); focusField(el, b.dataset.t); return; }
       if (act === 'q-pick') {
         S.picks[r][+b.dataset.i] = b.dataset.t;
@@ -512,14 +557,14 @@ export function play({ el, season, start = 0, onStep }) {
         render(); scrollTo(0, 0);
       } else if (act === 'q-next') {
         if (S.r < LAST) {
-          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : hasFinalists(S.r) ? firstUnpicked(S.r) : 0; render(); scrollTo(0, 0);
+          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : firstUnpicked(S.r); render(); scrollTo(0, 0);
           if (S.phase[S.r] === 'play') { if (isTable(S.r)) focusTie(); else focusField(el, nextOpen()); }
         }
         else { S.summary = true; render(); scrollTo(0, 0); }
       } else if (act === 'q-done') resolve({ score: points(), max: MAX, lines: lines() });
     });
 
-    if (isCountry(S.r)) S.focus = firstOpenTie(S.r); else if (hasFinalists(S.r)) S.focus = firstUnpicked(S.r);
+    if (isCountry(S.r)) S.focus = firstOpenTie(S.r); else S.focus = firstUnpicked(S.r);
     render();
     if (!S.summary && !S.submitted[S.r] && S.phase[S.r] === 'play') { if (isTable(S.r)) focusTie(); else focusField(el, nextOpen()); }
   });
