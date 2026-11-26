@@ -4,7 +4,7 @@
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from '../config.js';
 
 let client = null;
-function getClient() {
+export function getClient() {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY || !window.supabase) return null;
   client ||= window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   return client;

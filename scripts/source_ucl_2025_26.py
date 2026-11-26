@@ -79,8 +79,17 @@ MATCHDAYS = [
   ('bvb',0,2,'int'),('bru',3,0,'om'),('sge',0,2,'tot'),('bar',4,1,'cop'),('liv',6,0,'qar'),('mci',2,0,'gal'),
   ('paf',4,1,'sla'),('psg',1,1,'new'),('psv',1,2,'bay'),('usg',1,0,'ata'),('ben',4,2,'rma'),('nap',2,3,'che')]),
 ]
-# Starting XIs per match, keyed by (matchday, home, away): {'home': [11 names], 'away': [11 names]}, goalkeeper first.
+# Starting XIs per match, keyed by (matchday, home, away): {'home': [11 names], 'away': [11 names]}, goalkeeper first,
+# then each line left to right as seen on the pitch. FORMATIONS gives the shape (home, away) for each match.
 # Empty for now: the Missing XI game shows a placeholder until a match has line-ups.
+FORMATIONS = {
+ (1,'psv','usg'):('4-2-3-1','3-4-1-2'), (1,'tot','vil'):('4-3-3','4-4-2'), (1,'ath','ars'):('4-2-3-1','4-3-3'),
+ (1,'ben','qar'):('4-2-3-1','4-2-3-1'), (1,'juv','bvb'):('3-4-2-1','3-4-2-1'), (1,'rma','om'):('4-2-3-1','4-2-3-1'),
+ (1,'oly','paf'):('4-2-3-1','4-1-4-1'), (1,'sla','bod'):('4-2-3-1','4-3-3'), (1,'aja','int'):('4-3-3','3-5-2'),
+ (1,'liv','atm'):('4-2-3-1','4-4-2'), (1,'psg','ata'):('4-3-3','3-4-1-2'), (1,'bay','che'):('4-2-3-1','4-2-3-1'),
+ (1,'bru','mon'):('4-2-3-1','4-2-2-2'), (1,'cop','b04'):('4-4-2','3-4-2-1'), (1,'spo','kai'):('4-2-3-1','4-2-3-1'),
+ (1,'sge','gal'):('4-2-3-1','4-2-3-1'), (1,'new','bar'):('4-3-3','4-2-3-1'), (1,'mci','nap'):('4-1-4-1','4-1-4-1'),
+}
 # Matchday 1 line-ups (from Flashscore, surnames as shown there)
 LINEUPS = {
  (1,'psv','usg'): {'home': ['Kovar', 'Dest', 'Flamingo', 'Obispo', 'Gasiorowski', 'Schouten', 'Veerman', 'Perisic', 'Saibari', 'van Bommel', 'Pepi'],
@@ -254,12 +263,28 @@ season = {
  },
  'topScorers':[{'rank':r,'name':n,'nat':c,'team':t,'goals':g,'minutes':m,'aliases':al} for r,n,c,t,g,m,al in TOP_SCORERS],
  'leaguePhase':{'teams':LEAGUE_TEAMS,'matchdays':[{'n':n,'name':name,'matches':[
-     {'home':h,'away':a,'score':[hg,ag], **({'lineups':LINEUPS[(n,h,a)]} if (n,h,a) in LINEUPS else {})} for h,hg,ag,a in ms]}
+     {'home':h,'away':a,'score':[hg,ag], **({'lineups':{**LINEUPS[(n,h,a)], 'formation':dict(zip(['home','away'],FORMATIONS[(n,h,a)]))}} if (n,h,a) in LINEUPS else {})} for h,hg,ag,a in ms]}
    for n,name,ms in MATCHDAYS]},
  'leaguePosition':POS,
  'stages':[{'id':i,'type':'qualifying','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in Q]
          +[{'id':i,'type':'knockout','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in KO],
 }
+
+# Every player in the data (from the line-ups), for the player dropdown and the players table in Supabase
+import re as _re, unicodedata as _ud
+def _slug(x): return _re.sub(r'[^a-z0-9]+','-', _ud.normalize('NFKD', x).encode('ascii','ignore').decode().lower()).strip('-')
+_players = {}
+for (n,h,a), sides in LINEUPS.items():
+    for side, team in (('home',h),('away',a)):
+        for name in sides[side]:
+            _players.setdefault(f"{team}-{_slug(name)}", {'id':f"{team}-{_slug(name)}", 'name':name, 'team':team})
+season['players'] = sorted(_players.values(), key=lambda p:(p['name'].lower(), p['team']))
+for p in season['leaguePhase']['matchdays']:
+    for m in p['matches']:
+        if 'lineups' in m:
+            for side in ('home','away'):
+                for f, s_ in (('formation', side),):
+                    assert sum(map(int, m['lineups']['formation'][side].split('-'))) == 10, (m['home'], m['away'], side)
 
 if __name__ == '__main__':
     json.dump(season, open('data/seasons/ucl-2025-26.json','w'), ensure_ascii=False, indent=1)

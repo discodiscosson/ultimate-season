@@ -970,7 +970,11 @@
         "Eze",
         "Gyokeres",
         "Madueke"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-3-3"
+       }
       }
      },
      {
@@ -1006,7 +1010,11 @@
         "Ait El Hadj",
         "David",
         "Rodriguez"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "3-4-1-2"
+       }
       }
      },
      {
@@ -1042,7 +1050,11 @@
         "Beier",
         "Adeyemi",
         "Guirassy"
-       ]
+       ],
+       "formation": {
+        "home": "3-4-2-1",
+        "away": "3-4-2-1"
+       }
       }
      },
      {
@@ -1078,7 +1090,11 @@
         "O'Riley",
         "Greenwood",
         "Aubameyang"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-2-3-1"
+       }
       }
      },
      {
@@ -1114,7 +1130,11 @@
         "Kady Borges",
         "Leandro Andrade",
         "Duran"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-2-3-1"
+       }
       }
      },
      {
@@ -1150,7 +1170,11 @@
         "Pepe",
         "Mikautadze",
         "Perez"
-       ]
+       ],
+       "formation": {
+        "home": "4-3-3",
+        "away": "4-4-2"
+       }
       }
      },
      {
@@ -1186,7 +1210,11 @@
         "Sunjic",
         "Jaja",
         "Dimata"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-1-4-1"
+       }
       }
      },
      {
@@ -1222,7 +1250,11 @@
         "Hauge",
         "Hogh",
         "Jorgensen"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-3-3"
+       }
       }
      },
      {
@@ -1258,7 +1290,11 @@
         "Dumfries",
         "Esposito",
         "Thuram"
-       ]
+       ],
+       "formation": {
+        "home": "4-3-3",
+        "away": "3-5-2"
+       }
       }
      },
      {
@@ -1294,7 +1330,11 @@
         "Fernandez",
         "Palmer",
         "Joao Pedro"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-2-3-1"
+       }
       }
      },
      {
@@ -1330,7 +1370,11 @@
         "Simeone",
         "Griezmann",
         "Raspadori"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-4-2"
+       }
       }
      },
      {
@@ -1366,7 +1410,11 @@
         "Pasalic",
         "Maldini",
         "De Ketelaere"
-       ]
+       ],
+       "formation": {
+        "home": "4-3-3",
+        "away": "3-4-1-2"
+       }
       }
      },
      {
@@ -1402,7 +1450,11 @@
         "Akliouche",
         "Balogun",
         "Biereth"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-2-2-2"
+       }
       }
      },
      {
@@ -1438,7 +1490,11 @@
         "Ben Seghir",
         "Tillman",
         "Schick"
-       ]
+       ],
+       "formation": {
+        "home": "4-4-2",
+        "away": "3-4-2-1"
+       }
       }
      },
      {
@@ -1474,7 +1530,11 @@
         "Gundogan",
         "Sane",
         "Yilmaz"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-2-3-1"
+       }
       }
      },
      {
@@ -1510,7 +1570,11 @@
         "Anguissa",
         "Politano",
         "Hojlund"
-       ]
+       ],
+       "formation": {
+        "home": "4-1-4-1",
+        "away": "4-1-4-1"
+       }
       }
      },
      {
@@ -1546,7 +1610,11 @@
         "Fermin",
         "Raphinha",
         "Lewandowski"
-       ]
+       ],
+       "formation": {
+        "home": "4-3-3",
+        "away": "4-2-3-1"
+       }
       }
      },
      {
@@ -1582,7 +1650,11 @@
         "Jorginho",
         "Mrynskiy",
         "Satpaev"
-       ]
+       ],
+       "formation": {
+        "home": "4-2-3-1",
+        "away": "4-2-3-1"
+       }
       }
      }
     ]
@@ -3776,6 +3848,1988 @@
      "note": "PSG won 4–3 on penalties"
     }
    ]
+  }
+ ],
+ "players": [
+  {
+   "id": "cop-achouri",
+   "name": "Achouri",
+   "team": "cop"
+  },
+  {
+   "id": "che-adarabioyo",
+   "name": "Adarabioyo",
+   "team": "che"
+  },
+  {
+   "id": "bvb-adeyemi",
+   "name": "Adeyemi",
+   "team": "bvb"
+  },
+  {
+   "id": "usg-ait-el-hadj",
+   "name": "Ait El Hadj",
+   "team": "usg"
+  },
+  {
+   "id": "int-akanji",
+   "name": "Akanji",
+   "team": "int"
+  },
+  {
+   "id": "gal-akgun",
+   "name": "Akgun",
+   "team": "gal"
+  },
+  {
+   "id": "mon-akliouche",
+   "name": "Akliouche",
+   "team": "mon"
+  },
+  {
+   "id": "bod-aleesami",
+   "name": "Aleesami",
+   "team": "bod"
+  },
+  {
+   "id": "rma-alexander-arnold",
+   "name": "Alexander-Arnold",
+   "team": "rma"
+  },
+  {
+   "id": "liv-alisson",
+   "name": "Alisson",
+   "team": "liv"
+  },
+  {
+   "id": "b04-andrich",
+   "name": "Andrich",
+   "team": "b04"
+  },
+  {
+   "id": "nap-anguissa",
+   "name": "Anguissa",
+   "team": "nap"
+  },
+  {
+   "id": "bvb-anton",
+   "name": "Anton",
+   "team": "bvb"
+  },
+  {
+   "id": "kai-arad",
+   "name": "Arad",
+   "team": "kai"
+  },
+  {
+   "id": "bar-araujo",
+   "name": "Araujo",
+   "team": "bar"
+  },
+  {
+   "id": "spo-araujo",
+   "name": "Araujo",
+   "team": "spo"
+  },
+  {
+   "id": "om-aubameyang",
+   "name": "Aubameyang",
+   "team": "om"
+  },
+  {
+   "id": "bod-auklend",
+   "name": "Auklend",
+   "team": "bod"
+  },
+  {
+   "id": "ben-aursnes",
+   "name": "Aursnes",
+   "team": "ben"
+  },
+  {
+   "id": "aja-baas",
+   "name": "Baas",
+   "team": "aja"
+  },
+  {
+   "id": "b04-bade",
+   "name": "Bade",
+   "team": "b04"
+  },
+  {
+   "id": "om-balerdi",
+   "name": "Balerdi",
+   "team": "om"
+  },
+  {
+   "id": "mon-balogun",
+   "name": "Balogun",
+   "team": "mon"
+  },
+  {
+   "id": "mon-bamba",
+   "name": "Bamba",
+   "team": "mon"
+  },
+  {
+   "id": "psg-barcola",
+   "name": "Barcola",
+   "team": "psg"
+  },
+  {
+   "id": "int-barella",
+   "name": "Barella",
+   "team": "int"
+  },
+  {
+   "id": "new-barnes",
+   "name": "Barnes",
+   "team": "new"
+  },
+  {
+   "id": "ben-barrenechea",
+   "name": "Barrenechea",
+   "team": "ben"
+  },
+  {
+   "id": "atm-barrios",
+   "name": "Barrios",
+   "team": "atm"
+  },
+  {
+   "id": "int-bastoni",
+   "name": "Bastoni",
+   "team": "int"
+  },
+  {
+   "id": "bvb-beier",
+   "name": "Beier",
+   "team": "bvb"
+  },
+  {
+   "id": "ata-bellanova",
+   "name": "Bellanova",
+   "team": "ata"
+  },
+  {
+   "id": "b04-ben-seghir",
+   "name": "Ben Seghir",
+   "team": "b04"
+  },
+  {
+   "id": "bvb-bensebaini",
+   "name": "Bensebaini",
+   "team": "bvb"
+  },
+  {
+   "id": "tot-bentancur",
+   "name": "Bentancur",
+   "team": "tot"
+  },
+  {
+   "id": "ath-berenguer",
+   "name": "Berenguer",
+   "team": "ath"
+  },
+  {
+   "id": "bod-berg",
+   "name": "Berg",
+   "team": "bod"
+  },
+  {
+   "id": "tot-bergvall",
+   "name": "Bergvall",
+   "team": "tot"
+  },
+  {
+   "id": "ata-bernasconi",
+   "name": "Bernasconi",
+   "team": "ata"
+  },
+  {
+   "id": "nap-beukema",
+   "name": "Beukema",
+   "team": "nap"
+  },
+  {
+   "id": "mon-biereth",
+   "name": "Biereth",
+   "team": "mon"
+  },
+  {
+   "id": "bod-bjortuft",
+   "name": "Bjortuft",
+   "team": "bod"
+  },
+  {
+   "id": "ath-boiro",
+   "name": "Boiro",
+   "team": "ath"
+  },
+  {
+   "id": "juv-bremer",
+   "name": "Bremer",
+   "team": "juv"
+  },
+  {
+   "id": "sge-brown",
+   "name": "Brown",
+   "team": "sge"
+  },
+  {
+   "id": "paf-bruno",
+   "name": "Bruno",
+   "team": "paf"
+  },
+  {
+   "id": "vil-buchanan",
+   "name": "Buchanan",
+   "team": "vil"
+  },
+  {
+   "id": "nap-buongiorno",
+   "name": "Buongiorno",
+   "team": "nap"
+  },
+  {
+   "id": "usg-burgess",
+   "name": "Burgess",
+   "team": "usg"
+  },
+  {
+   "id": "sge-burkardt",
+   "name": "Burkardt",
+   "team": "sge"
+  },
+  {
+   "id": "new-burn",
+   "name": "Burn",
+   "team": "new"
+  },
+  {
+   "id": "qar-cafarquliyev",
+   "name": "Cafarquliyev",
+   "team": "qar"
+  },
+  {
+   "id": "che-caicedo",
+   "name": "Caicedo",
+   "team": "che"
+  },
+  {
+   "id": "mon-caio-henrique",
+   "name": "Caio Henrique",
+   "team": "mon"
+  },
+  {
+   "id": "gal-cakir",
+   "name": "Cakir",
+   "team": "gal"
+  },
+  {
+   "id": "ars-calafiori",
+   "name": "Calafiori",
+   "team": "ars"
+  },
+  {
+   "id": "int-calhanoglu",
+   "name": "Calhanoglu",
+   "team": "int"
+  },
+  {
+   "id": "mon-camara",
+   "name": "Camara",
+   "team": "mon"
+  },
+  {
+   "id": "juv-cambiaso",
+   "name": "Cambiaso",
+   "team": "juv"
+  },
+  {
+   "id": "vil-cardona",
+   "name": "Cardona",
+   "team": "vil"
+  },
+  {
+   "id": "ata-carnesecchi",
+   "name": "Carnesecchi",
+   "team": "ata"
+  },
+  {
+   "id": "rma-carreras",
+   "name": "Carreras",
+   "team": "rma"
+  },
+  {
+   "id": "sge-chaibi",
+   "name": "Chaibi",
+   "team": "sge"
+  },
+  {
+   "id": "che-chalobah",
+   "name": "Chalobah",
+   "team": "che"
+  },
+  {
+   "id": "psg-chevalier",
+   "name": "Chevalier",
+   "team": "psg"
+  },
+  {
+   "id": "oly-chiquinho",
+   "name": "Chiquinho",
+   "team": "oly"
+  },
+  {
+   "id": "sla-chory",
+   "name": "Chory",
+   "team": "sla"
+  },
+  {
+   "id": "sge-collins",
+   "name": "Collins",
+   "team": "sge"
+  },
+  {
+   "id": "vil-comesana",
+   "name": "Comesana",
+   "team": "vil"
+  },
+  {
+   "id": "paf-correia",
+   "name": "Correia",
+   "team": "paf"
+  },
+  {
+   "id": "rma-courtois",
+   "name": "Courtois",
+   "team": "rma"
+  },
+  {
+   "id": "bvb-couto",
+   "name": "Couto",
+   "team": "bvb"
+  },
+  {
+   "id": "bar-cubarsi",
+   "name": "Cubarsi",
+   "team": "bar"
+  },
+  {
+   "id": "che-cucurella",
+   "name": "Cucurella",
+   "team": "che"
+  },
+  {
+   "id": "ben-dahl",
+   "name": "Dahl",
+   "team": "ben"
+  },
+  {
+   "id": "juv-david",
+   "name": "David",
+   "team": "juv"
+  },
+  {
+   "id": "usg-david",
+   "name": "David",
+   "team": "usg"
+  },
+  {
+   "id": "paf-david-luiz",
+   "name": "David Luiz",
+   "team": "paf"
+  },
+  {
+   "id": "nap-de-bruyne",
+   "name": "De Bruyne",
+   "team": "nap"
+  },
+  {
+   "id": "bar-de-jong",
+   "name": "de Jong",
+   "team": "bar"
+  },
+  {
+   "id": "ata-de-ketelaere",
+   "name": "De Ketelaere",
+   "team": "ata"
+  },
+  {
+   "id": "ata-de-roon",
+   "name": "de Roon",
+   "team": "ata"
+  },
+  {
+   "id": "int-de-vrij",
+   "name": "de Vrij",
+   "team": "int"
+  },
+  {
+   "id": "ben-dedic",
+   "name": "Dedic",
+   "team": "ben"
+  },
+  {
+   "id": "cop-delaney",
+   "name": "Delaney",
+   "team": "cop"
+  },
+  {
+   "id": "psv-dest",
+   "name": "Dest",
+   "team": "psv"
+  },
+  {
+   "id": "juv-di-gregorio",
+   "name": "Di Gregorio",
+   "team": "juv"
+  },
+  {
+   "id": "nap-di-lorenzo",
+   "name": "Di Lorenzo",
+   "team": "nap"
+  },
+  {
+   "id": "mci-dias",
+   "name": "Dias",
+   "team": "mci"
+  },
+  {
+   "id": "bay-diaz",
+   "name": "Diaz",
+   "team": "bay"
+  },
+  {
+   "id": "mon-dier",
+   "name": "Dier",
+   "team": "mon"
+  },
+  {
+   "id": "int-dimarco",
+   "name": "Dimarco",
+   "team": "int"
+  },
+  {
+   "id": "paf-dimata",
+   "name": "Dimata",
+   "team": "paf"
+  },
+  {
+   "id": "ata-djimsiti",
+   "name": "Djimsiti",
+   "team": "ata"
+  },
+  {
+   "id": "sge-doan",
+   "name": "Doan",
+   "team": "sge"
+  },
+  {
+   "id": "mci-doku",
+   "name": "Doku",
+   "team": "mci"
+  },
+  {
+   "id": "mci-donnarumma",
+   "name": "Donnarumma",
+   "team": "mci"
+  },
+  {
+   "id": "sla-dorley",
+   "name": "Dorley",
+   "team": "sla"
+  },
+  {
+   "id": "sla-doudera",
+   "name": "Doudera",
+   "team": "sla"
+  },
+  {
+   "id": "paf-dragomir",
+   "name": "Dragomir",
+   "team": "paf"
+  },
+  {
+   "id": "int-dumfries",
+   "name": "Dumfries",
+   "team": "int"
+  },
+  {
+   "id": "qar-duran",
+   "name": "Duran",
+   "team": "qar"
+  },
+  {
+   "id": "rma-eder-militao",
+   "name": "Eder Militao",
+   "team": "rma"
+  },
+  {
+   "id": "aja-edvardsen",
+   "name": "Edvardsen",
+   "team": "aja"
+  },
+  {
+   "id": "oly-el-kaabi",
+   "name": "El Kaabi",
+   "team": "oly"
+  },
+  {
+   "id": "new-elanga",
+   "name": "Elanga",
+   "team": "new"
+  },
+  {
+   "id": "gal-elmali",
+   "name": "Elmali",
+   "team": "gal"
+  },
+  {
+   "id": "cop-elyounoussi",
+   "name": "Elyounoussi",
+   "team": "cop"
+  },
+  {
+   "id": "om-emerson",
+   "name": "Emerson",
+   "team": "om"
+  },
+  {
+   "id": "int-esposito",
+   "name": "Esposito",
+   "team": "int"
+  },
+  {
+   "id": "bod-evjen",
+   "name": "Evjen",
+   "team": "bod"
+  },
+  {
+   "id": "ars-eze",
+   "name": "Eze",
+   "team": "ars"
+  },
+  {
+   "id": "bar-fermin",
+   "name": "Fermin",
+   "team": "bar"
+  },
+  {
+   "id": "b04-fernandez",
+   "name": "Fernandez",
+   "team": "b04"
+  },
+  {
+   "id": "che-fernandez",
+   "name": "Fernandez",
+   "team": "che"
+  },
+  {
+   "id": "psv-flamingo",
+   "name": "Flamingo",
+   "team": "psv"
+  },
+  {
+   "id": "b04-flekken",
+   "name": "Flekken",
+   "team": "b04"
+  },
+  {
+   "id": "mci-foden",
+   "name": "Foden",
+   "team": "mci"
+  },
+  {
+   "id": "bru-forbs",
+   "name": "Forbs",
+   "team": "bru"
+  },
+  {
+   "id": "vil-foyth",
+   "name": "Foyth",
+   "team": "vil"
+  },
+  {
+   "id": "spo-fresneda",
+   "name": "Fresneda",
+   "team": "spo"
+  },
+  {
+   "id": "liv-frimpong",
+   "name": "Frimpong",
+   "team": "liv"
+  },
+  {
+   "id": "aja-gaaei",
+   "name": "Gaaei",
+   "team": "aja"
+  },
+  {
+   "id": "ars-gabriel",
+   "name": "Gabriel",
+   "team": "ars"
+  },
+  {
+   "id": "cop-gabriel-pereira",
+   "name": "Gabriel Pereira",
+   "team": "cop"
+  },
+  {
+   "id": "liv-gakpo",
+   "name": "Gakpo",
+   "team": "liv"
+  },
+  {
+   "id": "atm-galan",
+   "name": "Galan",
+   "team": "atm"
+  },
+  {
+   "id": "atm-gallagher",
+   "name": "Gallagher",
+   "team": "atm"
+  },
+  {
+   "id": "bar-garcia",
+   "name": "Garcia",
+   "team": "bar"
+  },
+  {
+   "id": "oly-garcia",
+   "name": "Garcia",
+   "team": "oly"
+  },
+  {
+   "id": "psv-gasiorowski",
+   "name": "Gasiorowski",
+   "team": "psv"
+  },
+  {
+   "id": "bay-gnabry",
+   "name": "Gnabry",
+   "team": "bay"
+  },
+  {
+   "id": "aja-godts",
+   "name": "Godts",
+   "team": "aja"
+  },
+  {
+   "id": "paf-goldar",
+   "name": "Goldar",
+   "team": "paf"
+  },
+  {
+   "id": "atm-gonzalez",
+   "name": "Gonzalez",
+   "team": "atm"
+  },
+  {
+   "id": "new-gordon",
+   "name": "Gordon",
+   "team": "new"
+  },
+  {
+   "id": "ath-gorosabel",
+   "name": "Gorosabel",
+   "team": "ath"
+  },
+  {
+   "id": "liv-gravenberch",
+   "name": "Gravenberch",
+   "team": "liv"
+  },
+  {
+   "id": "om-greenwood",
+   "name": "Greenwood",
+   "team": "om"
+  },
+  {
+   "id": "atm-griezmann",
+   "name": "Griezmann",
+   "team": "atm"
+  },
+  {
+   "id": "b04-grimaldo",
+   "name": "Grimaldo",
+   "team": "b04"
+  },
+  {
+   "id": "kai-gromyko",
+   "name": "Gromyko",
+   "team": "kai"
+  },
+  {
+   "id": "vil-gueye",
+   "name": "Gueye",
+   "team": "vil"
+  },
+  {
+   "id": "new-guimaraes",
+   "name": "Guimarães",
+   "team": "new"
+  },
+  {
+   "id": "bvb-guirassy",
+   "name": "Guirassy",
+   "team": "bvb"
+  },
+  {
+   "id": "rma-guler",
+   "name": "Guler",
+   "team": "rma"
+  },
+  {
+   "id": "bod-gundersen",
+   "name": "Gundersen",
+   "team": "bod"
+  },
+  {
+   "id": "gal-gundogan",
+   "name": "Gundogan",
+   "team": "gal"
+  },
+  {
+   "id": "che-gusto",
+   "name": "Gusto",
+   "team": "che"
+  },
+  {
+   "id": "mci-gvardiol",
+   "name": "Gvardiol",
+   "team": "mci"
+  },
+  {
+   "id": "ars-gyokeres",
+   "name": "Gyokeres",
+   "team": "ars"
+  },
+  {
+   "id": "mci-haaland",
+   "name": "Haaland",
+   "team": "mci"
+  },
+  {
+   "id": "bod-haikin",
+   "name": "Haikin",
+   "team": "bod"
+  },
+  {
+   "id": "psg-hakimi",
+   "name": "Hakimi",
+   "team": "psg"
+  },
+  {
+   "id": "cop-hatzidiakos",
+   "name": "Hatzidiakos",
+   "team": "cop"
+  },
+  {
+   "id": "bod-hauge",
+   "name": "Hauge",
+   "team": "bod"
+  },
+  {
+   "id": "oly-hezze",
+   "name": "Hezze",
+   "team": "oly"
+  },
+  {
+   "id": "ata-hien",
+   "name": "Hien",
+   "team": "ata"
+  },
+  {
+   "id": "spo-hjulmand",
+   "name": "Hjulmand",
+   "team": "spo"
+  },
+  {
+   "id": "bod-hogh",
+   "name": "Hogh",
+   "team": "bod"
+  },
+  {
+   "id": "om-hojbjerg",
+   "name": "Hojbjerg",
+   "team": "om"
+  },
+  {
+   "id": "nap-hojlund",
+   "name": "Hojlund",
+   "team": "nap"
+  },
+  {
+   "id": "sla-holes",
+   "name": "Holes",
+   "team": "sla"
+  },
+  {
+   "id": "cop-huescas",
+   "name": "Huescas",
+   "team": "cop"
+  },
+  {
+   "id": "rma-huijsen",
+   "name": "Huijsen",
+   "team": "rma"
+  },
+  {
+   "id": "spo-inacio",
+   "name": "Inacio",
+   "team": "spo"
+  },
+  {
+   "id": "liv-isak",
+   "name": "Isak",
+   "team": "liv"
+  },
+  {
+   "id": "aja-itakura",
+   "name": "Itakura",
+   "team": "aja"
+  },
+  {
+   "id": "paf-jaja",
+   "name": "Jaja",
+   "team": "paf"
+  },
+  {
+   "id": "che-james",
+   "name": "James",
+   "team": "che"
+  },
+  {
+   "id": "qar-jankovic",
+   "name": "Jankovic",
+   "team": "qar"
+  },
+  {
+   "id": "aja-jaros",
+   "name": "Jaros",
+   "team": "aja"
+  },
+  {
+   "id": "ath-jauregizar",
+   "name": "Jauregizar",
+   "team": "ath"
+  },
+  {
+   "id": "che-joao-pedro",
+   "name": "Joao Pedro",
+   "team": "che"
+  },
+  {
+   "id": "new-joelinton",
+   "name": "Joelinton",
+   "team": "new"
+  },
+  {
+   "id": "bod-jorgensen",
+   "name": "Jorgensen",
+   "team": "bod"
+  },
+  {
+   "id": "kai-jorginho",
+   "name": "Jorginho",
+   "team": "kai"
+  },
+  {
+   "id": "qar-kady-borges",
+   "name": "Kady Borges",
+   "team": "qar"
+  },
+  {
+   "id": "kai-kalmurza",
+   "name": "Kalmurza",
+   "team": "kai"
+  },
+  {
+   "id": "juv-kalulu",
+   "name": "Kalulu",
+   "team": "juv"
+  },
+  {
+   "id": "bay-kane",
+   "name": "Kane",
+   "team": "bay"
+  },
+  {
+   "id": "kai-kasabulat",
+   "name": "Kasabulat",
+   "team": "kai"
+  },
+  {
+   "id": "juv-kelly",
+   "name": "Kelly",
+   "team": "juv"
+  },
+  {
+   "id": "usg-khalaili",
+   "name": "Khalaili",
+   "team": "usg"
+  },
+  {
+   "id": "mci-khusanov",
+   "name": "Khusanov",
+   "team": "mci"
+  },
+  {
+   "id": "bay-kimmich",
+   "name": "Kimmich",
+   "team": "bay"
+  },
+  {
+   "id": "aja-klaassen",
+   "name": "Klaassen",
+   "team": "aja"
+  },
+  {
+   "id": "sge-knauff",
+   "name": "Knauff",
+   "team": "sge"
+  },
+  {
+   "id": "bvb-kobel",
+   "name": "Kobel",
+   "team": "bvb"
+  },
+  {
+   "id": "sge-koch",
+   "name": "Koch",
+   "team": "sge"
+  },
+  {
+   "id": "qar-kochalski",
+   "name": "Kochalski",
+   "team": "qar"
+  },
+  {
+   "id": "spo-kochorashvili",
+   "name": "Kochorashvili",
+   "team": "spo"
+  },
+  {
+   "id": "mon-kohn",
+   "name": "Kohn",
+   "team": "mon"
+  },
+  {
+   "id": "liv-konate",
+   "name": "Konate",
+   "team": "liv"
+  },
+  {
+   "id": "om-kondogbia",
+   "name": "Kondogbia",
+   "team": "om"
+  },
+  {
+   "id": "juv-koopmeiners",
+   "name": "Koopmeiners",
+   "team": "juv"
+  },
+  {
+   "id": "ata-kossounou",
+   "name": "Kossounou",
+   "team": "ata"
+  },
+  {
+   "id": "cop-kotarski",
+   "name": "Kotarski",
+   "team": "cop"
+  },
+  {
+   "id": "bar-kounde",
+   "name": "Kounde",
+   "team": "bar"
+  },
+  {
+   "id": "psv-kovar",
+   "name": "Kovar",
+   "team": "psv"
+  },
+  {
+   "id": "tot-kudus",
+   "name": "Kudus",
+   "team": "tot"
+  },
+  {
+   "id": "sla-kusej",
+   "name": "Kusej",
+   "team": "sla"
+  },
+  {
+   "id": "psg-kvaratskhelia",
+   "name": "Kvaratskhelia",
+   "team": "psg"
+  },
+  {
+   "id": "bay-laimer",
+   "name": "Laimer",
+   "team": "bay"
+  },
+  {
+   "id": "cop-larsson",
+   "name": "Larsson",
+   "team": "cop"
+  },
+  {
+   "id": "sge-larsson",
+   "name": "Larsson",
+   "team": "sge"
+  },
+  {
+   "id": "atm-le-normand",
+   "name": "Le Normand",
+   "team": "atm"
+  },
+  {
+   "id": "qar-leandro-andrade",
+   "name": "Leandro Andrade",
+   "team": "qar"
+  },
+  {
+   "id": "gal-lemina",
+   "name": "Lemina",
+   "team": "gal"
+  },
+  {
+   "id": "atm-lenglet",
+   "name": "Lenglet",
+   "team": "atm"
+  },
+  {
+   "id": "cop-lerager",
+   "name": "Lerager",
+   "team": "cop"
+  },
+  {
+   "id": "bar-lewandowski",
+   "name": "Lewandowski",
+   "team": "bar"
+  },
+  {
+   "id": "usg-leysen",
+   "name": "Leysen",
+   "team": "usg"
+  },
+  {
+   "id": "new-livramento",
+   "name": "Livramento",
+   "team": "new"
+  },
+  {
+   "id": "atm-llorente",
+   "name": "Llorente",
+   "team": "atm"
+  },
+  {
+   "id": "nap-lobotka",
+   "name": "Lobotka",
+   "team": "nap"
+  },
+  {
+   "id": "cop-lopez",
+   "name": "Lopez",
+   "team": "cop"
+  },
+  {
+   "id": "paf-luckassen",
+   "name": "Luckassen",
+   "team": "paf"
+  },
+  {
+   "id": "vil-luiz-junior",
+   "name": "Luiz Junior",
+   "team": "vil"
+  },
+  {
+   "id": "usg-mac-allister",
+   "name": "Mac Allister",
+   "team": "usg"
+  },
+  {
+   "id": "kai-machado-mata",
+   "name": "Machado Mata",
+   "team": "kai"
+  },
+  {
+   "id": "ars-madueke",
+   "name": "Madueke",
+   "team": "ars"
+  },
+  {
+   "id": "ata-maldini",
+   "name": "Maldini",
+   "team": "ata"
+  },
+  {
+   "id": "psg-marquinhos",
+   "name": "Marquinhos",
+   "team": "psg"
+  },
+  {
+   "id": "bar-martin",
+   "name": "Martin",
+   "team": "bar"
+  },
+  {
+   "id": "kai-martynovich",
+   "name": "Martynovich",
+   "team": "kai"
+  },
+  {
+   "id": "rma-mastantuono",
+   "name": "Mastantuono",
+   "team": "rma"
+  },
+  {
+   "id": "qar-matheus-silva",
+   "name": "Matheus Silva",
+   "team": "qar"
+  },
+  {
+   "id": "mon-mawissa",
+   "name": "Mawissa",
+   "team": "mon"
+  },
+  {
+   "id": "psg-mayulu",
+   "name": "Mayulu",
+   "team": "psg"
+  },
+  {
+   "id": "rma-mbappe",
+   "name": "Mbappe",
+   "team": "rma"
+  },
+  {
+   "id": "sla-mbodji",
+   "name": "Mbodji",
+   "team": "sla"
+  },
+  {
+   "id": "juv-mckennie",
+   "name": "McKennie",
+   "team": "juv"
+  },
+  {
+   "id": "nap-mctominay",
+   "name": "McTominay",
+   "team": "nap"
+  },
+  {
+   "id": "bru-mechele",
+   "name": "Mechele",
+   "team": "bru"
+  },
+  {
+   "id": "om-medina",
+   "name": "Medina",
+   "team": "om"
+  },
+  {
+   "id": "qar-medina",
+   "name": "Medina",
+   "team": "qar"
+  },
+  {
+   "id": "bru-meijer",
+   "name": "Meijer",
+   "team": "bru"
+  },
+  {
+   "id": "psg-mendes",
+   "name": "Mendes",
+   "team": "psg"
+  },
+  {
+   "id": "ars-merino",
+   "name": "Merino",
+   "team": "ars"
+  },
+  {
+   "id": "paf-michail",
+   "name": "Michail",
+   "team": "paf"
+  },
+  {
+   "id": "bru-mignolet",
+   "name": "Mignolet",
+   "team": "bru"
+  },
+  {
+   "id": "vil-mikautadze",
+   "name": "Mikautadze",
+   "team": "vil"
+  },
+  {
+   "id": "nap-milinkovic-savic",
+   "name": "Milinkovic-Savic",
+   "team": "nap"
+  },
+  {
+   "id": "mon-minamino",
+   "name": "Minamino",
+   "team": "mon"
+  },
+  {
+   "id": "int-mkhitaryan",
+   "name": "Mkhitaryan",
+   "team": "int"
+  },
+  {
+   "id": "ars-mosquera",
+   "name": "Mosquera",
+   "team": "ars"
+  },
+  {
+   "id": "cop-moukoko",
+   "name": "Moukoko",
+   "team": "cop"
+  },
+  {
+   "id": "vil-mourino",
+   "name": "Mourino",
+   "team": "vil"
+  },
+  {
+   "id": "kai-mrynskiy",
+   "name": "Mrynskiy",
+   "team": "kai"
+  },
+  {
+   "id": "ata-musah",
+   "name": "Musah",
+   "team": "ata"
+  },
+  {
+   "id": "qar-mustafazada",
+   "name": "Mustafazada",
+   "team": "qar"
+  },
+  {
+   "id": "ath-navarro",
+   "name": "Navarro",
+   "team": "ath"
+  },
+  {
+   "id": "che-neto",
+   "name": "Neto",
+   "team": "che"
+  },
+  {
+   "id": "bay-neuer",
+   "name": "Neuer",
+   "team": "bay"
+  },
+  {
+   "id": "psg-neves",
+   "name": "Neves",
+   "team": "psg"
+  },
+  {
+   "id": "usg-niang",
+   "name": "Niang",
+   "team": "usg"
+  },
+  {
+   "id": "bvb-nmecha",
+   "name": "Nmecha",
+   "team": "bvb"
+  },
+  {
+   "id": "mci-o-reilly",
+   "name": "O'Reilly",
+   "team": "mci"
+  },
+  {
+   "id": "om-o-riley",
+   "name": "O'Riley",
+   "team": "om"
+  },
+  {
+   "id": "psv-obispo",
+   "name": "Obispo",
+   "team": "psv"
+  },
+  {
+   "id": "atm-oblak",
+   "name": "Oblak",
+   "team": "atm"
+  },
+  {
+   "id": "bay-olise",
+   "name": "Olise",
+   "team": "bay"
+  },
+  {
+   "id": "bru-onyedika",
+   "name": "Onyedika",
+   "team": "bru"
+  },
+  {
+   "id": "juv-openda",
+   "name": "Openda",
+   "team": "juv"
+  },
+  {
+   "id": "bru-ordonez",
+   "name": "Ordonez",
+   "team": "bru"
+  },
+  {
+   "id": "oly-ortega",
+   "name": "Ortega",
+   "team": "oly"
+  },
+  {
+   "id": "ben-otamendi",
+   "name": "Otamendi",
+   "team": "ben"
+  },
+  {
+   "id": "psg-pacho",
+   "name": "Pacho",
+   "team": "psg"
+  },
+  {
+   "id": "che-palmer",
+   "name": "Palmer",
+   "team": "che"
+  },
+  {
+   "id": "ath-paredes",
+   "name": "Paredes",
+   "team": "ath"
+  },
+  {
+   "id": "ata-pasalic",
+   "name": "Pasalic",
+   "team": "ata"
+  },
+  {
+   "id": "oly-paschalakis",
+   "name": "Paschalakis",
+   "team": "oly"
+  },
+  {
+   "id": "om-pavard",
+   "name": "Pavard",
+   "team": "om"
+  },
+  {
+   "id": "ben-pavlidis",
+   "name": "Pavlidis",
+   "team": "ben"
+  },
+  {
+   "id": "bay-pavlovic",
+   "name": "Pavlovic",
+   "team": "bay"
+  },
+  {
+   "id": "bar-pedri",
+   "name": "Pedri",
+   "team": "bar"
+  },
+  {
+   "id": "qar-pedro-bicalho",
+   "name": "Pedro Bicalho",
+   "team": "qar"
+  },
+  {
+   "id": "paf-pepe",
+   "name": "Pepe",
+   "team": "paf"
+  },
+  {
+   "id": "vil-pepe",
+   "name": "Pepe",
+   "team": "vil"
+  },
+  {
+   "id": "psv-pepi",
+   "name": "Pepi",
+   "team": "psv"
+  },
+  {
+   "id": "vil-perez",
+   "name": "Perez",
+   "team": "vil"
+  },
+  {
+   "id": "psv-perisic",
+   "name": "Perisic",
+   "team": "psv"
+  },
+  {
+   "id": "oly-pirola",
+   "name": "Pirola",
+   "team": "oly"
+  },
+  {
+   "id": "oly-podence",
+   "name": "Podence",
+   "team": "oly"
+  },
+  {
+   "id": "nap-politano",
+   "name": "Politano",
+   "team": "nap"
+  },
+  {
+   "id": "new-pope",
+   "name": "Pope",
+   "team": "new"
+  },
+  {
+   "id": "tot-porro",
+   "name": "Porro",
+   "team": "tot"
+  },
+  {
+   "id": "spo-pote",
+   "name": "Pote",
+   "team": "spo"
+  },
+  {
+   "id": "sla-provod",
+   "name": "Provod",
+   "team": "sla"
+  },
+  {
+   "id": "b04-quansah",
+   "name": "Quansah",
+   "team": "b04"
+  },
+  {
+   "id": "spo-quaresma",
+   "name": "Quaresma",
+   "team": "spo"
+  },
+  {
+   "id": "spo-quenda",
+   "name": "Quenda",
+   "team": "spo"
+  },
+  {
+   "id": "bar-raphinha",
+   "name": "Raphinha",
+   "team": "bar"
+  },
+  {
+   "id": "bar-rashford",
+   "name": "Rashford",
+   "team": "bar"
+  },
+  {
+   "id": "usg-rasmussen",
+   "name": "Rasmussen",
+   "team": "usg"
+  },
+  {
+   "id": "atm-raspadori",
+   "name": "Raspadori",
+   "team": "atm"
+  },
+  {
+   "id": "ars-raya",
+   "name": "Raya",
+   "team": "ars"
+  },
+  {
+   "id": "aja-regeer",
+   "name": "Regeer",
+   "team": "aja"
+  },
+  {
+   "id": "mci-reijnders",
+   "name": "Reijnders",
+   "team": "mci"
+  },
+  {
+   "id": "oly-retsos",
+   "name": "Retsos",
+   "team": "oly"
+  },
+  {
+   "id": "ars-rice",
+   "name": "Rice",
+   "team": "ars"
+  },
+  {
+   "id": "tot-richarlison",
+   "name": "Richarlison",
+   "team": "tot"
+  },
+  {
+   "id": "ben-rios",
+   "name": "Rios",
+   "team": "ben"
+  },
+  {
+   "id": "liv-robertson",
+   "name": "Robertson",
+   "team": "liv"
+  },
+  {
+   "id": "oly-rodinei",
+   "name": "Rodinei",
+   "team": "oly"
+  },
+  {
+   "id": "mci-rodri",
+   "name": "Rodri",
+   "team": "mci"
+  },
+  {
+   "id": "usg-rodriguez",
+   "name": "Rodriguez",
+   "team": "usg"
+  },
+  {
+   "id": "rma-rodrygo",
+   "name": "Rodrygo",
+   "team": "rma"
+  },
+  {
+   "id": "tot-romero",
+   "name": "Romero",
+   "team": "tot"
+  },
+  {
+   "id": "psg-ruiz",
+   "name": "Ruiz",
+   "team": "psg"
+  },
+  {
+   "id": "om-rulli",
+   "name": "Rulli",
+   "team": "om"
+  },
+  {
+   "id": "bvb-ryerson",
+   "name": "Ryerson",
+   "team": "bvb"
+  },
+  {
+   "id": "bru-sabbe",
+   "name": "Sabbe",
+   "team": "bru"
+  },
+  {
+   "id": "bvb-sabitzer",
+   "name": "Sabitzer",
+   "team": "bvb"
+  },
+  {
+   "id": "sla-sadilek",
+   "name": "Sadilek",
+   "team": "sla"
+  },
+  {
+   "id": "psv-saibari",
+   "name": "Saibari",
+   "team": "psv"
+  },
+  {
+   "id": "liv-salah",
+   "name": "Salah",
+   "team": "liv"
+  },
+  {
+   "id": "gal-sallai",
+   "name": "Sallai",
+   "team": "gal"
+  },
+  {
+   "id": "ath-sancet",
+   "name": "Sancet",
+   "team": "ath"
+  },
+  {
+   "id": "che-sanchez",
+   "name": "Sanchez",
+   "team": "che"
+  },
+  {
+   "id": "gal-sanchez",
+   "name": "Sanchez",
+   "team": "gal"
+  },
+  {
+   "id": "gal-sane",
+   "name": "Sane",
+   "team": "gal"
+  },
+  {
+   "id": "tot-sarr",
+   "name": "Sarr",
+   "team": "tot"
+  },
+  {
+   "id": "kai-satpaev",
+   "name": "Satpaev",
+   "team": "kai"
+  },
+  {
+   "id": "new-schar",
+   "name": "Schar",
+   "team": "new"
+  },
+  {
+   "id": "usg-scherpen",
+   "name": "Scherpen",
+   "team": "usg"
+  },
+  {
+   "id": "b04-schick",
+   "name": "Schick",
+   "team": "b04"
+  },
+  {
+   "id": "ben-schjelderup",
+   "name": "Schjelderup",
+   "team": "ben"
+  },
+  {
+   "id": "psv-schouten",
+   "name": "Schouten",
+   "team": "psv"
+  },
+  {
+   "id": "ben-silva",
+   "name": "Silva",
+   "team": "ben"
+  },
+  {
+   "id": "mci-silva",
+   "name": "Silva",
+   "team": "mci"
+  },
+  {
+   "id": "atm-simeone",
+   "name": "Simeone",
+   "team": "atm"
+  },
+  {
+   "id": "ath-simon",
+   "name": "Simon",
+   "team": "ath"
+  },
+  {
+   "id": "tot-simons",
+   "name": "Simons",
+   "team": "tot"
+  },
+  {
+   "id": "gal-singo",
+   "name": "Singo",
+   "team": "gal"
+  },
+  {
+   "id": "bod-sjovold",
+   "name": "Sjovold",
+   "team": "bod"
+  },
+  {
+   "id": "int-sommer",
+   "name": "Sommer",
+   "team": "int"
+  },
+  {
+   "id": "kai-sorokin",
+   "name": "Sorokin",
+   "team": "kai"
+  },
+  {
+   "id": "tot-spence",
+   "name": "Spence",
+   "team": "tot"
+  },
+  {
+   "id": "nap-spinazzola",
+   "name": "Spinazzola",
+   "team": "nap"
+  },
+  {
+   "id": "sla-stanek",
+   "name": "Stanek",
+   "team": "sla"
+  },
+  {
+   "id": "bay-stanisic",
+   "name": "Stanisic",
+   "team": "bay"
+  },
+  {
+   "id": "bru-stankovic",
+   "name": "Stankovic",
+   "team": "bru"
+  },
+  {
+   "id": "oly-strefezza",
+   "name": "Strefezza",
+   "team": "oly"
+  },
+  {
+   "id": "spo-suarez",
+   "name": "Suarez",
+   "team": "spo"
+  },
+  {
+   "id": "ben-sudakov",
+   "name": "Sudakov",
+   "team": "ben"
+  },
+  {
+   "id": "paf-sunjic",
+   "name": "Sunjic",
+   "team": "paf"
+  },
+  {
+   "id": "bvb-svensson",
+   "name": "Svensson",
+   "team": "bvb"
+  },
+  {
+   "id": "liv-szoboszlai",
+   "name": "Szoboszlai",
+   "team": "liv"
+  },
+  {
+   "id": "bay-tah",
+   "name": "Tah",
+   "team": "bay"
+  },
+  {
+   "id": "kai-tapalov",
+   "name": "Tapalov",
+   "team": "kai"
+  },
+  {
+   "id": "b04-tapsoba",
+   "name": "Tapsoba",
+   "team": "b04"
+  },
+  {
+   "id": "aja-taylor",
+   "name": "Taylor",
+   "team": "aja"
+  },
+  {
+   "id": "rma-tchouameni",
+   "name": "Tchouameni",
+   "team": "rma"
+  },
+  {
+   "id": "sge-theate",
+   "name": "Theate",
+   "team": "sge"
+  },
+  {
+   "id": "int-thuram",
+   "name": "Thuram",
+   "team": "int"
+  },
+  {
+   "id": "juv-thuram",
+   "name": "Thuram",
+   "team": "juv"
+  },
+  {
+   "id": "b04-tillman",
+   "name": "Tillman",
+   "team": "b04"
+  },
+  {
+   "id": "ars-timber",
+   "name": "Timber",
+   "team": "ars"
+  },
+  {
+   "id": "new-tonali",
+   "name": "Tonali",
+   "team": "new"
+  },
+  {
+   "id": "gal-torreira",
+   "name": "Torreira",
+   "team": "gal"
+  },
+  {
+   "id": "bru-tresoldi",
+   "name": "Tresoldi",
+   "team": "bru"
+  },
+  {
+   "id": "spo-trincao",
+   "name": "Trincao",
+   "team": "spo"
+  },
+  {
+   "id": "new-trippier",
+   "name": "Trippier",
+   "team": "new"
+  },
+  {
+   "id": "ben-trubin",
+   "name": "Trubin",
+   "team": "ben"
+  },
+  {
+   "id": "bru-tzolis",
+   "name": "Tzolis",
+   "team": "bru"
+  },
+  {
+   "id": "bay-upamecano",
+   "name": "Upamecano",
+   "team": "bay"
+  },
+  {
+   "id": "sge-uzun",
+   "name": "Uzun",
+   "team": "sge"
+  },
+  {
+   "id": "rma-valverde",
+   "name": "Valverde",
+   "team": "rma"
+  },
+  {
+   "id": "psv-van-bommel",
+   "name": "van Bommel",
+   "team": "psv"
+  },
+  {
+   "id": "tot-van-de-ven",
+   "name": "van de Ven",
+   "team": "tot"
+  },
+  {
+   "id": "liv-van-dijk",
+   "name": "van Dijk",
+   "team": "liv"
+  },
+  {
+   "id": "bru-vanaken",
+   "name": "Vanaken",
+   "team": "bru"
+  },
+  {
+   "id": "mon-vanderson",
+   "name": "Vanderson",
+   "team": "mon"
+  },
+  {
+   "id": "b04-vazquez",
+   "name": "Vazquez",
+   "team": "b04"
+  },
+  {
+   "id": "psv-veerman",
+   "name": "Veerman",
+   "team": "psv"
+  },
+  {
+   "id": "vil-veiga",
+   "name": "Veiga",
+   "team": "vil"
+  },
+  {
+   "id": "ath-vesga",
+   "name": "Vesga",
+   "team": "ath"
+  },
+  {
+   "id": "tot-vicario",
+   "name": "Vicario",
+   "team": "tot"
+  },
+  {
+   "id": "spo-virginia",
+   "name": "Virginia",
+   "team": "spo"
+  },
+  {
+   "id": "psg-vitinha",
+   "name": "Vitinha",
+   "team": "psg"
+  },
+  {
+   "id": "ath-vivian",
+   "name": "Vivian",
+   "team": "ath"
+  },
+  {
+   "id": "om-weah",
+   "name": "Weah",
+   "team": "om"
+  },
+  {
+   "id": "aja-weghorst",
+   "name": "Weghorst",
+   "team": "aja"
+  },
+  {
+   "id": "aja-wijndal",
+   "name": "Wijndal",
+   "team": "aja"
+  },
+  {
+   "id": "ath-williams",
+   "name": "Williams",
+   "team": "ath"
+  },
+  {
+   "id": "liv-wirtz",
+   "name": "Wirtz",
+   "team": "liv"
+  },
+  {
+   "id": "juv-yildiz",
+   "name": "Yildiz",
+   "team": "juv"
+  },
+  {
+   "id": "gal-yilmaz",
+   "name": "Yilmaz",
+   "team": "gal"
+  },
+  {
+   "id": "sla-zafeiris",
+   "name": "Zafeiris",
+   "team": "sla"
+  },
+  {
+   "id": "sge-zetterer",
+   "name": "Zetterer",
+   "team": "sge"
+  },
+  {
+   "id": "sla-zima",
+   "name": "Zima",
+   "team": "sla"
+  },
+  {
+   "id": "usg-zorgane",
+   "name": "Zorgane",
+   "team": "usg"
+  },
+  {
+   "id": "qar-zoubir",
+   "name": "Zoubir",
+   "team": "qar"
+  },
+  {
+   "id": "ars-zubimendi",
+   "name": "Zubimendi",
+   "team": "ars"
   }
  ]
 }

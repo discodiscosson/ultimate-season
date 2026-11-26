@@ -4,12 +4,15 @@ import { countryName, exactCountry, matchCountry, suggestCountries } from './cou
 import { clubCountry, exactClub, matchClub, suggestClubs } from './clubs.js';
 import { esc } from './util.js';
 import { flagHTML } from './flags.js';
+import { playerClub, searchPlayers } from './players.js';
 
 const SOURCES = {
   country: { suggest: suggestCountries, exact: exactCountry, match: matchCountry, name: countryName, sub: () => '', icon: (c) => flagHTML(c), placeholder: 'Country' },
   club: { suggest: suggestClubs, exact: exactClub, match: matchClub, name: (c) => c, sub: (c) => countryName(clubCountry(c)), icon: (c) => flagHTML(clubCountry(c)), placeholder: 'Club' },
+  // Players: suggestions come from a search (season data + the Guess the Career database); any typed name is a valid answer
+  player: { search: searchPlayers, free: true, exact: (v) => v.trim() || null, match: (v) => v.trim() || null, name: (c) => c, sub: playerClub, placeholder: 'Player' },
 };
-const MSG = { country: 'Pick a country from the list', club: 'Pick a club from the list' };
+const MSG = { country: 'Pick a country from the list', club: 'Pick a club from the list', player: '' };
 const safeId = (key) => String(key).replace(/[^a-zA-Z0-9_-]/g, '_');
 
 export function comboHTML({ key, src = 'country', draft, invalid, label }) {
@@ -44,8 +47,17 @@ export function bindCombos(root, state, { onChange, onDone } = {}) {
   };
 
   function open(input) {
+    const src = srcOf(input);
+    if (src.search) {
+      const q = input.value;
+      if (q.trim().length < 2) { close(input); return; }
+      src.search(q).then((items) => { if (input.value === q && document.activeElement === input) show(input, items); });
+      return;
+    }
+    show(input, src.suggest(input.value).slice(0, 300));
+  }
+  function show(input, items) {
     const lb = listOf(input), src = srcOf(input);
-    const items = src.suggest(input.value).slice(0, 300);
     if (!items.length) { close(input); return; }
     const selected = state.sel[input.dataset.cf];
     lb.innerHTML = items.map((c, i) => {

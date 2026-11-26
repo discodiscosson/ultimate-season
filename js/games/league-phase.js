@@ -9,6 +9,8 @@ import { flagHTML } from '../lib/flags.js';
 import { project, WIDTH, HEIGHT } from '../lib/projection.js';
 import { standings } from '../lib/standings.js';
 import { nameMatcher } from '../lib/names.js';
+import { setPlayerPool } from '../lib/players.js';
+import { bindCombos, comboHTML } from '../lib/combo.js';
 import { esc, prefersReducedMotion, shuffle } from '../lib/util.js';
 
 export const meta = { id: 'league', title: 'League phase', short: 'League phase' };
@@ -48,7 +50,9 @@ export function play({ el, season, start = 0, onStep }) {
     const countries = new Set(teams.map((t) => T[t].country));
     const names = Object.fromEntries(teams.map((t) => [t, T[t].name]));
     const nm = (t) => T[t].name;
-    const S = { phase: 'map', md: 0, per: MDS.map(() => ({ chosen: [], pred: {}, predDone: false, xiHidden: {}, xiAns: {}, xiDone: false })) };
+    const S = { phase: 'map', md: 0, per: MDS.map(() => ({ chosen: [], pred: {}, predDone: false, xiHidden: {}, xiAns: {}, xiDone: false })), cb: { drafts: {}, sel: {} } };
+    setPlayerPool(season);
+    bindCombos(el, S.cb, {});
     const cur = () => S.per[S.md];
     const MD = () => MDS[S.md];
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -259,20 +263,31 @@ export function play({ el, season, start = 0, onStep }) {
         if (!m.lineups) {
           return `<div class="xi-card">${top}<p class="xi-empty">Starting line-ups for this match have not been added yet. Add them to <code>LINEUPS</code> in <code>scripts/source_ucl_2025_26.py</code> and the game will hide one player per team for you to name.</p></div>`;
         }
-        const side = (s) => {
-          const key = `${i}-${s}`, h = P.xiHidden[key];
-          return `<ol class="xi-list">${m.lineups[s].map((p, j) => {
-            if (j !== h) return `<li>${esc(p)}</li>`;
-            if (!done) return `<li class="xi-miss"><input data-xi="${key}" value="${esc(P.xiAns[key] || '')}" placeholder="Who is missing?" aria-label="Missing player" autocomplete="off" spellcheck="false"></li>`;
-            const ok = nameMatches(P.xiAns[key], p);
-            return `<li class="xi-miss ${ok ? 'ok' : 'no'}">${ok ? `${esc(p)} ✓` : `<s>${esc(P.xiAns[key] || 'No answer')}</s> ${esc(p)}`}</li>`;
-          }).join('')}</ol>`;
+        // Both teams on one pitch in their formations: home at the top, away at the bottom
+        const player = (s, p, j) => {
+          const key = `${i}-${s}`;
+          if (j !== P.xiHidden[key]) return `<span class="pl">${esc(p)}</span>`;
+          if (!done) return `<span class="pl miss">${comboHTML({ key: `xi:${k}:${key}`, src: 'player', draft: S.cb.drafts[`xi:${k}:${key}`], label: `Missing player for ${nm(m[s])}` })}</span>`;
+          const ok = nameMatches(P.xiAns[key], p);
+          return `<span class="pl miss ${ok ? 'ok' : 'no'}">${ok ? `${esc(p)} ✓` : `<s>${esc(P.xiAns[key] || 'No answer')}</s>${esc(p)}`}</span>`;
         };
-        return `<div class="xi-card">${top}<div class="xi-cols"><div><h4>${esc(nm(m.home))}</h4>${side('home')}</div><div><h4>${esc(nm(m.away))}</h4>${side('away')}</div></div></div>`;
+        const lines = (s) => {
+          const list = m.lineups[s], counts = (m.lineups.formation?.[s] || '4-4-2').split('-').map(Number);
+          const rows = [[0]];
+          let at = 1;
+          for (const c of counts) { rows.push(Array.from({ length: c }, (_, x) => at + x)); at += c; }
+          return rows.map((r) => `<div class="xrow">${r.map((j) => player(s, list[j], j)).join('')}</div>`);
+        };
+        const tag = (t, f) => `<span class="xtag">${flagHTML(T[t].country)}${esc(nm(t))}<small>${esc(f || '')}</small></span>`;
+        return `<div class="xi-card">${top}
+          <div class="xpitch">
+            <div class="xhalf">${tag(m.home, m.lineups.formation?.home)}${lines('home').join('')}</div>
+            <div class="xhalf away">${lines('away').reverse().join('')}${tag(m.away, m.lineups.formation?.away)}</div>
+          </div></div>`;
       }).join('');
       el.innerHTML = `${head('Missing XI')}
         <p class="hint">${keys.length
-          ? (done ? `You named ${xiTotal(k)} of ${keys.length} missing players.` : `One player is missing from each starting line-up. Type the name (the surname is enough). ${XI_POINT} pt each.`)
+          ? (done ? `You named ${xiTotal(k)} of ${keys.length} missing players.` : `One player is missing from each starting line-up. Start typing to search players (the surname is enough). ${XI_POINT} pt each.`)
           : 'This game needs the starting line-ups of your matches, which are not in the data yet.'}</p>
         <div class="xi-grid">${cards}</div>
         <div class="foot"><span></span>${keys.length && !done
@@ -442,7 +457,11 @@ export function play({ el, season, start = 0, onStep }) {
       } else if (act === 'lp-predict') { predictScreen(); scrollTo(0, 0); }
       else if (act === 'lp-predsubmit') { cur().predDone = true; predictScreen(); scrollTo(0, 0); }
       else if (act === 'lp-xi') { xiScreen(); scrollTo(0, 0); }
-      else if (act === 'lp-xisubmit') { cur().xiDone = true; xiScreen(); scrollTo(0, 0); }
+      else if (act === 'lp-xisubmit') {
+        const P = cur();
+        xiKeys(S.md).forEach((key) => { P.xiAns[key] = S.cb.drafts[`xi:${S.md}:${key}`] || ''; });
+        P.xiDone = true; xiScreen(); scrollTo(0, 0);
+      }
       else if (act === 'lp-table') { tableScreen(S.md); scrollTo(0, 0); }
       else if (act === 'lp-next') matchdayDraw(S.md + 1);
       else if (act === 'lp-ko') knockoutScreen();

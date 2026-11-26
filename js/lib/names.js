@@ -17,6 +17,9 @@ export function nameMatcher(entries) {
     if (n.length < 3) return null;
     const exact = list.find((x) => x.keys.includes(n));
     if (exact) return exact.id;
+    // A full name that ends with the stored name counts ("Virgil van Dijk" for "van Dijk")
+    const tail = list.find((x) => x.keys.some((k) => k.length >= 4 && n.endsWith(k)));
+    if (tail) return tail.id;
     let best = null, bestD = 99;
     for (const x of list) for (const k of x.keys) { const d = lev(n, k); if (d < bestD) { bestD = d; best = x.id; } }
     return n.length >= 5 && bestD <= (n.length >= 9 ? 2 : 1) ? best : null;
