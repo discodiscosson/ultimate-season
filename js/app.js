@@ -9,10 +9,13 @@ const DIFF = {
   hard: { name: 'Hard', desc: 'Free text, no suggestions. Knockouts are marked at the end.' },
 };
 
+// Only hard mode for now. Set to true to show the difficulty picker again.
+const SHOW_DIFFICULTY = false;
+
 const app = document.getElementById('app');
 let INDEX = null;
 let runId = 0;
-const sel = { comp: null, season: null, diff: 'medium' };
+const sel = { comp: null, season: null, diff: 'hard' };
 const comp = () => INDEX.competitions.find((c) => c.id === sel.comp);
 
 function band(sub, ladder) {
@@ -36,8 +39,8 @@ function renderStart() {
         <select id="season" aria-label="Season">${c.seasons.map((s) => `<option value="${s.id}" ${s.id === sel.season ? 'selected' : ''}>${esc(s.label)}</option>`).join('')}</select>
         <button class="btn ghost" data-act="app-random">Random</button>
       </div>
-      <h3 class="lbl">Difficulty</h3>
-      <div class="modes">${Object.entries(DIFF).map(([k, d]) => `<button class="mode ${sel.diff === k ? 'on' : ''}" data-act="app-diff" data-d="${k}" aria-pressed="${sel.diff === k}"><h4>${d.name}</h4><p>${d.desc}</p></button>`).join('')}</div>
+      ${SHOW_DIFFICULTY ? `<h3 class="lbl">Difficulty</h3>
+      <div class="modes">${Object.entries(DIFF).map(([k, d]) => `<button class="mode ${sel.diff === k ? 'on' : ''}" data-act="app-diff" data-d="${k}" aria-pressed="${sel.diff === k}"><h4>${d.name}</h4><p>${d.desc}</p></button>`).join('')}</div>` : ''}
     </section>
     <div class="foot"><span></span><button class="btn" data-act="app-start">Start the season</button></div>`;
 }
@@ -50,7 +53,7 @@ async function play() {
   catch (e) { app.innerHTML = band(esc(e.message)) + '<div class="foot"><button class="btn" data-act="app-home">Back</button></div>'; return; }
   if (myRun !== runId) return;
 
-  const title = `${season.competition.name} ${season.label}, ${DIFF[sel.diff].name}`;
+  const title = SHOW_DIFFICULTY ? `${season.competition.name} ${season.label}, ${DIFF[sel.diff].name}` : `${season.competition.name} ${season.label}`;
   const moments = momentsFor(season);
   app.innerHTML = band(esc(title), moments.map((m, k) => ({ label: m.meta.short, state: k === 0 ? 'now' : '' }))) + '<div id="stage"></div>';
   const results = await runSeason({

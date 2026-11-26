@@ -93,6 +93,22 @@ button.row:hover { border-color: var(--pick); }
 .choice { font: inherit; font-size: .88rem; font-weight: 600; padding: 7px 8px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; text-align: center; }
 .choice:hover { border-color: var(--pick); }
 
+/* Country dropdown */
+.combo { position: relative; min-width: 0; }
+.combo input { width: 100%; font: inherit; font-size: 16px; padding: 8px 10px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
+.combo input:focus { outline: 2px solid var(--pick); outline-offset: 1px; border-color: var(--pick); }
+.combo input.bad { border-color: var(--bad); }
+.lb { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 30; max-height: 240px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.16); }
+.lb li { padding: 8px 10px; border-radius: 6px; cursor: pointer; font-size: .95rem; }
+.lb li:hover, .lb li.active { background: var(--pick-bg); }
+.lb li[aria-selected="true"] { font-weight: 700; }
+.row3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) auto; }
+.pickbtn { font: inherit; font-size: .82rem; font-weight: 700; white-space: nowrap; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 7px 10px; cursor: pointer; }
+.pickbtn:hover { border-color: var(--pick); }
+.pickbtn.on { border-color: var(--pick); background: var(--pick-bg); }
+.pickmark { font-weight: 700; min-width: 1em; text-align: center; }
+.row.win .pickmark { color: var(--good); } .row.wrong .pickmark { color: var(--bad); }
+
 /* Knockout bracket */
 .team { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 12px; border-radius: 9px; border: 1.5px solid transparent; background: var(--surface2); color: var(--ink); font: inherit; cursor: pointer; text-align: left; transition: border-color .12s, background .12s; }
 .team:hover:not(:disabled) { border-color: var(--pick); }
@@ -146,5 +162,5 @@ button.row:hover { border-color: var(--pick); }
   .thead, .grp { grid-template-columns: minmax(0, 1.5fr) 24px minmax(0, 1fr); }
   .slot::before { left: -13.5px; width: 12px; }
 }
-@media (max-width: 480px) { .row { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
+@media (max-width: 480px) { .row { grid-template-columns: minmax(0, 1fr); gap: 6px; } .row3 .pickbtn { justify-self: start; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

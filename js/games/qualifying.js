@@ -1,4 +1,6 @@
-import { DATALIST, bindCountryField, fieldHTML, focusField, makeOptions, resultHTML } from '../lib/country-field.js';
+// Qualifying: type the country of every new team in each round, submit, then see the answers.
+// In the last round the player also picks which team in each tie reached the league phase.
+import { bindCombos, comboHTML, focusField, resultHTML } from '../lib/country-field.js';
 import { countryName } from '../lib/countries.js';
 import { esc, tieResult } from '../lib/util.js';
 
@@ -8,7 +10,7 @@ export const available = (season) => season.stages.some((s) => s.type === 'quali
 const PICK_POINTS = 2;
 const PATHS = { champions: 'Champions Path', league: 'League Path' };
 
-export function play({ el, season, difficulty }) {
+export function play({ el, season }) {
   return new Promise((resolve) => {
     const ST = season.stages.filter((s) => s.type === 'qualifying');
     const T = season.teams;
@@ -22,35 +24,46 @@ export function play({ el, season, difficulty }) {
       NEW[r] = [];
       st.ties.forEach((tie) => tie.slots.forEach(({ team }) => { if (!seen.has(team)) { seen.add(team); NEW[r].push(team); } }));
     });
-    const pool = Object.values(T).map((t) => t.country);
     const MAX = NEW.flat().length + ST[LAST].ties.length * PICK_POINTS;
 
-    const S = { r: 0, ans: {}, err: {}, drafts: {}, opts: {}, picks: {}, summary: false };
-    const answered = (r) => NEW[r].every((t) => S.ans[t]);
+    const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: {}, submitted: [], summary: false };
     const points = () => Object.values(S.ans).filter((a) => a.ok).length
-      + ST[LAST].ties.filter((tie, i) => S.picks[i] === tie.winner).length * PICK_POINTS;
+      + (S.submitted[LAST] ? ST[LAST].ties.filter((tie, i) => S.picks[i] === tie.winner).length * PICK_POINTS : 0);
+    const progress = (r) => {
+      const countries = NEW[r].filter((t) => S.sel[t]).length;
+      const picks = r === LAST ? Object.keys(S.picks).length : 0;
+      const needPicks = r === LAST ? ST[LAST].ties.length : 0;
+      return { countries, picks, needPicks, done: countries === NEW[r].length && picks === needPicks };
+    };
 
     function row(r, i, t, tie) {
-      const isNew = NEW[r].includes(t), a = S.ans[t], done = answered(r);
+      const isNew = NEW[r].includes(t), sub = S.submitted[r], last = r === LAST;
       const pick = S.picks[i];
-      const pickPhase = r === LAST && done;
-      const revealed = r < LAST ? done : pick !== undefined;
-      let cls = 'row';
-      if (revealed) cls += t === tie.winner ? ' win' : (r === LAST && t === pick ? ' wrong' : ' dim');
+      let cls = 'row' + (last ? ' row3' : '');
+      if (sub) cls += t === tie.winner ? ' win' : (last && t === pick ? ' wrong' : ' dim');
       let right;
-      if (isNew && !a) {
-        S.opts[t] ||= makeOptions(T[t].country, pool);
-        right = fieldHTML({ key: t, difficulty, options: S.opts[t], draft: S.drafts[t], err: S.err[t], label: `Country of ${nm(t)}` });
-      } else if (isNew) right = resultHTML(a.code, T[t].country);
+      if (isNew && !sub) right = comboHTML({ key: t, draft: S.drafts[t], invalid: S.drafts[t] && !S.sel[t] && S.touched?.[t], label: `Country of ${nm(t)}` });
+      else if (isNew) right = resultHTML(S.ans[t]?.code, T[t].country);
       else right = `<span class="cty">${esc(countryName(T[t].country))}</span>`;
-      const name = `<span class="tn">${esc(nm(t))}${revealed && t === tie.winner ? '<span class="adv">Through</span>' : ''}</span>`;
-      return pickPhase && !revealed
-        ? `<button class="${cls}" data-act="q-pick" data-i="${i}" data-t="${t}">${name}${right}</button>`
-        : `<div class="${cls}">${name}${right}</div>`;
+      const name = `<span class="tn">${esc(nm(t))}${sub && t === tie.winner ? '<span class="adv">Through</span>' : ''}</span>`;
+      const pickBtn = last
+        ? (sub ? `<span class="pickmark">${pick === t ? (t === tie.winner ? '✓' : '✗') : ''}</span>`
+          : `<button class="pickbtn ${pick === t ? 'on' : ''}" data-act="q-pick" data-i="${i}" data-t="${t}" aria-pressed="${pick === t}">${pick === t ? '✓ Through' : 'Through?'}</button>`)
+        : '';
+      return `<div class="${cls}">${name}${right}${pickBtn}</div>`;
+    }
+
+    function footer(r) {
+      const p = progress(r), sub = S.submitted[r];
+      if (sub) return `<span class="hint" style="margin:0"></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'See summary'}</button>`;
+      const parts = [`${p.countries} of ${NEW[r].length} countries`];
+      if (r === LAST) parts.push(`${p.picks} of ${p.needPicks} picks`);
+      return `<span class="hint" style="margin:0" id="q-status">${parts.join(', ')}</span>
+        <button class="btn" data-act="q-submit" id="q-submit" ${p.done ? '' : 'disabled'}>Submit answers</button>`;
     }
 
     function roundHTML() {
-      const r = S.r, st = ST[r], done = answered(r);
+      const r = S.r, st = ST[r], sub = S.submitted[r];
       let i = 0, body = '', lastPath;
       for (const tie of st.ties) {
         if (tie.path !== lastPath) {
@@ -59,36 +72,32 @@ export function play({ el, season, difficulty }) {
           body += '<div class="ties">';
           lastPath = tie.path;
         }
-        const idx = i++, pick = S.picks[idx];
+        const idx = i++;
         const [a, b] = tie.slots.map((s) => s.team);
-        const show = r < LAST ? done : pick !== undefined;
         let res = '';
-        if (show) {
-          const verdict = r === LAST ? `<b class="${pick === tie.winner ? 'ok' : 'no'}">${pick === tie.winner ? `Correct, +${PICK_POINTS} pts` : 'Wrong'}.</b> ` : '';
+        if (sub) {
+          const verdict = r === LAST
+            ? `<b class="${S.picks[idx] === tie.winner ? 'ok' : 'no'}">${S.picks[idx] === tie.winner ? `Correct pick, +${PICK_POINTS} pts` : 'Wrong pick'}.</b> `
+            : '';
           res = `<div class="res">${verdict}${esc(tieResult(tie, T, a, b))}</div>`;
         }
         body += `<div class="tie">${row(r, idx, a, tie)}${row(r, idx, b, tie)}${res}</div>`;
       }
       body += '</div>';
 
-      const left = NEW[r].filter((t) => !S.ans[t]).length;
-      const nTies = st.ties.length, picked = Object.keys(S.picks).length;
-      let hint, status, canNext;
-      if (!done) {
-        const how = difficulty === 'easy' ? 'Pick the right country for each new team.' : 'Type the country of each new team and press Enter or OK.';
-        hint = r === 0 ? how : `${how} Teams you have already seen show their country.`;
-        status = `${left} teams left`; canNext = false;
-      } else if (r < LAST) {
-        hint = 'All countries done. Here are the results of the round.'; status = ''; canNext = true;
+      let hint;
+      if (sub) {
+        const ok = NEW[r].filter((t) => S.ans[t].ok).length;
+        hint = `You got ${ok} of ${NEW[r].length} countries right in this round.`;
       } else {
-        hint = `Pick which team in each tie reached the league phase. ${PICK_POINTS} pts per correct pick.`;
-        status = picked < nTies ? `${nTies - picked} ties left` : ''; canNext = picked === nTies;
+        hint = r === 0
+          ? 'Type the country of every team and pick it from the list. Answers are revealed when you submit the round.'
+          : 'Type the country of every new team. Teams you have already seen show their country.';
+        if (r === LAST) hint += ` Also pick which team in each tie reached the league phase (${PICK_POINTS} pts each).`;
       }
-      return `${DATALIST}
-        <div class="bar"><h2>${esc(st.name)}</h2><span class="score">${points()} pts</span></div>
+      return `<div class="bar"><h2>${esc(st.name)}</h2><span class="score">${points()} pts</span></div>
         <p class="hint">${hint}</p>${body}
-        <div class="foot"><span class="hint" style="margin:0">${status}</span>
-        <button class="btn" data-act="q-next" ${canNext ? '' : 'disabled'}>${r < LAST ? 'Next round' : 'See summary'}</button></div>`;
+        <div class="foot" id="q-foot">${footer(r)}</div>`;
     }
 
     function lines() {
@@ -99,39 +108,51 @@ export function play({ el, season, difficulty }) {
     }
 
     function summaryHTML() {
-      const misses = NEW.flat().filter((t) => S.ans[t] && !S.ans[t].ok)
-        .map((t) => `<div class="miss"><span><b>${esc(nm(t))}</b>: ${esc(countryName(T[t].country))}</span><span>You answered ${esc(countryName(S.ans[t].code))}</span></div>`).join('');
+      const misses = NEW.flat().filter((t) => !S.ans[t]?.ok)
+        .map((t) => `<div class="miss"><span><b>${esc(nm(t))}</b>: ${esc(countryName(T[t].country))}</span><span>You answered ${esc(countryName(S.ans[t]?.code) || 'nothing')}</span></div>`).join('');
       return `<div class="bar"><h2>Qualifying done</h2><span class="score">${points()} / ${MAX} pts</span></div>
         <div class="rounds">${lines().map(([k, v]) => `<div class="rrow"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join('')}</div>
         ${misses ? `<h3 class="path">Countries you missed</h3>${misses}` : ''}
         <div class="foot"><span></span><button class="btn" data-act="q-done">Continue</button></div>`;
     }
 
-    function focusNext(after) {
-      const list = NEW[S.r], start = after ? list.indexOf(after) + 1 : 0;
-      const next = [...list.slice(start), ...list.slice(0, start)].find((t) => !S.ans[t]);
-      if (next && difficulty !== 'easy') focusField(el, next);
-    }
-
     function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); }
+    const updateFooter = () => { const f = el.querySelector('#q-foot'); if (f && !S.submitted[S.r]) f.innerHTML = footer(S.r); };
+    const firstOpen = (after) => {
+      const list = NEW[S.r], start = after ? list.indexOf(after) + 1 : 0;
+      return [...list.slice(start), ...list.slice(0, start)].find((t) => !S.sel[t]);
+    };
 
-    bindCountryField(el, S, (t, code) => {
-      if (S.ans[t]) return;
-      S.ans[t] = { code, ok: code === T[t].country };
-      render(); focusNext(t);
-    }, render);
+    S.touched = {};
+    bindCombos(el, S, {
+      onChange: (t) => { S.touched[t] = true; updateFooter(); },
+      onDone: (t) => { const next = firstOpen(t); if (next) focusField(el, next); },
+    });
 
     el.addEventListener('click', (e) => {
       const b = e.target.closest('[data-act^="q-"]');
       if (!b || b.disabled) return;
       const act = b.dataset.act;
-      if (act === 'q-pick') { const i = +b.dataset.i; if (S.picks[i] === undefined) { S.picks[i] = b.dataset.t; render(); } }
-      else if (act === 'q-next') {
-        if (S.r < LAST) { S.r++; render(); scrollTo(0, 0); focusNext(); }
+      if (act === 'q-pick') {
+        S.picks[+b.dataset.i] = b.dataset.t;
+        // update only the two pick buttons in this tie, so typed text and focus elsewhere are kept
+        b.closest('.tie').querySelectorAll('.pickbtn').forEach((x) => {
+          const on = x.dataset.t === b.dataset.t;
+          x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); x.textContent = on ? '✓ Through' : 'Through?';
+        });
+        updateFooter();
+      } else if (act === 'q-submit') {
+        if (!progress(S.r).done) return;
+        NEW[S.r].forEach((t) => { S.ans[t] = { code: S.sel[t], ok: S.sel[t] === T[t].country }; });
+        S.submitted[S.r] = true;
+        render(); scrollTo(0, 0);
+      } else if (act === 'q-next') {
+        if (S.r < LAST) { S.r++; render(); scrollTo(0, 0); focusField(el, firstOpen()); }
         else { S.summary = true; render(); scrollTo(0, 0); }
       } else if (act === 'q-done') resolve({ score: points(), max: MAX, lines: lines() });
     });
 
-    render(); focusNext();
+    render();
+    focusField(el, firstOpen());
   });
 }
