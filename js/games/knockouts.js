@@ -1,5 +1,6 @@
 // The knockout phase, played with the same rounds engine as qualifying: one results-table row per tie,
-// one tie in focus, pick who went through, submit to see the results. The real winners move into the next round.
+// one tie in focus, pick who went through. Hard mode: your own picks go through to the next round, right or wrong,
+// and the results are revealed round by round after the final.
 import { playRounds } from './qualifying.js';
 
 export const meta = { id: 'knockouts', title: 'Knockout phase', short: 'Knockouts' };
@@ -13,6 +14,7 @@ export const KNOCKOUTS = {
   finalists: () => false,
   rivals: () => false,
   autoDraw: true,
+  hidden: true, // hard mode; set to false to reveal each round and send the real winners through
   newLabel: 'Straight from the league phase',
   doneTitle: 'Knockout phase done',
 };

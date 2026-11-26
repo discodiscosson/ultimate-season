@@ -307,6 +307,8 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .kpos { margin-left: auto; font-style: normal; font-size: .7rem; color: var(--muted); font-weight: 700; }
 @media (max-width: 700px) { .ko-split { grid-template-columns: 1fr; } .ko-dest { position: static; } }
 
+.nreal { display: block; font-size: .7rem; font-weight: 500; color: var(--muted); line-height: 1.25; margin-top: 2px; }
+.mrow.unreal { border-style: dashed; }
 .champ { font-family: var(--display); font-weight: 800; font-size: 1.6rem; display: flex; align-items: center; gap: 10px; margin: 4px 2px 14px; }
 .champ .flag { width: 34px; height: 25px; }
 
