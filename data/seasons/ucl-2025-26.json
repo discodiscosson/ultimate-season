@@ -43,7 +43,10 @@
   },
   "mal": {
    "name": "Malmö FF",
-   "country": "SWE"
+   "country": "SWE",
+   "finals": [
+    1979
+   ]
   },
   "lvd": {
    "name": "FCI Levadia",
@@ -107,7 +110,10 @@
   },
   "kai": {
    "name": "Kairat",
-   "country": "KAZ"
+   "country": "KAZ",
+   "rivals": [
+    "Astana"
+   ]
   },
   "noa": {
    "name": "Noah",
@@ -131,7 +137,12 @@
   },
   "paf": {
    "name": "Pafos",
-   "country": "CYP"
+   "country": "CYP",
+   "rivals": [
+    "AEL Limassol",
+    "Apollon Limassol",
+    "APOEL"
+   ]
   },
   "mac": {
    "name": "Maccabi Tel Aviv",
@@ -139,11 +150,20 @@
   },
   "rsb": {
    "name": "Red Star Belgrade",
-   "country": "SRB"
+   "country": "SRB",
+   "finals": [
+    1991
+   ],
+   "rivals": [
+    "Partizan"
+   ]
   },
   "fer": {
    "name": "Ferencváros",
-   "country": "HUN"
+   "country": "HUN",
+   "rivals": [
+    "Újpest"
+   ]
   },
   "lec": {
    "name": "Lech Poznań",
@@ -151,7 +171,10 @@
   },
   "cop": {
    "name": "Copenhagen",
-   "country": "DEN"
+   "country": "DEN",
+   "rivals": [
+    "Brøndby"
+   ]
   },
   "rij": {
    "name": "Rijeka",
@@ -163,7 +186,10 @@
   },
   "qar": {
    "name": "Qarabağ",
-   "country": "AZE"
+   "country": "AZE",
+   "rivals": [
+    "Neftçi"
+   ]
   },
   "bra": {
    "name": "Brann",
@@ -183,15 +209,28 @@
   },
   "ran": {
    "name": "Rangers",
-   "country": "SCO"
+   "country": "SCO",
+   "rivals": [
+    "Celtic"
+   ]
   },
   "pan": {
    "name": "Panathinaikos",
-   "country": "GRE"
+   "country": "GRE",
+   "finals": [
+    1971
+   ]
   },
   "bru": {
    "name": "Club Brugge",
-   "country": "BEL"
+   "country": "BEL",
+   "finals": [
+    1978
+   ],
+   "rivals": [
+    "Anderlecht",
+    "Cercle Brugge"
+   ]
   },
   "nic": {
    "name": "Nice",
@@ -199,39 +238,85 @@
   },
   "ben": {
    "name": "Benfica",
-   "country": "POR"
+   "country": "POR",
+   "finals": [
+    1961,
+    1962,
+    1963,
+    1965,
+    1968,
+    1988,
+    1990
+   ],
+   "rivals": [
+    "Sporting CP",
+    "Porto"
+   ]
   },
   "fey": {
    "name": "Feyenoord",
-   "country": "NED"
+   "country": "NED",
+   "finals": [
+    1970
+   ]
   },
   "fen": {
    "name": "Fenerbahçe",
-   "country": "TUR"
+   "country": "TUR",
+   "rivals": [
+    "Galatasaray"
+   ]
   },
   "bod": {
    "name": "Bodø/Glimt",
-   "country": "NOR"
+   "country": "NOR",
+   "rivals": [
+    "Tromsø",
+    "Rosenborg"
+   ]
   },
   "stu": {
    "name": "Sturm Graz",
-   "country": "AUT"
+   "country": "AUT",
+   "rivals": [
+    "Grazer AK",
+    "Rapid Wien"
+   ]
   },
   "cel": {
    "name": "Celtic",
-   "country": "SCO"
+   "country": "SCO",
+   "finals": [
+    1967,
+    1970
+   ],
+   "rivals": [
+    "Rangers"
+   ]
   },
   "bas": {
    "name": "Basel",
-   "country": "SUI"
+   "country": "SUI",
+   "rivals": [
+    "FC Zürich",
+    "Grasshoppers"
+   ]
   },
   "psg": {
    "name": "Paris Saint-Germain",
-   "country": "FRA"
+   "country": "FRA",
+   "finals": [
+    2020,
+    2025,
+    2026
+   ]
   },
   "mon": {
    "name": "Monaco",
-   "country": "FRA"
+   "country": "FRA",
+   "finals": [
+    2004
+   ]
   },
   "gal": {
    "name": "Galatasaray",
@@ -239,15 +324,51 @@
   },
   "juv": {
    "name": "Juventus",
-   "country": "ITA"
+   "country": "ITA",
+   "finals": [
+    1973,
+    1983,
+    1985,
+    1996,
+    1997,
+    1998,
+    2003,
+    2015,
+    2017
+   ]
   },
   "rma": {
    "name": "Real Madrid",
-   "country": "ESP"
+   "country": "ESP",
+   "finals": [
+    1956,
+    1957,
+    1958,
+    1959,
+    1960,
+    1962,
+    1964,
+    1966,
+    1981,
+    1998,
+    2000,
+    2002,
+    2014,
+    2016,
+    2017,
+    2018,
+    2022,
+    2024
+   ]
   },
   "bvb": {
    "name": "Borussia Dortmund",
-   "country": "GER"
+   "country": "GER",
+   "finals": [
+    1997,
+    2013,
+    2024
+   ]
   },
   "ata": {
    "name": "Atalanta",
@@ -259,11 +380,25 @@
   },
   "atm": {
    "name": "Atlético Madrid",
-   "country": "ESP"
+   "country": "ESP",
+   "finals": [
+    1974,
+    2014,
+    2016
+   ]
   },
   "int": {
    "name": "Inter",
-   "country": "ITA"
+   "country": "ITA",
+   "finals": [
+    1964,
+    1965,
+    1967,
+    1972,
+    2010,
+    2023,
+    2025
+   ]
   },
   "oly": {
    "name": "Olympiacos",
@@ -271,31 +406,81 @@
   },
   "b04": {
    "name": "Bayer Leverkusen",
-   "country": "GER"
+   "country": "GER",
+   "finals": [
+    2002
+   ]
   },
   "che": {
    "name": "Chelsea",
-   "country": "ENG"
+   "country": "ENG",
+   "finals": [
+    2008,
+    2012,
+    2021
+   ]
   },
   "liv": {
    "name": "Liverpool",
-   "country": "ENG"
+   "country": "ENG",
+   "finals": [
+    1977,
+    1978,
+    1981,
+    1984,
+    1985,
+    2005,
+    2007,
+    2018,
+    2019,
+    2022
+   ]
   },
   "mci": {
    "name": "Manchester City",
-   "country": "ENG"
+   "country": "ENG",
+   "finals": [
+    2021,
+    2023
+   ]
   },
   "bay": {
    "name": "Bayern München",
-   "country": "GER"
+   "country": "GER",
+   "finals": [
+    1974,
+    1975,
+    1976,
+    1982,
+    1987,
+    1999,
+    2001,
+    2010,
+    2012,
+    2013,
+    2020
+   ]
   },
   "bar": {
    "name": "Barcelona",
-   "country": "ESP"
+   "country": "ESP",
+   "finals": [
+    1961,
+    1986,
+    1992,
+    1994,
+    2006,
+    2009,
+    2011,
+    2015
+   ]
   },
   "tot": {
    "name": "Tottenham Hotspur",
-   "country": "ENG"
+   "country": "ENG",
+   "finals": [
+    2019
+   ]
   },
   "spo": {
    "name": "Sporting CP",
@@ -303,7 +488,11 @@
   },
   "ars": {
    "name": "Arsenal",
-   "country": "ENG"
+   "country": "ENG",
+   "finals": [
+    2006,
+    2026
+   ]
   }
  },
  "leaguePosition": {

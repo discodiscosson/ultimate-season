@@ -1,5 +1,5 @@
 // Which country hosts the final? Pick from the list, submit, then see the answer.
-import { bindCombos, comboHTML, focusField, resultHTML } from '../lib/country-field.js';
+import { bindCombos, comboHTML, focusField, resultHTML } from '../lib/combo.js';
 import { countryName } from '../lib/countries.js';
 import { esc, formatDate } from '../lib/util.js';
 

@@ -24,6 +24,20 @@ TEAMS = {
  'che':('Chelsea','ENG'),'liv':('Liverpool','ENG'),'mci':('Manchester City','ENG'),'bay':('Bayern München','GER'),
  'bar':('Barcelona','ESP'),'tot':('Tottenham Hotspur','ENG'),'spo':('Sporting CP','POR'),'ars':('Arsenal','ENG'),
 }
+# European Cup / Champions League finals played (years of the final). Only teams with at least one final are listed.
+FINALS = {'ben':[1961,1962,1963,1965,1968,1988,1990],'cel':[1967,1970],'fey':[1970],'pan':[1971],
+ 'bru':[1978],'mal':[1979],'rsb':[1991],
+ 'psg':[2020,2025,2026],'ars':[2006,2026],'bay':[1974,1975,1976,1982,1987,1999,2001,2010,2012,2013,2020],
+ 'rma':[1956,1957,1958,1959,1960,1962,1964,1966,1981,1998,2000,2002,2014,2016,2017,2018,2022,2024],
+ 'bar':[1961,1986,1992,1994,2006,2009,2011,2015],'atm':[1974,2014,2016],'liv':[1977,1978,1981,1984,1985,2005,2007,2018,2019,2022],
+ 'che':[2008,2012,2021],'mci':[2021,2023],'tot':[2019],'juv':[1973,1983,1985,1996,1997,1998,2003,2015,2017],
+ 'int':[1964,1965,1967,1972,2010,2023,2025],'bvb':[1997,2013,2024],'b04':[2002],'mon':[2004]}
+# Biggest rival(s): accepted answers in the rival game. Names must match js/lib/clubs.js.
+RIVALS = {'fer':['Újpest'],'qar':['Neftçi'],'rsb':['Partizan'],'paf':['AEL Limassol','Apollon Limassol','APOEL'],
+ 'bod':['Tromsø','Rosenborg'],'stu':['Grazer AK','Rapid Wien'],'cel':['Rangers'],'kai':['Astana'],
+ 'bas':['FC Zürich','Grasshoppers'],'cop':['Brøndby'],'fen':['Galatasaray'],'ben':['Sporting CP','Porto'],
+ 'ran':['Celtic'],'bru':['Anderlecht','Cercle Brugge']}
+
 # League phase position (only known for the teams that reached the knockout phase so far)
 POS = {'ars':1,'bay':2,'liv':3,'tot':4,'bar':5,'che':6,'spo':7,'mci':8,'rma':9,'int':10,'psg':11,'new':12,'juv':13,
  'atm':14,'ata':15,'b04':16,'bvb':17,'oly':18,'bru':19,'gal':20,'mon':21,'qar':22,'bod':23,'ben':24}
@@ -82,7 +96,8 @@ season = {
  'id':'ucl-2025-26','label':'2025/26',
  'competition':{'id':'ucl','name':'Champions League','sport':'football'},
  'final':{'date':'2026-05-30','city':'Budapest','country':'HUN','venue':'Puskás Aréna'},
- 'teams':{k:{'name':v[0],'country':v[1]} for k,v in TEAMS.items()},
+ 'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {})}
+          for k,v in TEAMS.items()},
  'leaguePosition':POS,
  'stages':[{'id':i,'type':'qualifying','name':n,'short':s,'ties':t} for i,n,s,t in Q]
          +[{'id':i,'type':'knockout','name':n,'short':s,'ties':t} for i,n,s,t in KO],

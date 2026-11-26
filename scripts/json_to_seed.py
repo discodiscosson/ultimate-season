@@ -18,9 +18,11 @@ out.append('on conflict (code) do update set name = excluded.name, aliases = exc
 c = S['competition']
 out.append(f"insert into ultimate_season.competitions (id, sport, name) values ({q(c['id'])}, {q(c['sport'])}, {q(c['name'])}) on conflict (id) do nothing;\n")
 
-out.append('insert into ultimate_season.teams (id, name, country_code) values')
-out.append(',\n'.join(f"  ({q(k)}, {q(v['name'])}, {q(v['country'])})" for k, v in S['teams'].items()))
-out.append('on conflict (id) do update set name = excluded.name, country_code = excluded.country_code;\n')
+ints = lambda xs: "array[" + ",".join(str(int(x)) for x in xs) + "]::int[]" if xs else 'null'
+out.append('insert into ultimate_season.teams (id, name, country_code, european_cup_finals, rivals) values')
+out.append(',\n'.join(f"  ({q(k)}, {q(v['name'])}, {q(v['country'])}, {ints(v.get('finals'))}, {arr(v.get('rivals')) if v.get('rivals') else 'null'})" for k, v in S['teams'].items()))
+out.append('on conflict (id) do update set name = excluded.name, country_code = excluded.country_code,')
+out.append('  european_cup_finals = excluded.european_cup_finals, rivals = excluded.rivals;\n')
 
 F = S['final']
 start_year = int(S['label'][:4])

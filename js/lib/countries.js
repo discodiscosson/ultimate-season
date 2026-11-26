@@ -1,4 +1,5 @@
 // All countries in the world, plus the UK home nations and football territories used in UEFA.
+// Answers and the dropdown are limited to the UEFA members (see UEFA below).
 // Format: CODE: [display name, ...accepted aliases]. Swedish names are kept as aliases.
 export const COUNTRIES = {
   AFG: ['Afghanistan'], ALB: ['Albania', 'albanien'], ALG: ['Algeria', 'algeriet'], AND: ['Andorra'], ANG: ['Angola'],
@@ -54,11 +55,19 @@ export const COUNTRIES = {
 
 export const countryName = (code) => COUNTRIES[code]?.[0] ?? code;
 
+// The 55 UEFA member associations. The country dropdown only offers these.
+export const UEFA = ['ALB', 'AND', 'ARM', 'AUT', 'AZE', 'BLR', 'BEL', 'BIH', 'BUL', 'CRO', 'CYP', 'CZE', 'DEN', 'ENG', 'EST', 'FRO',
+  'FIN', 'FRA', 'GEO', 'GER', 'GIB', 'GRE', 'HUN', 'ISL', 'IRL', 'ISR', 'ITA', 'KAZ', 'KOS', 'LVA', 'LIE', 'LTU', 'LUX', 'MLT',
+  'MDA', 'MNE', 'NED', 'MKD', 'NIR', 'NOR', 'POL', 'POR', 'ROU', 'RUS', 'SMR', 'SCO', 'SRB', 'SVK', 'SVN', 'ESP', 'SWE', 'SUI',
+  'TUR', 'UKR', 'WAL'];
+const UEFA_SET = new Set(UEFA);
+
 export const norm = (s) => String(s ?? '').toLowerCase().replace(/ø/g, 'o').replace(/æ/g, 'ae')
   .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]/g, '');
 
-const ALIAS = Object.entries(COUNTRIES).flatMap(([code, names]) => names.map((n) => [norm(n), code]));
-const BY_NAME = Object.keys(COUNTRIES).sort((a, b) => countryName(a).localeCompare(countryName(b), 'en'));
+// Only UEFA members are offered and accepted as answers; the full list stays available for display.
+const ALIAS = Object.entries(COUNTRIES).filter(([code]) => UEFA_SET.has(code)).flatMap(([code, names]) => names.map((n) => [norm(n), code]));
+const BY_NAME = UEFA.slice().sort((a, b) => countryName(a).localeCompare(countryName(b), 'en'));
 
 // Exact match on a name or alias, otherwise null.
 export function exactCountry(input) {
