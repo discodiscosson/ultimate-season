@@ -334,8 +334,10 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         const attrs = rp && !focused ? ` data-act="q-focus" data-i="${i}" role="button" tabindex="0"` : '';
         const mid = !pickIn ? '<span class="vs">–</span>'
           : played ? `${aggText(tie)}<span class="legs-m">${[l1, l2].filter(Boolean).join(', ')}</span>`
-            : `<span class="vs">–</span><span class="nreal">Never played. Real tie: ${esc(nm(real[0]))} v ${esc(nm(real[1]))}, ${esc(nm(tie.winner))} went through</span>`;
-        return `<div class="mrow ${cls}${pickIn && !played ? ' unreal' : ''}"${attrs}>
+            : '<span class="vs">–</span>';
+        // Ties that never happened get a dashed border; the real tie is in the tooltip
+        const tip = pickIn && !played ? ` title="Never played. Real tie: ${esc(nm(real[0]))} v ${esc(nm(real[1]))}, ${esc(nm(tie.winner))} went through"` : '';
+        return `<div class="mrow ${cls}${pickIn && !played ? ' unreal' : ''}"${attrs}${tip}>
           <div class="tc t1">${advTeam(r, i, a, tie, 0)}</div>
           <div class="agg">${mid}</div>
           <div class="tc t2">${advTeam(r, i, b, tie, 1)}</div>
@@ -367,7 +369,7 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
       } else if (cfg.hidden && S.reveal) {
         const unreal = ST[r].ties.filter((_, i) => { const [a, b] = tieTeams(r, i), re = realTeams(r, i); return !(re.includes(a) && re.includes(b)); }).length;
         ask = r === LAST ? `${nm(ST[r].ties[0].winner)} are the champions!` : `${ST[r].name}: the results`;
-        hint = `${s.picks} of ${n} pick${n === 1 ? '' : 's'} right. ${s.total} pts.${unreal ? ` ${unreal} of your ties never happened, because a team you picked earlier was already out.` : ''}`;
+        hint = `${s.picks} of ${n} pick${n === 1 ? '' : 's'} right. ${s.total} pts.${unreal ? ` Dashed ties never happened, because a team you picked earlier was already out.` : ''}`;
         foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'See summary'}</button>`;
       } else if (!fin && hasRival(r)) {
         ask = 'Who are their biggest rivals?';
