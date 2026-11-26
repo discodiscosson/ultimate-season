@@ -151,8 +151,10 @@ button.row:hover { border-color: var(--pick); }
 .mrow.focus .flag { width: 32px; height: 24px; }
 .tc { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .tc.t1 { justify-content: flex-end; text-align: right; }
-.tc .combo { width: 170px; max-width: 100%; flex: none; }
-.tname { font-weight: 600; overflow-wrap: anywhere; }
+.tc .combo { flex: 1 1 150px; min-width: 120px; max-width: 200px; }
+.mrow.focus { grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); }
+.mrow.focus .leg { display: none; }
+.tname { font-weight: 600; flex: 0 1 auto; overflow-wrap: normal; word-break: normal; }
 .tname.w { font-weight: 800; }
 .mrow.done .tname:not(.w) { font-weight: 500; color: var(--muted); }
 .agg { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
