@@ -104,7 +104,7 @@ export function play({ el, season, difficulty }) {
       return `<div class="bar"><h2>Qualifying done</h2><span class="score">${points()} / ${MAX} pts</span></div>
         <div class="rounds">${lines().map(([k, v]) => `<div class="rrow"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join('')}</div>
         ${misses ? `<h3 class="path">Countries you missed</h3>${misses}` : ''}
-        <div class="foot"><span></span><button class="btn" data-act="q-done">On to the knockout phase</button></div>`;
+        <div class="foot"><span></span><button class="btn" data-act="q-done">Continue</button></div>`;
     }
 
     function focusNext(after) {

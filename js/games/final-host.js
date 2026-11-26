@@ -19,7 +19,7 @@ export function play({ el, season, difficulty }) {
       const ok = answered && S.ans === F.country;
       const where = [F.venue, F.city].filter(Boolean).join(', ');
       el.innerHTML = `${DATALIST}
-        <div class="bar"><h2>Before the season</h2><span class="score">${answered ? (ok ? POINTS : 0) : 0} pts</span></div>
+        <div class="bar"><h2>The final</h2><span class="score">${answered ? (ok ? POINTS : 0) : 0} pts</span></div>
         <div class="tie q">
           <p class="qtext">Which country hosts this season’s final?</p>
           ${answered ? `<p>${resultHTML(S.ans, F.country)}</p>
