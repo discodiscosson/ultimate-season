@@ -4,10 +4,11 @@
 //    plays Missing XI on the same matches, and the league table updates with the teams moving to their new places.
 // 3. The final table splits: the top 8 wait in the round of 16, places 9–24 move into their play-off ties, 25–36 are out.
 import { loadMap } from '../data.js';
-import { countryName, norm } from '../lib/countries.js';
+import { countryName } from '../lib/countries.js';
 import { flagHTML } from '../lib/flags.js';
 import { project, WIDTH, HEIGHT } from '../lib/projection.js';
 import { standings } from '../lib/standings.js';
+import { nameMatcher } from '../lib/names.js';
 import { esc, prefersReducedMotion, shuffle } from '../lib/util.js';
 
 export const meta = { id: 'league', title: 'League phase', short: 'League phase' };
@@ -35,13 +36,8 @@ function layout(teams, T) {
 }
 
 const sign = (a, b) => Math.sign(a - b);
-// A player's answer is right if it matches the full name or the surname (last word)
-const nameMatches = (given, real) => {
-  const g = norm(given), r = norm(real);
-  if (!g) return false;
-  const last = norm(String(real).trim().split(/\s+/).pop());
-  return g === r || g === last;
-};
+// A player's answer is right if it matches the name, the last word of it, or is a small typo away
+const nameMatches = (given, real) => nameMatcher([{ id: 1, name: real }])(given || '') === 1;
 
 export function play({ el, season, start = 0, onStep }) {
   return new Promise((resolve) => {

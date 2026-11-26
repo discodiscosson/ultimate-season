@@ -943,7 +943,35 @@
       "score": [
        0,
        2
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Simon",
+        "Gorosabel",
+        "Vivian",
+        "Paredes",
+        "Boiro",
+        "Jauregizar",
+        "Vesga",
+        "Berenguer",
+        "Sancet",
+        "Navarro",
+        "Williams"
+       ],
+       "away": [
+        "Raya",
+        "Calafiori",
+        "Gabriel",
+        "Mosquera",
+        "Timber",
+        "Rice",
+        "Zubimendi",
+        "Merino",
+        "Eze",
+        "Gyokeres",
+        "Madueke"
+       ]
+      }
      },
      {
       "home": "psv",
@@ -951,7 +979,35 @@
       "score": [
        1,
        3
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Kovar",
+        "Dest",
+        "Flamingo",
+        "Obispo",
+        "Gasiorowski",
+        "Schouten",
+        "Veerman",
+        "Perisic",
+        "Saibari",
+        "van Bommel",
+        "Pepi"
+       ],
+       "away": [
+        "Scherpen",
+        "Leysen",
+        "Burgess",
+        "Mac Allister",
+        "Niang",
+        "Rasmussen",
+        "Zorgane",
+        "Khalaili",
+        "Ait El Hadj",
+        "David",
+        "Rodriguez"
+       ]
+      }
      },
      {
       "home": "juv",
@@ -959,7 +1015,35 @@
       "score": [
        4,
        4
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Di Gregorio",
+        "Kalulu",
+        "Bremer",
+        "Kelly",
+        "McKennie",
+        "Koopmeiners",
+        "Thuram",
+        "Cambiaso",
+        "David",
+        "Yildiz",
+        "Openda"
+       ],
+       "away": [
+        "Kobel",
+        "Bensebaini",
+        "Anton",
+        "Ryerson",
+        "Svensson",
+        "Nmecha",
+        "Sabitzer",
+        "Couto",
+        "Beier",
+        "Adeyemi",
+        "Guirassy"
+       ]
+      }
      },
      {
       "home": "rma",
@@ -967,7 +1051,35 @@
       "score": [
        2,
        1
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Courtois",
+        "Alexander-Arnold",
+        "Eder Militao",
+        "Huijsen",
+        "Carreras",
+        "Valverde",
+        "Tchouameni",
+        "Mastantuono",
+        "Guler",
+        "Rodrygo",
+        "Mbappe"
+       ],
+       "away": [
+        "Rulli",
+        "Emerson",
+        "Medina",
+        "Balerdi",
+        "Pavard",
+        "Hojbjerg",
+        "Kondogbia",
+        "Weah",
+        "O'Riley",
+        "Greenwood",
+        "Aubameyang"
+       ]
+      }
      },
      {
       "home": "ben",
@@ -975,7 +1087,35 @@
       "score": [
        2,
        3
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Trubin",
+        "Dedic",
+        "Silva",
+        "Otamendi",
+        "Dahl",
+        "Rios",
+        "Barrenechea",
+        "Aursnes",
+        "Sudakov",
+        "Schjelderup",
+        "Pavlidis"
+       ],
+       "away": [
+        "Kochalski",
+        "Cafarquliyev",
+        "Medina",
+        "Mustafazada",
+        "Matheus Silva",
+        "Jankovic",
+        "Pedro Bicalho",
+        "Zoubir",
+        "Kady Borges",
+        "Leandro Andrade",
+        "Duran"
+       ]
+      }
      },
      {
       "home": "tot",
@@ -983,7 +1123,35 @@
       "score": [
        1,
        0
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Vicario",
+        "Porro",
+        "Romero",
+        "van de Ven",
+        "Spence",
+        "Bergvall",
+        "Bentancur",
+        "Sarr",
+        "Kudus",
+        "Richarlison",
+        "Simons"
+       ],
+       "away": [
+        "Luiz Junior",
+        "Cardona",
+        "Veiga",
+        "Foyth",
+        "Mourino",
+        "Buchanan",
+        "Gueye",
+        "Comesana",
+        "Pepe",
+        "Mikautadze",
+        "Perez"
+       ]
+      }
      },
      {
       "home": "oly",
@@ -991,7 +1159,35 @@
       "score": [
        0,
        0
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Paschalakis",
+        "Rodinei",
+        "Retsos",
+        "Pirola",
+        "Ortega",
+        "Hezze",
+        "Garcia",
+        "Strefezza",
+        "Chiquinho",
+        "Podence",
+        "El Kaabi"
+       ],
+       "away": [
+        "Michail",
+        "Correia",
+        "David Luiz",
+        "Luckassen",
+        "Bruno",
+        "Goldar",
+        "Dragomir",
+        "Pepe",
+        "Sunjic",
+        "Jaja",
+        "Dimata"
+       ]
+      }
      },
      {
       "home": "sla",
@@ -999,7 +1195,35 @@
       "score": [
        2,
        2
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Stanek",
+        "Doudera",
+        "Holes",
+        "Zima",
+        "Mbodji",
+        "Zafeiris",
+        "Dorley",
+        "Kusej",
+        "Sadilek",
+        "Provod",
+        "Chory"
+       ],
+       "away": [
+        "Haikin",
+        "Aleesami",
+        "Gundersen",
+        "Bjortuft",
+        "Sjovold",
+        "Auklend",
+        "Berg",
+        "Evjen",
+        "Hauge",
+        "Hogh",
+        "Jorgensen"
+       ]
+      }
      },
      {
       "home": "aja",
@@ -1007,7 +1231,35 @@
       "score": [
        0,
        2
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Jaros",
+        "Gaaei",
+        "Itakura",
+        "Baas",
+        "Wijndal",
+        "Klaassen",
+        "Regeer",
+        "Taylor",
+        "Edvardsen",
+        "Weghorst",
+        "Godts"
+       ],
+       "away": [
+        "Sommer",
+        "Bastoni",
+        "de Vrij",
+        "Akanji",
+        "Dimarco",
+        "Mkhitaryan",
+        "Calhanoglu",
+        "Barella",
+        "Dumfries",
+        "Esposito",
+        "Thuram"
+       ]
+      }
      },
      {
       "home": "bay",
@@ -1015,7 +1267,35 @@
       "score": [
        3,
        1
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Neuer",
+        "Laimer",
+        "Upamecano",
+        "Tah",
+        "Stanisic",
+        "Kimmich",
+        "Pavlovic",
+        "Olise",
+        "Gnabry",
+        "Diaz",
+        "Kane"
+       ],
+       "away": [
+        "Sanchez",
+        "Cucurella",
+        "Adarabioyo",
+        "Chalobah",
+        "Gusto",
+        "Caicedo",
+        "James",
+        "Neto",
+        "Fernandez",
+        "Palmer",
+        "Joao Pedro"
+       ]
+      }
      },
      {
       "home": "liv",
@@ -1023,7 +1303,35 @@
       "score": [
        3,
        2
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Alisson",
+        "Frimpong",
+        "Konate",
+        "van Dijk",
+        "Robertson",
+        "Gravenberch",
+        "Szoboszlai",
+        "Salah",
+        "Wirtz",
+        "Gakpo",
+        "Isak"
+       ],
+       "away": [
+        "Oblak",
+        "Galan",
+        "Lenglet",
+        "Le Normand",
+        "Llorente",
+        "Gonzalez",
+        "Gallagher",
+        "Barrios",
+        "Simeone",
+        "Griezmann",
+        "Raspadori"
+       ]
+      }
      },
      {
       "home": "psg",
@@ -1031,7 +1339,35 @@
       "score": [
        4,
        0
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Chevalier",
+        "Hakimi",
+        "Marquinhos",
+        "Pacho",
+        "Mendes",
+        "Neves",
+        "Vitinha",
+        "Ruiz",
+        "Kvaratskhelia",
+        "Mayulu",
+        "Barcola"
+       ],
+       "away": [
+        "Carnesecchi",
+        "Djimsiti",
+        "Hien",
+        "Kossounou",
+        "Bernasconi",
+        "Musah",
+        "de Roon",
+        "Bellanova",
+        "Pasalic",
+        "Maldini",
+        "De Ketelaere"
+       ]
+      }
      },
      {
       "home": "bru",
@@ -1039,7 +1375,35 @@
       "score": [
        4,
        1
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Mignolet",
+        "Sabbe",
+        "Ordonez",
+        "Mechele",
+        "Meijer",
+        "Stankovic",
+        "Onyedika",
+        "Forbs",
+        "Vanaken",
+        "Tzolis",
+        "Tresoldi"
+       ],
+       "away": [
+        "Kohn",
+        "Caio Henrique",
+        "Mawissa",
+        "Dier",
+        "Vanderson",
+        "Camara",
+        "Bamba",
+        "Minamino",
+        "Akliouche",
+        "Balogun",
+        "Biereth"
+       ]
+      }
      },
      {
       "home": "cop",
@@ -1047,7 +1411,35 @@
       "score": [
        2,
        2
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Kotarski",
+        "Huescas",
+        "Gabriel Pereira",
+        "Hatzidiakos",
+        "Lopez",
+        "Larsson",
+        "Lerager",
+        "Delaney",
+        "Achouri",
+        "Moukoko",
+        "Elyounoussi"
+       ],
+       "away": [
+        "Flekken",
+        "Tapsoba",
+        "Bade",
+        "Quansah",
+        "Grimaldo",
+        "Fernandez",
+        "Andrich",
+        "Vazquez",
+        "Ben Seghir",
+        "Tillman",
+        "Schick"
+       ]
+      }
      },
      {
       "home": "sge",
@@ -1055,7 +1447,35 @@
       "score": [
        5,
        1
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Zetterer",
+        "Collins",
+        "Koch",
+        "Theate",
+        "Brown",
+        "Chaibi",
+        "Larsson",
+        "Doan",
+        "Uzun",
+        "Knauff",
+        "Burkardt"
+       ],
+       "away": [
+        "Cakir",
+        "Elmali",
+        "Sanchez",
+        "Singo",
+        "Sallai",
+        "Lemina",
+        "Torreira",
+        "Akgun",
+        "Gundogan",
+        "Sane",
+        "Yilmaz"
+       ]
+      }
      },
      {
       "home": "mci",
@@ -1063,7 +1483,35 @@
       "score": [
        2,
        0
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Donnarumma",
+        "Khusanov",
+        "Dias",
+        "Gvardiol",
+        "O'Reilly",
+        "Rodri",
+        "Silva",
+        "Foden",
+        "Reijnders",
+        "Doku",
+        "Haaland"
+       ],
+       "away": [
+        "Milinkovic-Savic",
+        "Spinazzola",
+        "Buongiorno",
+        "Beukema",
+        "Di Lorenzo",
+        "Lobotka",
+        "McTominay",
+        "De Bruyne",
+        "Anguissa",
+        "Politano",
+        "Hojlund"
+       ]
+      }
      },
      {
       "home": "new",
@@ -1071,7 +1519,35 @@
       "score": [
        1,
        2
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Pope",
+        "Trippier",
+        "Schar",
+        "Burn",
+        "Livramento",
+        "Guimarães",
+        "Tonali",
+        "Joelinton",
+        "Elanga",
+        "Gordon",
+        "Barnes"
+       ],
+       "away": [
+        "Garcia",
+        "Martin",
+        "Cubarsi",
+        "Araujo",
+        "Kounde",
+        "Pedri",
+        "de Jong",
+        "Rashford",
+        "Fermin",
+        "Raphinha",
+        "Lewandowski"
+       ]
+      }
      },
      {
       "home": "spo",
@@ -1079,7 +1555,35 @@
       "score": [
        4,
        1
-      ]
+      ],
+      "lineups": {
+       "home": [
+        "Virginia",
+        "Fresneda",
+        "Quaresma",
+        "Inacio",
+        "Araujo",
+        "Hjulmand",
+        "Kochorashvili",
+        "Quenda",
+        "Trincao",
+        "Pote",
+        "Suarez"
+       ],
+       "away": [
+        "Kalmurza",
+        "Machado Mata",
+        "Sorokin",
+        "Martynovich",
+        "Tapalov",
+        "Arad",
+        "Kasabulat",
+        "Gromyko",
+        "Jorginho",
+        "Mrynskiy",
+        "Satpaev"
+       ]
+      }
      }
     ]
    },

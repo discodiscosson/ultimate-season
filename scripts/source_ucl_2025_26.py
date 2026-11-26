@@ -81,7 +81,45 @@ MATCHDAYS = [
 ]
 # Starting XIs per match, keyed by (matchday, home, away): {'home': [11 names], 'away': [11 names]}, goalkeeper first.
 # Empty for now: the Missing XI game shows a placeholder until a match has line-ups.
-LINEUPS = {}
+# Matchday 1 line-ups (from Flashscore, surnames as shown there)
+LINEUPS = {
+ (1,'psv','usg'): {'home': ['Kovar', 'Dest', 'Flamingo', 'Obispo', 'Gasiorowski', 'Schouten', 'Veerman', 'Perisic', 'Saibari', 'van Bommel', 'Pepi'],
+   'away': ['Scherpen', 'Leysen', 'Burgess', 'Mac Allister', 'Niang', 'Rasmussen', 'Zorgane', 'Khalaili', 'Ait El Hadj', 'David', 'Rodriguez']},
+ (1,'tot','vil'): {'home': ['Vicario', 'Porro', 'Romero', 'van de Ven', 'Spence', 'Bergvall', 'Bentancur', 'Sarr', 'Kudus', 'Richarlison', 'Simons'],
+   'away': ['Luiz Junior', 'Cardona', 'Veiga', 'Foyth', 'Mourino', 'Buchanan', 'Gueye', 'Comesana', 'Pepe', 'Mikautadze', 'Perez']},
+ (1,'ath','ars'): {'home': ['Simon', 'Gorosabel', 'Vivian', 'Paredes', 'Boiro', 'Jauregizar', 'Vesga', 'Berenguer', 'Sancet', 'Navarro', 'Williams'],
+   'away': ['Raya', 'Calafiori', 'Gabriel', 'Mosquera', 'Timber', 'Rice', 'Zubimendi', 'Merino', 'Eze', 'Gyokeres', 'Madueke']},
+ (1,'ben','qar'): {'home': ['Trubin', 'Dedic', 'Silva', 'Otamendi', 'Dahl', 'Rios', 'Barrenechea', 'Aursnes', 'Sudakov', 'Schjelderup', 'Pavlidis'],
+   'away': ['Kochalski', 'Cafarquliyev', 'Medina', 'Mustafazada', 'Matheus Silva', 'Jankovic', 'Pedro Bicalho', 'Zoubir', 'Kady Borges', 'Leandro Andrade', 'Duran']},
+ (1,'juv','bvb'): {'home': ['Di Gregorio', 'Kalulu', 'Bremer', 'Kelly', 'McKennie', 'Koopmeiners', 'Thuram', 'Cambiaso', 'David', 'Yildiz', 'Openda'],
+   'away': ['Kobel', 'Bensebaini', 'Anton', 'Ryerson', 'Svensson', 'Nmecha', 'Sabitzer', 'Couto', 'Beier', 'Adeyemi', 'Guirassy']},
+ (1,'rma','om'): {'home': ['Courtois', 'Alexander-Arnold', 'Eder Militao', 'Huijsen', 'Carreras', 'Valverde', 'Tchouameni', 'Mastantuono', 'Guler', 'Rodrygo', 'Mbappe'],
+   'away': ['Rulli', 'Emerson', 'Medina', 'Balerdi', 'Pavard', 'Hojbjerg', 'Kondogbia', 'Weah', "O'Riley", 'Greenwood', 'Aubameyang']},
+ (1,'oly','paf'): {'home': ['Paschalakis', 'Rodinei', 'Retsos', 'Pirola', 'Ortega', 'Hezze', 'Garcia', 'Strefezza', 'Chiquinho', 'Podence', 'El Kaabi'],
+   'away': ['Michail', 'Correia', 'David Luiz', 'Luckassen', 'Bruno', 'Goldar', 'Dragomir', 'Pepe', 'Sunjic', 'Jaja', 'Dimata']},
+ (1,'sla','bod'): {'home': ['Stanek', 'Doudera', 'Holes', 'Zima', 'Mbodji', 'Zafeiris', 'Dorley', 'Kusej', 'Sadilek', 'Provod', 'Chory'],
+   'away': ['Haikin', 'Aleesami', 'Gundersen', 'Bjortuft', 'Sjovold', 'Auklend', 'Berg', 'Evjen', 'Hauge', 'Hogh', 'Jorgensen']},
+ (1,'aja','int'): {'home': ['Jaros', 'Gaaei', 'Itakura', 'Baas', 'Wijndal', 'Klaassen', 'Regeer', 'Taylor', 'Edvardsen', 'Weghorst', 'Godts'],
+   'away': ['Sommer', 'Bastoni', 'de Vrij', 'Akanji', 'Dimarco', 'Mkhitaryan', 'Calhanoglu', 'Barella', 'Dumfries', 'Esposito', 'Thuram']},
+ (1,'liv','atm'): {'home': ['Alisson', 'Frimpong', 'Konate', 'van Dijk', 'Robertson', 'Gravenberch', 'Szoboszlai', 'Salah', 'Wirtz', 'Gakpo', 'Isak'],
+   'away': ['Oblak', 'Galan', 'Lenglet', 'Le Normand', 'Llorente', 'Gonzalez', 'Gallagher', 'Barrios', 'Simeone', 'Griezmann', 'Raspadori']},
+ (1,'psg','ata'): {'home': ['Chevalier', 'Hakimi', 'Marquinhos', 'Pacho', 'Mendes', 'Neves', 'Vitinha', 'Ruiz', 'Kvaratskhelia', 'Mayulu', 'Barcola'],
+   'away': ['Carnesecchi', 'Djimsiti', 'Hien', 'Kossounou', 'Bernasconi', 'Musah', 'de Roon', 'Bellanova', 'Pasalic', 'Maldini', 'De Ketelaere']},
+ (1,'bay','che'): {'home': ['Neuer', 'Laimer', 'Upamecano', 'Tah', 'Stanisic', 'Kimmich', 'Pavlovic', 'Olise', 'Gnabry', 'Diaz', 'Kane'],
+   'away': ['Sanchez', 'Cucurella', 'Adarabioyo', 'Chalobah', 'Gusto', 'Caicedo', 'James', 'Neto', 'Fernandez', 'Palmer', 'Joao Pedro']},
+ (1,'bru','mon'): {'home': ['Mignolet', 'Sabbe', 'Ordonez', 'Mechele', 'Meijer', 'Stankovic', 'Onyedika', 'Forbs', 'Vanaken', 'Tzolis', 'Tresoldi'],
+   'away': ['Kohn', 'Caio Henrique', 'Mawissa', 'Dier', 'Vanderson', 'Camara', 'Bamba', 'Minamino', 'Akliouche', 'Balogun', 'Biereth']},
+ (1,'cop','b04'): {'home': ['Kotarski', 'Huescas', 'Gabriel Pereira', 'Hatzidiakos', 'Lopez', 'Larsson', 'Lerager', 'Delaney', 'Achouri', 'Moukoko', 'Elyounoussi'],
+   'away': ['Flekken', 'Tapsoba', 'Bade', 'Quansah', 'Grimaldo', 'Fernandez', 'Andrich', 'Vazquez', 'Ben Seghir', 'Tillman', 'Schick']},
+ (1,'spo','kai'): {'home': ['Virginia', 'Fresneda', 'Quaresma', 'Inacio', 'Araujo', 'Hjulmand', 'Kochorashvili', 'Quenda', 'Trincao', 'Pote', 'Suarez'],
+   'away': ['Kalmurza', 'Machado Mata', 'Sorokin', 'Martynovich', 'Tapalov', 'Arad', 'Kasabulat', 'Gromyko', 'Jorginho', 'Mrynskiy', 'Satpaev']},
+ (1,'sge','gal'): {'home': ['Zetterer', 'Collins', 'Koch', 'Theate', 'Brown', 'Chaibi', 'Larsson', 'Doan', 'Uzun', 'Knauff', 'Burkardt'],
+   'away': ['Cakir', 'Elmali', 'Sanchez', 'Singo', 'Sallai', 'Lemina', 'Torreira', 'Akgun', 'Gundogan', 'Sane', 'Yilmaz']},
+ (1,'new','bar'): {'home': ['Pope', 'Trippier', 'Schar', 'Burn', 'Livramento', 'Guimarães', 'Tonali', 'Joelinton', 'Elanga', 'Gordon', 'Barnes'],
+   'away': ['Garcia', 'Martin', 'Cubarsi', 'Araujo', 'Kounde', 'Pedri', 'de Jong', 'Rashford', 'Fermin', 'Raphinha', 'Lewandowski']},
+ (1,'mci','nap'): {'home': ['Donnarumma', 'Khusanov', 'Dias', 'Gvardiol', "O'Reilly", 'Rodri', 'Silva', 'Foden', 'Reijnders', 'Doku', 'Haaland'],
+   'away': ['Milinkovic-Savic', 'Spinazzola', 'Buongiorno', 'Beukema', 'Di Lorenzo', 'Lobotka', 'McTominay', 'De Bruyne', 'Anguissa', 'Politano', 'Hojlund']},
+}
 
 # Top goalscorers (whole competition proper): rank, player, nationality, team, goals, minutes, accepted answers
 TOP_SCORERS = [
