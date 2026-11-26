@@ -92,7 +92,8 @@ button.row:hover { border-color: var(--pick); }
 .inp { display: flex; gap: 6px; }
 .inp input { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 7px 9px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
 .inp input:focus { outline: 2px solid var(--pick); outline-offset: 1px; border-color: var(--pick); }
-.ok { font: inherit; font-weight: 700; border: 0; border-radius: 8px; padding: 0 12px; background: var(--pitch); color: var(--pitch-ink); cursor: pointer; }
+/* OK button (scoped so .ok on other elements only means "correct") */
+button.ok { font: inherit; font-weight: 700; border: 0; border-radius: 8px; padding: 0 12px; background: var(--pitch); color: var(--pitch-ink); cursor: pointer; }
 .err { font-size: .8rem; color: var(--bad); margin-top: 4px; }
 .cty { font-size: .92rem; font-weight: 600; }
 .cty.ok { color: var(--good); } .cty.no { color: var(--bad); }
@@ -192,6 +193,12 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .mrow.done .tbtn:not(.w) .tname { font-weight: 500; color: var(--muted); }
 .tick { font-weight: 800; color: var(--pick); }
 .tick.ok { color: var(--good); } .tick.no { color: var(--bad); }
+.tbtn { flex-direction: column; gap: 3px; }
+.tc.t1 .tbtn { align-items: flex-end; }
+.tc.t2 .tbtn { align-items: flex-start; }
+.tmain { display: inline-flex; align-items: center; gap: 8px; }
+.tsub { display: flex; gap: 6px; }
+.tsub:empty { display: none; }
 .trophy { font-size: .95em; }
 .mtable.adv .badge { font-size: .72rem; }
 .mrow.focus .tbtn { padding: 8px 10px; }

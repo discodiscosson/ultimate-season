@@ -253,20 +253,22 @@ export function play({ el, season, start = 0, onStep }) {
       const pickIn = S.picksIn[r], fin = S.submitted[r], pick = S.picks[r][i], marked = S.marks[r].has(t);
       const flag = flagHTML(T[t].country);
       const cls = ['tbtn'];
-      let extra = '';
-      if (!pickIn) { if (pick === t) { cls.push('picked'); extra = '<span class="tick">✓</span>'; } }
+      let tick = '', badge = '';
+      if (!pickIn) { if (pick === t) { cls.push('picked'); tick = '<span class="tick">✓</span>'; } }
       else {
         if (t === tie.winner) cls.push('w');
-        if (pick === t) extra = `<span class="tick ${t === tie.winner ? 'ok' : 'no'}">${t === tie.winner ? '✓' : '✗'}</span>`;
-        if (!fin && marked) cls.push('marked');
+        if (pick === t) tick = `<span class="tick ${t === tie.winner ? 'ok' : 'no'}">${t === tie.winner ? '✓' : '✗'}</span>`;
+        if (!fin && marked) { cls.push('marked'); tick += '<span class="trophy">🏆</span>'; }
         if (fin) {
           const years = T[t].finals || [];
-          if (years.length) extra += `<span class="badge ${marked ? 'ok' : 'miss'}" title="European Cup / Champions League final">🏆 ${years.length > 3 ? `${years.length} finals` : years.join(', ')}${marked ? ' ✓' : ''}</span>`;
-          else if (marked) extra += '<span class="badge no">✗ No final</span>';
-        } else if (marked) extra += '<span class="trophy">🏆</span>';
+          if (years.length) badge = `<span class="badge ${marked ? 'ok' : 'miss'}" title="European Cup / Champions League final">🏆 ${years.length > 3 ? `${years.length} finals` : years.join(', ')}${marked ? ' ✓' : ''}</span>`;
+          else if (marked) badge = '<span class="badge no">✗ No final</span>';
+        }
       }
       const name = `<span class="tname">${esc(nm(t))}</span>`;
-      const inner = side === 0 ? `${extra}${name}${flag}` : `${flag}${name}${extra}`;
+      // Name, flag and tick on the first line; the final badge on its own line underneath
+      const main = side === 0 ? `${tick}${name}${flag}` : `${flag}${name}${tick}`;
+      const inner = `<span class="tmain">${main}</span><span class="tsub">${badge}</span>`;
       const act = !pickIn ? `data-act="q-pickt" data-i="${i}" data-t="${t}" aria-pressed="${pick === t}"`
         : !fin ? `data-act="q-markt" data-t="${t}" aria-pressed="${marked}"` : '';
       return act ? `<button class="${cls.join(' ')} t${side + 1}" ${act}>${inner}</button>` : `<div class="${cls.join(' ')} t${side + 1}">${inner}</div>`;
