@@ -76,6 +76,16 @@ Q = [
   + fixed([('fen','ben','ben','0–1','0–0, 0–1'),('ran','bru','bru','1–9','1–3, 0–6')],'league')),
 ]
 
+# Story text shown before a round. Paragraphs are separated by a blank line; links use [text](url).
+INTROS = {
+ 'q1': "The draw for the first qualifying round was held on 17 June 2025. The first legs were played on 8 and 9 July, "
+       "and the second legs were played on 15 and 16 July 2025.\n\n"
+       "The winners of the ties advanced to the Champions Path second qualifying round. Twelve of the losing teams were "
+       "transferred to the [Conference League second qualifying round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Conference_League#Second_qualifying_round), "
+       "and the other two losing teams (selected via a draw) were transferred to the "
+       "[Conference League third qualifying round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Conference_League#Third_qualifying_round).",
+}
+
 SEEDED = ['che','liv','mci','bay','bar','tot','spo','ars']
 KO = [
  ('ko_po','Knockout phase play-offs','KO PO', fixed([
@@ -99,8 +109,8 @@ season = {
  'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {})}
           for k,v in TEAMS.items()},
  'leaguePosition':POS,
- 'stages':[{'id':i,'type':'qualifying','name':n,'short':s,'ties':t} for i,n,s,t in Q]
-         +[{'id':i,'type':'knockout','name':n,'short':s,'ties':t} for i,n,s,t in KO],
+ 'stages':[{'id':i,'type':'qualifying','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in Q]
+         +[{'id':i,'type':'knockout','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in KO],
 }
 
 if __name__ == '__main__':

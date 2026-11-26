@@ -47,8 +47,8 @@ def from_ref(slot):
             f"where s.season_id = {q(sid)} and s.code = {q(code)} and t.sort_order = {int(i)})")
 
 for n, st in enumerate(S['stages']):
-    out.append(f"insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values "
-               f"({q(sid)}, {q(st['id'])}, {q(st['type'])}, {q(st['name'])}, {q(st['short'])}, {n});")
+    out.append(f"insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order, intro) values "
+               f"({q(sid)}, {q(st['id'])}, {q(st['type'])}, {q(st['name'])}, {q(st['short'])}, {n}, {q(st.get('intro'))});")
     stage_ref = f"(select id from ultimate_season.stages where season_id = {q(sid)} and code = {q(st['id'])})"
     for i, t in enumerate(st['ties']):
         a, b = (team_of(s) for s in t['slots'])

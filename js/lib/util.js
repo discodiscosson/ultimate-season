@@ -1,5 +1,13 @@
 export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+// Story text: paragraphs separated by a blank line, links written as [text](https://...).
+export function richText(text) {
+  return String(text || '').split(/\n\s*\n/).map((p) => `<p>${esc(p).replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+    (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`)}</p>`).join('');
+}
+
+export const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
 export function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }

@@ -3,10 +3,11 @@
 // Advance rounds (the rest): pick who went through.
 // Third qualifying round: also mark every team that has played a European Cup / Champions League final.
 // Last round (play-off): also name each team's biggest rival instead.
-// Nothing is revealed until the round is submitted.
+// A round can open with a story text and an animated draw (when the stage has an intro).
+// Match results appear tie by tie as you complete them; whether your answers were right is revealed when the round is submitted.
 import { answerHTML, bindCombos, comboHTML, focusField } from '../lib/combo.js';
 import { countryName } from '../lib/countries.js';
-import { esc, tieResult } from '../lib/util.js';
+import { esc, prefersReducedMotion, richText, shuffle, tieResult } from '../lib/util.js';
 import { flagHTML } from '../lib/flags.js';
 
 export const meta = { id: 'qualifying', title: 'Qualifying', short: 'Qualifying' };
@@ -44,7 +45,8 @@ export function play({ el, season, start = 0, onStep }) {
       : ST[r].ties.length * PICK_POINTS + (hasFinalists(r) ? teamsIn(r).filter(isFinalist).length : 0) + rivalTeams(r).length * RIVAL_POINTS);
     const MAX = ST.reduce((s, _, r) => s + roundMax(r), 0);
 
-    const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: ST.map(() => ({})), marks: ST.map(() => new Set()), submitted: [], summary: false, touched: {}, focus: 0, editing: {} };
+    const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: ST.map(() => ({})), marks: ST.map(() => new Set()), submitted: [], summary: false, touched: {}, focus: 0, editing: {},
+      phase: ST.map((st) => (st.intro ? 'intro' : 'play')), justDrew: false, justDone: null };
     const rk = (t) => `rival:${t}`;
 
     // Per-round results (only meaningful once submitted)
@@ -89,6 +91,7 @@ export function play({ el, season, start = 0, onStep }) {
           rivalTeams(r).forEach((t) => { S.sel[rk(t)] = rivalsOf(t)[0]; S.drafts[rk(t)] = rivalsOf(t)[0]; });
         }
         S.submitted[r] = true;
+        S.phase[r] = 'play';
       }
       S.r = Math.min(start, LAST);
       S.summary = start > LAST;
@@ -179,17 +182,27 @@ export function play({ el, season, start = 0, onStep }) {
         : '<span class="flag flag-empty"></span>';
     }
 
-    function countryTableHTML(r) {
+    function countryTableHTML(r, draw = false) {
       const sub = S.submitted[r];
       const rows = ST[r].ties.map((tie, i) => {
         const [a, b] = tieTeams(r, i);
+        if (draw) {
+          return `<div class="mrow drawing">
+            <div class="tc t1"><span class="tname drawslot" data-slot="${i}-0"></span></div>
+            <div class="agg"><span class="vs">–</span></div>
+            <div class="tc t2"><span class="tname drawslot" data-slot="${i}-1"></span></div>
+            <div class="leg"></div><div class="leg"></div>
+          </div>`;
+        }
         const focused = !sub && S.focus === i;
-        const name = (t) => `<span class="tname ${sub && t === tie.winner ? 'w' : ''}">${esc(nm(t))}</span>`;
-        const [l1, l2] = sub ? legsOf(tie) : ['', ''];
+        const played = sub || tieDone(r, i); // the result is shown as soon as both countries are picked
+        const name = (t) => `<span class="tname ${played && t === tie.winner ? 'w' : ''}">${esc(nm(t))}</span>`;
+        const [l1, l2] = played ? legsOf(tie) : ['', ''];
         const attrs = !sub && !focused ? ` data-act="q-focus" data-i="${i}" role="button" tabindex="0"` : '';
-        return `<div class="mrow ${focused ? 'focus' : ''} ${sub ? 'done' : ''} ${!sub && tieDone(r, i) ? 'filled' : ''}"${attrs}>
+        const cls = [focused && 'focus', sub && 'done', !sub && played && 'filled played', S.justDone === i && 'reveal'].filter(Boolean).join(' ');
+        return `<div class="mrow ${cls}"${attrs}>
           <div class="tc t1">${name(a)}${flagCell(r, i, a, focused)}</div>
-          <div class="agg">${sub ? aggText(tie) : '<span class="vs">–</span>'}${sub ? `<span class="legs-m">${[l1, l2].join(', ')}</span>` : ''}</div>
+          <div class="agg">${played ? aggText(tie) : '<span class="vs">–</span>'}${played ? `<span class="legs-m">${[l1, l2].join(', ')}</span>` : ''}</div>
           <div class="tc t2">${flagCell(r, i, b, focused)}${name(b)}</div>
           <div class="leg">${l1}</div><div class="leg">${l2}</div>
         </div>`;
@@ -216,7 +229,7 @@ export function play({ el, season, start = 0, onStep }) {
       }
       if (isCountry(r)) {
         return r === 0
-          ? 'Pick the country of every team, one tie at a time. Click any tie to jump to it, or a flag to change it. Answers are revealed when you submit the round.'
+          ? 'Pick the country of both teams in a tie to see how the tie ended. Click any tie to jump to it, or a flag to change it. Whether your countries were right is revealed when you submit the round.'
           : 'Pick the country of every new team. Teams you have already seen show their flag.';
       }
       let h = `Pick which team went through in each tie (${PICK_POINTS} pts).`;
@@ -225,8 +238,23 @@ export function play({ el, season, start = 0, onStep }) {
       return h;
     }
 
+    function introHTML(r) {
+      return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
+        <div class="story">${richText(ST[r].intro)}</div>
+        <div class="foot"><span></span><button class="btn" data-act="q-intro">Next</button></div>`;
+    }
+
+    function drawHTML(r) {
+      return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
+        <h3 class="ask small">The draw</h3>
+        ${countryTableHTML(r, true)}
+        <div class="foot"><span></span><button class="btn ghost" data-act="q-skip">Skip draw</button></div>`;
+    }
+
     function roundHTML() {
       const r = S.r, st = ST[r], sub = S.submitted[r];
+      if (isCountry(r) && S.phase[r] === 'intro') return introHTML(r);
+      if (isCountry(r) && S.phase[r] === 'draw') return drawHTML(r);
       const ties = isCountry(r) ? null : st.ties.map((tie, i) => {
         const [a, b] = tie.slots.map((s) => s.team);
         const row = isCountry(r) ? (t) => countryRow(r, t, tie) : (t) => advanceRow(r, i, t, tie);
@@ -238,6 +266,7 @@ export function play({ el, season, start = 0, onStep }) {
         return `<div class="tie">${row(a)}${row(b)}${res}</div>`;
       }).join('');
       return `<div class="bar"><h2>${esc(st.name)}</h2><span class="score">${points()} pts</span></div>
+        ${isCountry(r) && !sub ? `<h3 class="ask ${S.justDrew ? 'anim' : ''}">${r === 0 ? 'Where are these teams from?' : 'Where are the new teams from?'}</h3>` : ''}
         <p class="hint">${hintFor(r)}</p>${isCountry(r) ? countryTableHTML(r) : `<div class="ties">${ties}</div>`}
         <div class="foot" id="q-foot">${footer(r)}</div>`;
     }
@@ -262,7 +291,35 @@ export function play({ el, season, start = 0, onStep }) {
         <div class="foot"><span></span><button class="btn" data-act="q-done">Continue</button></div>`;
     }
 
-    function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); onStep?.(S.summary ? ST.length : S.r); }
+    function render() {
+      el.innerHTML = S.summary ? summaryHTML() : roundHTML();
+      S.justDrew = false; S.justDone = null;
+      onStep?.(S.summary ? ST.length : S.r);
+    }
+
+    // The draw: teams appear one by one in random slots
+    let drawTimer = null;
+    function finishDraw() {
+      clearInterval(drawTimer); drawTimer = null;
+      if (S.phase[S.r] !== 'draw') return;
+      S.phase[S.r] = 'play'; S.justDrew = true;
+      S.focus = firstOpenTie(S.r);
+      render(); focusTie();
+    }
+    function startDraw() {
+      const r = S.r;
+      S.phase[r] = 'draw'; render(); scrollTo(0, 0);
+      const slots = shuffle(ST[r].ties.flatMap((tie, i) => [[i, 0], [i, 1]]));
+      if (prefersReducedMotion()) { finishDraw(); return; }
+      drawTimer = setInterval(() => {
+        if (!el.isConnected || S.phase[r] !== 'draw') { clearInterval(drawTimer); return; }
+        const next = slots.shift();
+        if (!next) { clearInterval(drawTimer); setTimeout(() => { if (el.isConnected) finishDraw(); }, 700); return; }
+        const [i, side] = next;
+        const cell = el.querySelector(`[data-slot="${i}-${side}"]`);
+        if (cell) { cell.textContent = nm(tieTeams(r, i)[side]); cell.classList.add('pop'); }
+      }, 150);
+    }
     const updateFooter = () => { const f = el.querySelector('#q-foot'); if (f && !S.submitted[S.r]) f.innerHTML = footer(S.r); };
     const nextOpen = (after) => {
       const all = isCountry(S.r) ? NEW[S.r] : rivalTeams(S.r).map(rk);
@@ -280,7 +337,7 @@ export function play({ el, season, start = 0, onStep }) {
       onDone: (k) => {
         if (!isCountry(S.r)) { focusField(el, nextOpen(k)); return; }
         S.editing[k] = false;
-        if (tieDone(S.r, S.focus)) { const n = nextOpenTie(S.r, S.focus); if (n !== null) S.focus = n; }
+        if (tieDone(S.r, S.focus)) { S.justDone = S.focus; const n = nextOpenTie(S.r, S.focus); if (n !== null) S.focus = n; }
         render(); focusTie();
       },
     });
@@ -295,6 +352,8 @@ export function play({ el, season, start = 0, onStep }) {
       const b = e.target.closest('[data-act^="q-"]');
       if (!b || b.disabled) return;
       const act = b.dataset.act, r = S.r;
+      if (act === 'q-intro') { startDraw(); return; }
+      if (act === 'q-skip') { finishDraw(); return; }
       if (act === 'q-focus') { S.focus = +b.dataset.i; render(); focusTie(); return; }
       if (act === 'q-edit') { S.editing[b.dataset.t] = true; render(); focusField(el, b.dataset.t); return; }
       if (act === 'q-pick') {
@@ -312,13 +371,16 @@ export function play({ el, season, start = 0, onStep }) {
         S.submitted[r] = true;
         render(); scrollTo(0, 0);
       } else if (act === 'q-next') {
-        if (S.r < LAST) { S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : 0; render(); scrollTo(0, 0); if (isCountry(S.r)) focusTie(); else focusField(el, nextOpen()); }
+        if (S.r < LAST) {
+          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : 0; render(); scrollTo(0, 0);
+          if (S.phase[S.r] === 'play') { if (isCountry(S.r)) focusTie(); else focusField(el, nextOpen()); }
+        }
         else { S.summary = true; render(); scrollTo(0, 0); }
       } else if (act === 'q-done') resolve({ score: points(), max: MAX, lines: lines() });
     });
 
     if (isCountry(S.r)) S.focus = firstOpenTie(S.r);
     render();
-    if (!S.summary && !S.submitted[S.r]) { if (isCountry(S.r)) focusTie(); else focusField(el, nextOpen()); }
+    if (!S.summary && !S.submitted[S.r] && S.phase[S.r] === 'play') { if (isCountry(S.r)) focusTie(); else focusField(el, nextOpen()); }
   });
 }
