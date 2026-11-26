@@ -2,6 +2,7 @@
 // 1. The 36 teams are placed on a map of Europe one by one.
 // 2. For every matchday: the teams drop into their fixtures, the player picks 5 matches, predicts their scores,
 //    plays Missing XI on the same matches, and the league table updates with the teams moving to their new places.
+// 3. The final table splits: the top 8 wait in the round of 16, places 9–24 move into their play-off ties, 25–36 are out.
 import { loadMap } from '../data.js';
 import { countryName, norm } from '../lib/countries.js';
 import { flagHTML } from '../lib/flags.js';
@@ -11,7 +12,7 @@ import { esc, prefersReducedMotion, shuffle } from '../lib/util.js';
 
 export const meta = { id: 'league', title: 'League phase', short: 'League phase' };
 export const available = (season) => (season.leaguePhase?.teams?.length || 0) > 0;
-export const steps = (season) => ['The teams', ...(season.leaguePhase?.matchdays || []).flatMap((m) => [m.name, `Table after ${m.name}`])];
+export const steps = (season) => ['The teams', ...(season.leaguePhase?.matchdays || []).flatMap((m) => [m.name, `Table after ${m.name}`]), 'To the knockouts'];
 
 const PICK = 5;
 const EXACT = 3, OUTCOME = 1, XI_POINT = 1;
@@ -307,7 +308,7 @@ export function play({ el, season, start = 0, onStep }) {
           <div class="lt-row lt-head" role="row"><span>Pos</span><span class="c-team">Team</span><span>Pld</span><span class="c-w">W</span><span class="c-w">D</span><span class="c-w">L</span><span class="c-w">GF</span><span class="c-w">GA</span><span>GD</span><span>Pts</span></div>
           ${before.map((r) => `<div class="lt-row ${k === 0 ? '' : zone(r.pos)}" role="row" data-t="${r.t}">${rowInner(r)}</div>`).join('')}
         </div>
-        <div class="foot"><span></span><button class="btn" data-act="${last ? 'lp-end' : 'lp-next'}">${last ? 'Continue' : `To ${esc(MDS[k + 1].name)}`}</button></div>`;
+        <div class="foot"><span></span><button class="btn" data-act="${last ? 'lp-ko' : 'lp-next'}">${last ? 'To the knockouts' : `To ${esc(MDS[k + 1].name)}`}</button></div>`;
 
       const apply = () => {
         const box = el.querySelector('#lt');
@@ -331,6 +332,74 @@ export function play({ el, season, start = 0, onStep }) {
         }
       };
       if (prefersReducedMotion()) apply(); else setTimeout(() => { if (S.phase === 'table' && S.md === k) apply(); }, 700);
+    }
+
+    // ---------- 7. To the knockouts ----------
+    async function knockoutScreen() {
+      S.phase = 'ko';
+      onStep?.(1 + 2 * MDS.length);
+      const final = standings(teams, upTo(MDS.length - 1), names);
+      const pos = Object.fromEntries(final.map((r) => [r.t, r.pos]));
+      const KS = season.stages.filter((s) => s.type === 'knockout');
+      const poTies = KS[0]?.ties || [];
+      const seeded = (KS[1]?.ties || []).flatMap((t) => t.slots.filter((s) => s.team).map((s) => s.team))
+        .sort((a, b) => pos[a] - pos[b]);
+      const chip = (t) => `${flagHTML(T[t].country)}<span>${esc(nm(t))}</span><i class="kpos">${pos[t]}</i>`;
+      el.innerHTML = `${head('To the knockouts')}
+        <p class="hint" id="ko-hint">The league phase is over. Who goes where?</p>
+        <div class="ko-split">
+          <div class="ko-table">${final.map((r) => `<div class="kt-row ${zone(r.pos)}" data-t="${r.t}">
+            <span class="kt-pos">${r.pos}</span>${flagHTML(T[r.t].country)}<span class="kt-name">${esc(nm(r.t))}</span><b>${r.pts}</b></div>`).join('')}</div>
+          <div class="ko-dest">
+            <div class="ko-box"><h4>Straight to the round of 16</h4>
+              <div class="ko-seeds">${seeded.map((t) => `<span class="ko-slot" data-ko="${t}"></span>`).join('')}</div></div>
+            <div class="ko-box"><h4>Knockout phase play-offs</h4>
+              <div class="ko-ties">${poTies.map((tie) => `<div class="ko-tie">${tie.slots.map((s) => `<span class="ko-slot" data-ko="${s.team}"></span>`).join('<span class="ko-vs">v</span>')}</div>`).join('')}</div></div>
+          </div>
+        </div>
+        <div class="foot" id="lp-foot"><span></span><button class="btn ghost" data-act="lp-koskip">Skip</button></div>`;
+      scrollTo(0, 0);
+      const motion = !prefersReducedMotion();
+      const fill = (t) => { const s = el.querySelector(`.ko-slot[data-ko="${t}"]`); if (s && !s.innerHTML) { s.innerHTML = chip(t); s.classList.add('pop', 'filled'); } };
+      const flyRow = (t) => {
+        const row = el.querySelector(`.kt-row[data-t="${t}"]`), slot = el.querySelector(`.ko-slot[data-ko="${t}"]`);
+        if (!row || !slot) return;
+        row.classList.add('sent');
+        if (!motion || !slot.animate) { fill(t); return; }
+        const a = row.getBoundingClientRect(), b = slot.getBoundingClientRect();
+        const ghost = document.createElement('span');
+        ghost.className = 'chip flyer';
+        ghost.innerHTML = `${flagHTML(T[t].country)}${esc(nm(t))}`;
+        Object.assign(ghost.style, { left: `${a.left + 30}px`, top: `${a.top}px` });
+        el.appendChild(ghost);
+        ghost.animate([{ transform: 'translate(0,0)' }, { transform: `translate(${b.left - a.left - 30}px, ${b.top - a.top}px)` }],
+          { duration: 700, easing: 'cubic-bezier(.4,.1,.3,1)' }).onfinish = () => { ghost.remove(); fill(t); };
+      };
+      const finish = () => {
+        if (S.phase !== 'ko') return;
+        S.phase = 'kodone';
+        el.querySelectorAll('.kt-row').forEach((r) => (pos[r.dataset.t] > 24 ? r.classList.add('out') : r.classList.add('sent')));
+        [...seeded, ...poTies.flatMap((t) => t.slots.map((s) => s.team))].forEach(fill);
+        el.querySelector('#ko-hint').textContent = 'The top 8 wait in the round of 16. The other 16 meet over two legs for the last 8 places.';
+        el.querySelector('#lp-foot').innerHTML = '<span></span><button class="btn" data-act="lp-end">Start the knockouts</button>';
+      };
+      S.koFinish = finish;
+      if (!motion) { finish(); return; }
+      await sleep(900);
+      // 25–36 are out
+      if (S.phase !== 'ko') return;
+      el.querySelector('#ko-hint').textContent = 'Places 25–36 are out.';
+      el.querySelectorAll('.kt-row.z3').forEach((r, i) => setTimeout(() => r.classList.add('out'), i * 70));
+      await sleep(1600);
+      if (S.phase !== 'ko') return;
+      el.querySelector('#ko-hint').textContent = 'The top 8 go straight to the round of 16.';
+      for (const t of seeded) { if (S.phase !== 'ko') return; flyRow(t); await sleep(220); }
+      await sleep(900);
+      if (S.phase !== 'ko') return;
+      el.querySelector('#ko-hint').textContent = 'Places 9–24 are drawn into the knockout phase play-offs.';
+      for (const tie of poTies) for (const s of tie.slots) { if (S.phase !== 'ko') return; flyRow(s.team); await sleep(160); }
+      await sleep(1000);
+      finish();
     }
 
     // ---------- End ----------
@@ -380,11 +449,14 @@ export function play({ el, season, start = 0, onStep }) {
       else if (act === 'lp-xisubmit') { cur().xiDone = true; xiScreen(); scrollTo(0, 0); }
       else if (act === 'lp-table') { tableScreen(S.md); scrollTo(0, 0); }
       else if (act === 'lp-next') matchdayDraw(S.md + 1);
+      else if (act === 'lp-ko') knockoutScreen();
+      else if (act === 'lp-koskip') S.koFinish?.();
       else if (act === 'lp-end') end();
     });
 
     // Review mode: step 1 + 2k is matchday k, step 2 + 2k is the table after it
-    if (start >= 1 && MDS.length) {
+    if (start >= 1 + 2 * MDS.length && MDS.length) knockoutScreen();
+    else if (start >= 1 && MDS.length) {
       const k = Math.min(Math.floor((start - 1) / 2), MDS.length - 1);
       S.md = k;
       if ((start - 1) % 2 === 1) tableScreen(k); else choose();
