@@ -2,15 +2,17 @@
 // 1. The 36 teams are placed on a map of Europe one by one.
 // 2. Matchday 1: the teams fall from the map into their fixtures.
 // 3. The player picks 5 matches, predicts their scores, then plays Missing XI on the same 5 matches.
+// 4. The league table after the matchday is filled in.
 import { loadMap } from '../data.js';
 import { countryName, norm } from '../lib/countries.js';
 import { flagHTML } from '../lib/flags.js';
 import { project, WIDTH, HEIGHT } from '../lib/projection.js';
 import { esc, prefersReducedMotion, shuffle } from '../lib/util.js';
+import { standings } from '../lib/standings.js';
 
 export const meta = { id: 'league', title: 'League phase', short: 'League phase' };
 export const available = (season) => (season.leaguePhase?.teams?.length || 0) > 0;
-export const steps = (season) => ['The teams', ...(season.leaguePhase?.matchdays || []).map((m) => m.name)];
+export const steps = (season) => ['The teams', ...(season.leaguePhase?.matchdays || []).slice(0, 1).flatMap((m) => [m.name, `Table after ${m.name}`])];
 
 const PICK = 5;
 const EXACT = 3, OUTCOME = 1, XI_POINT = 1;
@@ -129,15 +131,16 @@ export function play({ el, season, start = 0, onStep }) {
 
     function fly(t, slot, html) {
       const fill = () => { slot.innerHTML = html; slot.classList.add('pop'); };
-      const pin = el.querySelector(`.pin[data-t="${t}"] circle`);
-      if (!pin || !slot.animate) { fill(); return; }
-      const a = pin.getBoundingClientRect(), b = slot.getBoundingClientRect();
+      const chip = el.querySelector(`.lp-team[data-t="${t}"]`);
+      if (!chip || !slot.animate) { chip?.classList.add('gone'); fill(); return; }
+      const a = chip.getBoundingClientRect(), b = slot.getBoundingClientRect();
+      chip.classList.add('gone');
       const ghost = document.createElement('span');
       ghost.className = 'chip flyer';
       ghost.innerHTML = `${flagHTML(T[t].country)}${esc(nm(t))}`;
       Object.assign(ghost.style, { left: `${a.left}px`, top: `${a.top}px` });
       el.appendChild(ghost);
-      ghost.animate([{ transform: 'translate(0,0) scale(.6)', opacity: .6 }, { transform: `translate(${b.left - a.left}px, ${b.top - a.top}px) scale(1)`, opacity: 1 }],
+      ghost.animate([{ transform: 'translate(0,0)' }, { transform: `translate(${b.left - a.left}px, ${b.top - a.top}px)` }],
         { duration: 650, easing: 'cubic-bezier(.4,.1,.3,1)' }).onfinish = () => { ghost.remove(); fill(); };
     }
 
@@ -146,9 +149,9 @@ export function play({ el, season, start = 0, onStep }) {
       onStep?.(1);
       el.querySelector('#lp-ask').textContent = MD.name;
       el.querySelector('#lp-hint').textContent = 'The teams take their places for the first matchday.';
-      el.querySelector('#lp-list').remove();
-      el.querySelector('.map-wrap')?.classList.add('small');
-      el.querySelector('.map-wrap')?.scrollIntoView?.({ block: 'start' });
+      // The map steps aside; the team boxes stay and drop into their fixtures
+      el.querySelector('.map-wrap')?.classList.add('collapsed');
+      scrollTo(0, 0);
       el.querySelector('#lp-md').innerHTML = fixturesHTML(false);
       el.querySelector('#lp-foot').innerHTML = '<span></span><button class="btn ghost" data-act="lp-mdskip">Skip</button>';
       if (prefersReducedMotion()) { mdChoose(); return; }
@@ -268,7 +271,27 @@ export function play({ el, season, start = 0, onStep }) {
         <div class="xi-grid">${cards}</div>
         <div class="foot"><span></span>${keys.length && !done
           ? '<button class="btn" data-act="lp-xisubmit">Submit answers</button>'
-          : '<button class="btn" data-act="lp-end">Continue</button>'}</div>`;
+          : '<button class="btn" data-act="lp-table">See the table</button>'}</div>`;
+    }
+
+    // ---------- 6. League table after the matchday ----------
+    function tableScreen() {
+      S.phase = 'table';
+      onStep?.(2);
+      const names = Object.fromEntries(teams.map((t) => [t, nm(t)]));
+      const rows = standings(teams, MD.matches, names);
+      const zone = (p) => (p <= 8 ? 'z1' : p <= 24 ? 'z2' : 'z3');
+      const gd = (n) => (n > 0 ? `+${n}` : String(n));
+      el.innerHTML = `<div class="bar"><h2>League phase</h2><span class="score">${score()} pts</span></div>
+        <h3 class="ask anim">Table after ${esc(MD.name)}</h3>
+        <p class="hint">Top 8 go straight to the round of 16. Places 9–24 go to the knockout phase play-offs. Places 25–36 are out.</p>
+        <div class="ltable-wrap"><table class="ltable">
+          <thead><tr><th>Pos</th><th class="tl">Team</th><th>Pld</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>
+          <tbody>${rows.map((r, i) => `<tr class="${zone(r.pos)}" style="animation-delay:${i * 45}ms">
+            <td>${r.pos}</td><td class="tl"><span class="lt-team">${flagHTML(T[r.t].country)}${esc(nm(r.t))}</span></td>
+            <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td><td>${gd(r.gd)}</td><td><b>${r.pts}</b></td></tr>`).join('')}</tbody>
+        </table></div>
+        <div class="foot"><span></span><button class="btn" data-act="lp-end">Continue</button></div>`;
     }
 
     // ---------- Score and events ----------
@@ -314,11 +337,13 @@ export function play({ el, season, start = 0, onStep }) {
       else if (act === 'lp-predsubmit') { S.predDone = true; predictScreen(); scrollTo(0, 0); }
       else if (act === 'lp-xi') { xiScreen(); scrollTo(0, 0); }
       else if (act === 'lp-xisubmit') { S.xiDone = true; xiScreen(); scrollTo(0, 0); }
+      else if (act === 'lp-table') { tableScreen(); scrollTo(0, 0); }
       else if (act === 'lp-end') end();
     });
 
     // Review mode can start directly at the matchday
-    if (start >= 1 && MD) mdChoose();
+    if (start >= 2 && MD) tableScreen();
+    else if (start >= 1 && MD) mdChoose();
     else mapScreen().then(() => { if (el.isConnected) runMap(); }).catch((e) => {
       el.querySelector('.map-wrap').innerHTML = `<p class="hint">${esc(e.message)}</p>`; mapDone();
     });
