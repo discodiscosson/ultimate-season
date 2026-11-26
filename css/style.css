@@ -134,6 +134,7 @@ button.row:hover { border-color: var(--pick); }
 .flag { display: inline-block; width: 24px; height: 18px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.12); vertical-align: middle; flex: none; }
 .flag-empty { border: 1.5px dashed var(--muted); box-shadow: none; opacity: .6; }
 .flag-none { background: var(--line); }
+.lb { text-align: left; }
 .lb li { display: flex; align-items: center; gap: 10px; }
 .lb li .nm { flex: 1; }
 
@@ -150,9 +151,7 @@ button.row:hover { border-color: var(--pick); }
 .mrow.focus .flag { width: 32px; height: 24px; }
 .tc { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .tc.t1 { justify-content: flex-end; text-align: right; }
-.tc .combo { width: 190px; max-width: 100%; }
-.mrow.focus .tc { flex-wrap: wrap; }
-.mrow.focus .tc.t1 { flex-wrap: wrap-reverse; }
+.tc .combo { width: 170px; max-width: 100%; flex: none; }
 .tname { font-weight: 600; overflow-wrap: anywhere; }
 .tname.w { font-weight: 800; }
 .mrow.done .tname:not(.w) { font-weight: 500; color: var(--muted); }
@@ -173,6 +172,9 @@ button.row:hover { border-color: var(--pick); }
   .legs-m { display: block; font-size: .72rem; font-weight: 500; color: var(--muted); }
   .mrow { padding: 9px 10px; }
   .mrow.focus { transform: none; padding: 14px 10px; }
+  .mrow.focus .tc { flex-wrap: wrap; }
+  .mrow.focus .tc.t1 { flex-direction: column; align-items: flex-end; }
+  .mrow.focus .tc.t2 { flex-direction: column-reverse; align-items: flex-start; }
   .tc .combo { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .mrow { transition: none; } .mrow.focus { transform: none; } }

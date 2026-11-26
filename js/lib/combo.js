@@ -1,5 +1,5 @@
-// Searchable dropdown (combobox) for countries and clubs. Typing filters the list; arrow keys move,
-// Enter or a click picks. The field only stores the choice; answers are marked by the game.
+// Searchable dropdown (combobox) for countries and clubs. The list opens when you type, click the field
+// or press the down arrow (not just on focus); arrow keys move, Enter or a click picks. The field only stores the choice; answers are marked by the game.
 import { countryName, exactCountry, matchCountry, suggestCountries } from './countries.js';
 import { clubCountry, exactClub, matchClub, suggestClubs } from './clubs.js';
 import { esc } from './util.js';
@@ -95,7 +95,7 @@ export function bindCombos(root, state, { onChange, onDone } = {}) {
     open(input);
     onChange?.(key);
   });
-  root.addEventListener('focusin', (e) => { if (e.target.dataset?.cf) open(e.target); });
+  root.addEventListener('click', (e) => { if (e.target.dataset?.cf && listOf(e.target).hidden) open(e.target); });
   root.addEventListener('focusout', (e) => {
     const input = e.target, key = input.dataset?.cf;
     if (!key) return;
