@@ -113,7 +113,10 @@
    "country": "KAZ",
    "rivals": [
     "Astana"
-   ]
+   ],
+   "city": "Almaty",
+   "lat": 43.24,
+   "lon": 76.92
   },
   "noa": {
    "name": "Noah",
@@ -142,7 +145,10 @@
     "AEL Limassol",
     "Apollon Limassol",
     "APOEL"
-   ]
+   ],
+   "city": "Paphos",
+   "lat": 34.772,
+   "lon": 32.424
   },
   "mac": {
    "name": "Maccabi Tel Aviv",
@@ -174,7 +180,10 @@
    "country": "DEN",
    "rivals": [
     "Brøndby"
-   ]
+   ],
+   "city": "Copenhagen",
+   "lat": 55.703,
+   "lon": 12.572
   },
   "rij": {
    "name": "Rijeka",
@@ -189,7 +198,10 @@
    "country": "AZE",
    "rivals": [
     "Neftçi"
-   ]
+   ],
+   "city": "Baku",
+   "lat": 40.43,
+   "lon": 49.92
   },
   "bra": {
    "name": "Brann",
@@ -230,7 +242,10 @@
    "rivals": [
     "Anderlecht",
     "Cercle Brugge"
-   ]
+   ],
+   "city": "Bruges",
+   "lat": 51.193,
+   "lon": 3.181
   },
   "nic": {
    "name": "Nice",
@@ -251,7 +266,10 @@
    "rivals": [
     "Sporting CP",
     "Porto"
-   ]
+   ],
+   "city": "Lisbon",
+   "lat": 38.753,
+   "lon": -9.185
   },
   "fey": {
    "name": "Feyenoord",
@@ -273,7 +291,10 @@
    "rivals": [
     "Tromsø",
     "Rosenborg"
-   ]
+   ],
+   "city": "Bodø",
+   "lat": 67.276,
+   "lon": 14.383
   },
   "stu": {
    "name": "Sturm Graz",
@@ -309,18 +330,27 @@
     2020,
     2025,
     2026
-   ]
+   ],
+   "city": "Paris",
+   "lat": 48.841,
+   "lon": 2.253
   },
   "mon": {
    "name": "Monaco",
    "country": "FRA",
    "finals": [
     2004
-   ]
+   ],
+   "city": "Monaco",
+   "lat": 43.728,
+   "lon": 7.416
   },
   "gal": {
    "name": "Galatasaray",
-   "country": "TUR"
+   "country": "TUR",
+   "city": "Istanbul",
+   "lat": 41.103,
+   "lon": 28.991
   },
   "juv": {
    "name": "Juventus",
@@ -335,7 +365,10 @@
     2003,
     2015,
     2017
-   ]
+   ],
+   "city": "Turin",
+   "lat": 45.109,
+   "lon": 7.641
   },
   "rma": {
    "name": "Real Madrid",
@@ -359,7 +392,10 @@
     2018,
     2022,
     2024
-   ]
+   ],
+   "city": "Madrid",
+   "lat": 40.453,
+   "lon": -3.688
   },
   "bvb": {
    "name": "Borussia Dortmund",
@@ -368,15 +404,24 @@
     1997,
     2013,
     2024
-   ]
+   ],
+   "city": "Dortmund",
+   "lat": 51.493,
+   "lon": 7.452
   },
   "ata": {
    "name": "Atalanta",
-   "country": "ITA"
+   "country": "ITA",
+   "city": "Bergamo",
+   "lat": 45.709,
+   "lon": 9.681
   },
   "new": {
    "name": "Newcastle United",
-   "country": "ENG"
+   "country": "ENG",
+   "city": "Newcastle",
+   "lat": 54.976,
+   "lon": -1.622
   },
   "atm": {
    "name": "Atlético Madrid",
@@ -385,7 +430,10 @@
     1974,
     2014,
     2016
-   ]
+   ],
+   "city": "Madrid",
+   "lat": 40.436,
+   "lon": -3.599
   },
   "int": {
    "name": "Inter",
@@ -398,18 +446,27 @@
     2010,
     2023,
     2025
-   ]
+   ],
+   "city": "Milan",
+   "lat": 45.478,
+   "lon": 9.124
   },
   "oly": {
    "name": "Olympiacos",
-   "country": "GRE"
+   "country": "GRE",
+   "city": "Piraeus",
+   "lat": 37.946,
+   "lon": 23.664
   },
   "b04": {
    "name": "Bayer Leverkusen",
    "country": "GER",
    "finals": [
     2002
-   ]
+   ],
+   "city": "Leverkusen",
+   "lat": 51.038,
+   "lon": 7.002
   },
   "che": {
    "name": "Chelsea",
@@ -418,7 +475,10 @@
     2008,
     2012,
     2021
-   ]
+   ],
+   "city": "London",
+   "lat": 51.482,
+   "lon": -0.191
   },
   "liv": {
    "name": "Liverpool",
@@ -434,7 +494,10 @@
     2018,
     2019,
     2022
-   ]
+   ],
+   "city": "Liverpool",
+   "lat": 53.431,
+   "lon": -2.961
   },
   "mci": {
    "name": "Manchester City",
@@ -442,7 +505,10 @@
    "finals": [
     2021,
     2023
-   ]
+   ],
+   "city": "Manchester",
+   "lat": 53.483,
+   "lon": -2.2
   },
   "bay": {
    "name": "Bayern München",
@@ -459,7 +525,10 @@
     2012,
     2013,
     2020
-   ]
+   ],
+   "city": "Munich",
+   "lat": 48.219,
+   "lon": 11.625
   },
   "bar": {
    "name": "Barcelona",
@@ -473,18 +542,27 @@
     2009,
     2011,
     2015
-   ]
+   ],
+   "city": "Barcelona",
+   "lat": 41.381,
+   "lon": 2.123
   },
   "tot": {
    "name": "Tottenham Hotspur",
    "country": "ENG",
    "finals": [
     2019
-   ]
+   ],
+   "city": "London",
+   "lat": 51.604,
+   "lon": -0.066
   },
   "spo": {
    "name": "Sporting CP",
-   "country": "POR"
+   "country": "POR",
+   "city": "Lisbon",
+   "lat": 38.761,
+   "lon": -9.161
   },
   "ars": {
    "name": "Arsenal",
@@ -492,8 +570,114 @@
    "finals": [
     2006,
     2026
-   ]
+   ],
+   "city": "London",
+   "lat": 51.555,
+   "lon": -0.108
+  },
+  "nap": {
+   "name": "Napoli",
+   "country": "ITA",
+   "city": "Naples",
+   "lat": 40.828,
+   "lon": 14.193
+  },
+  "ath": {
+   "name": "Athletic Club",
+   "country": "ESP",
+   "city": "Bilbao",
+   "lat": 43.264,
+   "lon": -2.949
+  },
+  "vil": {
+   "name": "Villarreal",
+   "country": "ESP",
+   "city": "Villarreal",
+   "lat": 39.944,
+   "lon": -0.103
+  },
+  "sge": {
+   "name": "Eintracht Frankfurt",
+   "country": "GER",
+   "city": "Frankfurt",
+   "lat": 50.069,
+   "lon": 8.645
+  },
+  "om": {
+   "name": "Marseille",
+   "country": "FRA",
+   "city": "Marseille",
+   "lat": 43.27,
+   "lon": 5.396
+  },
+  "psv": {
+   "name": "PSV Eindhoven",
+   "country": "NED",
+   "city": "Eindhoven",
+   "lat": 51.442,
+   "lon": 5.467
+  },
+  "aja": {
+   "name": "Ajax",
+   "country": "NED",
+   "city": "Amsterdam",
+   "lat": 52.314,
+   "lon": 4.942
+  },
+  "usg": {
+   "name": "Union Saint-Gilloise",
+   "country": "BEL",
+   "city": "Brussels",
+   "lat": 50.818,
+   "lon": 4.329
+  },
+  "sla": {
+   "name": "Slavia Prague",
+   "country": "CZE",
+   "city": "Prague",
+   "lat": 50.068,
+   "lon": 14.471
   }
+ },
+ "leaguePhase": {
+  "teams": [
+   "liv",
+   "ars",
+   "mci",
+   "che",
+   "new",
+   "tot",
+   "rma",
+   "bar",
+   "atm",
+   "ath",
+   "vil",
+   "nap",
+   "int",
+   "juv",
+   "ata",
+   "bay",
+   "b04",
+   "bvb",
+   "sge",
+   "psg",
+   "om",
+   "mon",
+   "psv",
+   "aja",
+   "spo",
+   "ben",
+   "usg",
+   "bru",
+   "gal",
+   "sla",
+   "oly",
+   "cop",
+   "bod",
+   "qar",
+   "paf",
+   "kai"
+  ]
  },
  "leaguePosition": {
   "ars": 1,

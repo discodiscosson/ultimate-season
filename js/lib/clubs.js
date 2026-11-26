@@ -26,7 +26,7 @@ const RAW = {
     'Lorient', 'Metz', 'Paris FC', 'Saint-Étienne', 'Bordeaux', 'Montpellier', 'Reims'],
   POR: ['Benfica', 'Porto', ['Sporting CP', 'sporting', 'sporting lisbon'], 'Braga', ['Vitória de Guimarães', 'guimaraes'], 'Boavista',
     'Rio Ave', 'Famalicão', 'Gil Vicente', 'Moreirense', 'Estoril', 'Casa Pia', 'Arouca', 'Santa Clara', 'Nacional', 'Marítimo', 'Belenenses'],
-  NED: ['Ajax', 'PSV', 'Feyenoord', 'AZ', 'FC Twente', 'FC Utrecht', 'Sparta Rotterdam', 'Heerenveen', 'NEC', 'Go Ahead Eagles',
+  NED: ['Ajax', ['PSV Eindhoven', 'psv'], 'Feyenoord', 'AZ', 'FC Twente', 'FC Utrecht', 'Sparta Rotterdam', 'Heerenveen', 'NEC', 'Go Ahead Eagles',
     'Vitesse', 'FC Groningen', 'Willem II', 'Fortuna Sittard', 'PEC Zwolle', 'Excelsior', 'Heracles Almelo'],
   BEL: ['Club Brugge', 'Anderlecht', ['Standard Liège', 'standard'], 'Genk', 'Gent', 'Antwerp', ['Union Saint-Gilloise', 'union sg'],
     'Cercle Brugge', 'Mechelen', 'Charleroi', 'Westerlo', 'OH Leuven', 'Sint-Truiden', 'Beerschot'],

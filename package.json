@@ -4,10 +4,13 @@
   "type": "module",
   "scripts": {
     "preview": "node scripts/build-preview.mjs",
-    "export": "node scripts/export-season.mjs"
+    "export": "node scripts/export-season.mjs",
+    "map": "node scripts/build-map.mjs"
   },
   "devDependencies": {
     "@supabase/supabase-js": "2.118.0",
-    "esbuild": "0.23.1"
+    "esbuild": "0.23.1",
+    "world-atlas": "2.0.2",
+    "topojson-client": "3.1.0"
   }
 }

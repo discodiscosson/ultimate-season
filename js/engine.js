@@ -3,8 +3,9 @@
 import * as finalHost from './games/final-host.js';
 import * as qualifying from './games/qualifying.js';
 import * as bracket from './games/bracket.js';
+import * as league from './games/league-phase.js';
 
-const GAMES = [qualifying, finalHost, bracket];
+const GAMES = [qualifying, league, finalHost, bracket];
 
 export const momentsFor = (season) => GAMES.filter((g) => g.available(season));
 

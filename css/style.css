@@ -207,6 +207,30 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .mtable.adv .badge { font-size: .72rem; }
 .mrow.focus .tbtn { padding: 8px 10px; }
 
+/* League phase map */
+.map-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-bottom: 12px; }
+.map { display: block; width: 100%; height: auto; }
+.map .sea { fill: #dfe9ef; }
+.map .land path { fill: #f6f4ee; stroke: #c9cfc4; stroke-width: .7; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .map .sea { fill: #0e1d24; } :root:not([data-theme="light"]) .map .land path { fill: #1a2b22; stroke: #2e4438; } }
+:root[data-theme="dark"] .map .sea { fill: #0e1d24; } :root[data-theme="dark"] .map .land path { fill: #1a2b22; stroke: #2e4438; }
+.pin { opacity: 0; }
+.pin.in { opacity: 1; }
+.pin circle { fill: var(--pick); stroke: #fff; stroke-width: 2; }
+.pin .drop { transform-box: fill-box; }
+.pin.in .drop { animation: drop .5s cubic-bezier(.3,1.4,.5,1) both; }
+.pin .lbl { font: 700 13px Figtree, system-ui, sans-serif; fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; opacity: 0; transition: opacity .3s; pointer-events: none; }
+.pin.now .lbl, .pin.hl .lbl { opacity: 1; }
+.pin.now circle, .pin.hl circle { fill: var(--pitch); r: 8; }
+.map.done .pin { cursor: pointer; }
+.lp-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.lp-team { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 6px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .85rem; font-weight: 600; animation: pop .3s ease both; cursor: default; }
+.lp-team .flag { width: 18px; height: 13px; }
+.lp-team small { font-weight: 500; color: var(--muted); }
+.lp-team.hl { border-color: var(--pick); background: var(--pick-bg); }
+@keyframes drop { from { opacity: 0; transform: translateY(-36px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pin.in .drop { animation: none; } }
+
 /* Storytelling */
 .story { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 6px 22px; font-size: 1.08rem; line-height: 1.65; animation: fadeUp .5s ease both; }
 .story p { animation: fadeUp .6s ease both; }

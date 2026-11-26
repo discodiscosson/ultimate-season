@@ -23,7 +23,29 @@ TEAMS = {
  'atm':('Atlético Madrid','ESP'),'int':('Inter','ITA'),'oly':('Olympiacos','GRE'),'b04':('Bayer Leverkusen','GER'),
  'che':('Chelsea','ENG'),'liv':('Liverpool','ENG'),'mci':('Manchester City','ENG'),'bay':('Bayern München','GER'),
  'bar':('Barcelona','ESP'),'tot':('Tottenham Hotspur','ENG'),'spo':('Sporting CP','POR'),'ars':('Arsenal','ENG'),
+ # league phase only
+ 'nap':('Napoli','ITA'),'ath':('Athletic Club','ESP'),'vil':('Villarreal','ESP'),'sge':('Eintracht Frankfurt','GER'),
+ 'om':('Marseille','FRA'),'psv':('PSV Eindhoven','NED'),'aja':('Ajax','NED'),'usg':('Union Saint-Gilloise','BEL'),
+ 'sla':('Slavia Prague','CZE'),
 }
+
+# Home city and stadium coordinates (lat, lon) for the map. Qarabağ play their home games in Baku.
+CITY = {
+ 'liv':('Liverpool',53.431,-2.961),'ars':('London',51.555,-0.108),'che':('London',51.482,-0.191),'tot':('London',51.604,-0.066),
+ 'mci':('Manchester',53.483,-2.200),'new':('Newcastle',54.976,-1.622),
+ 'rma':('Madrid',40.453,-3.688),'atm':('Madrid',40.436,-3.599),'bar':('Barcelona',41.381,2.123),'ath':('Bilbao',43.264,-2.949),
+ 'vil':('Villarreal',39.944,-0.103),
+ 'nap':('Naples',40.828,14.193),'int':('Milan',45.478,9.124),'juv':('Turin',45.109,7.641),'ata':('Bergamo',45.709,9.681),
+ 'bay':('Munich',48.219,11.625),'b04':('Leverkusen',51.038,7.002),'bvb':('Dortmund',51.493,7.452),'sge':('Frankfurt',50.069,8.645),
+ 'psg':('Paris',48.841,2.253),'om':('Marseille',43.270,5.396),'mon':('Monaco',43.728,7.416),
+ 'psv':('Eindhoven',51.442,5.467),'aja':('Amsterdam',52.314,4.942),
+ 'spo':('Lisbon',38.761,-9.161),'ben':('Lisbon',38.753,-9.185),
+ 'usg':('Brussels',50.818,4.329),'bru':('Bruges',51.193,3.181),
+ 'gal':('Istanbul',41.103,28.991),'sla':('Prague',50.068,14.471),'oly':('Piraeus',37.946,23.664),'cop':('Copenhagen',55.703,12.572),
+ 'bod':('Bodø',67.276,14.383),'qar':('Baku',40.430,49.920),'paf':('Paphos',34.772,32.424),'kai':('Almaty',43.240,76.920),
+}
+LEAGUE_TEAMS = ['liv','ars','mci','che','new','tot','rma','bar','atm','ath','vil','nap','int','juv','ata',
+ 'bay','b04','bvb','sge','psg','om','mon','psv','aja','spo','ben','usg','bru','gal','sla','oly','cop','bod','qar','paf','kai']
 # European Cup / Champions League finals played (years of the final). Only teams with at least one final are listed.
 FINALS = {'ben':[1961,1962,1963,1965,1968,1988,1990],'cel':[1967,1970],'fey':[1970],'pan':[1971],
  'bru':[1978],'mal':[1979],'rsb':[1991],
@@ -120,8 +142,10 @@ season = {
  'id':'ucl-2025-26','label':'2025/26',
  'competition':{'id':'ucl','name':'Champions League','sport':'football'},
  'final':{'date':'2026-05-30','city':'Budapest','country':'HUN','venue':'Puskás Aréna'},
- 'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {})}
+ 'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {}),
+              **({'city':CITY[k][0],'lat':CITY[k][1],'lon':CITY[k][2]} if k in CITY else {})}
           for k,v in TEAMS.items()},
+ 'leaguePhase':{'teams':LEAGUE_TEAMS},
  'leaguePosition':POS,
  'stages':[{'id':i,'type':'qualifying','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in Q]
          +[{'id':i,'type':'knockout','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in KO],

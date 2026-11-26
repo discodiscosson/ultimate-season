@@ -13,3 +13,11 @@ export async function loadSeason(id) {
   if (!r.ok) throw new Error('Could not load the season');
   return r.json();
 }
+
+// The Europe map (country outlines), built by scripts/build-map.mjs
+export async function loadMap() {
+  if (window.__US_MAP__) return window.__US_MAP__;
+  const r = await fetch('assets/maps/europe.json');
+  if (!r.ok) throw new Error('Could not load the map');
+  return r.json();
+}
