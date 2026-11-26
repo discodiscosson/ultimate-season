@@ -3,10 +3,11 @@
 import { countryName, exactCountry, matchCountry, suggestCountries } from './countries.js';
 import { clubCountry, exactClub, matchClub, suggestClubs } from './clubs.js';
 import { esc } from './util.js';
+import { flagHTML } from './flags.js';
 
 const SOURCES = {
-  country: { suggest: suggestCountries, exact: exactCountry, match: matchCountry, name: countryName, sub: () => '', placeholder: 'Country' },
-  club: { suggest: suggestClubs, exact: exactClub, match: matchClub, name: (c) => c, sub: (c) => countryName(clubCountry(c)), placeholder: 'Club' },
+  country: { suggest: suggestCountries, exact: exactCountry, match: matchCountry, name: countryName, sub: () => '', icon: (c) => flagHTML(c), placeholder: 'Country' },
+  club: { suggest: suggestClubs, exact: exactClub, match: matchClub, name: (c) => c, sub: (c) => countryName(clubCountry(c)), icon: (c) => flagHTML(clubCountry(c)), placeholder: 'Club' },
 };
 const MSG = { country: 'Pick a country from the list', club: 'Pick a club from the list' };
 const safeId = (key) => String(key).replace(/[^a-zA-Z0-9_-]/g, '_');
@@ -49,7 +50,7 @@ export function bindCombos(root, state, { onChange, onDone } = {}) {
     const selected = state.sel[input.dataset.cf];
     lb.innerHTML = items.map((c, i) => {
       const sub = src.sub(c);
-      return `<li role="option" id="${lb.id}-${i}" data-code="${esc(c)}" class="${i === 0 && input.value ? 'active' : ''}" aria-selected="${c === selected}">${esc(src.name(c))}${sub ? `<span class="sub">${esc(sub)}</span>` : ''}</li>`;
+      return `<li role="option" id="${lb.id}-${i}" data-code="${esc(c)}" class="${i === 0 && input.value ? 'active' : ''}" aria-selected="${c === selected}">${src.icon ? src.icon(c) : ''}<span class="nm">${esc(src.name(c))}</span>${sub ? `<span class="sub">${esc(sub)}</span>` : ''}</li>`;
     }).join('');
     lb.hidden = false;
     input.setAttribute('aria-expanded', 'true');
