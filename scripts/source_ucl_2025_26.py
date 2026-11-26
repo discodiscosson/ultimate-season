@@ -50,6 +50,34 @@ MATCHDAYS = [
   ('ath',0,2,'ars'),('psv',1,3,'usg'),('juv',4,4,'bvb'),('rma',2,1,'om'),('ben',2,3,'qar'),('tot',1,0,'vil'),
   ('oly',0,0,'paf'),('sla',2,2,'bod'),('aja',0,2,'int'),('bay',3,1,'che'),('liv',3,2,'atm'),('psg',4,0,'ata'),
   ('bru',4,1,'mon'),('cop',2,2,'b04'),('sge',5,1,'gal'),('mci',2,0,'nap'),('new',1,2,'bar'),('spo',4,1,'kai')]),
+ (2, 'Matchday 2', [
+  ('ata',2,1,'bru'),('kai',0,5,'rma'),('atm',5,1,'sge'),('che',1,0,'ben'),('int',3,0,'sla'),('bod',2,2,'tot'),
+  ('gal',1,0,'liv'),('om',4,0,'aja'),('paf',1,5,'bay'),('qar',2,0,'cop'),('usg',0,4,'new'),('ars',2,0,'oly'),
+  ('mon',2,2,'mci'),('b04',1,1,'psv'),('bvb',4,1,'ath'),('bar',1,2,'psg'),('nap',2,1,'spo'),('vil',2,2,'juv')]),
+ (3, 'Matchday 3', [
+  ('bar',6,1,'oly'),('kai',0,0,'paf'),('ars',4,0,'atm'),('b04',2,7,'psg'),('cop',2,4,'bvb'),('new',3,0,'ben'),
+  ('psv',6,2,'nap'),('usg',0,4,'int'),('vil',0,2,'mci'),('ath',3,1,'qar'),('gal',3,1,'bod'),('mon',0,0,'tot'),
+  ('ata',0,0,'sla'),('che',5,1,'aja'),('sge',1,5,'liv'),('bay',4,0,'bru'),('rma',1,0,'juv'),('spo',2,1,'om')]),
+ (4, 'Matchday 4', [
+  ('sla',0,3,'ars'),('nap',0,0,'sge'),('atm',3,1,'usg'),('bod',0,1,'mon'),('juv',1,1,'spo'),('liv',1,0,'rma'),
+  ('oly',1,1,'psv'),('psg',1,2,'bay'),('tot',4,0,'cop'),('paf',1,0,'vil'),('qar',2,2,'che'),('aja',0,3,'gal'),
+  ('bru',3,3,'bar'),('int',2,1,'kai'),('mci',4,1,'bvb'),('new',2,0,'ath'),('om',0,1,'ata'),('ben',0,1,'b04')]),
+ (5, 'Matchday 5', [
+  ('aja',0,2,'ben'),('gal',0,1,'usg'),('bvb',4,0,'vil'),('che',3,0,'bar'),('bod',2,3,'juv'),('mci',0,2,'b04'),
+  ('om',2,1,'new'),('sla',0,0,'ath'),('nap',2,0,'qar'),('cop',3,2,'kai'),('paf',2,2,'mon'),('ars',3,1,'bay'),
+  ('atm',2,1,'int'),('sge',0,3,'ata'),('liv',1,4,'psv'),('oly',3,4,'rma'),('psg',5,3,'tot'),('spo',3,0,'bru')]),
+ (6, 'Matchday 6', [
+  ('kai',0,1,'oly'),('bay',3,1,'spo'),('mon',1,0,'gal'),('ata',2,1,'che'),('bar',2,1,'sge'),('int',0,1,'liv'),
+  ('psv',2,3,'atm'),('usg',2,3,'om'),('tot',3,0,'sla'),('qar',2,4,'aja'),('vil',2,3,'cop'),('ath',0,0,'psg'),
+  ('b04',2,2,'new'),('bvb',2,2,'bod'),('bru',0,3,'ars'),('juv',2,0,'paf'),('rma',1,2,'mci'),('ben',2,0,'nap')]),
+ (7, 'Matchday 7', [
+  ('kai',1,4,'bru'),('bod',3,1,'mci'),('cop',1,1,'nap'),('int',1,3,'ars'),('oly',2,0,'b04'),('rma',6,1,'mon'),
+  ('spo',2,1,'psg'),('tot',2,0,'bvb'),('vil',1,2,'aja'),('gal',1,1,'atm'),('qar',3,2,'sge'),('ata',2,3,'ath'),
+  ('che',1,0,'paf'),('bay',2,0,'usg'),('juv',2,0,'ben'),('new',3,0,'psv'),('om',0,3,'liv'),('sla',2,4,'bar')]),
+ (8, 'Matchday 8', [
+  ('aja',1,2,'oly'),('ars',3,2,'kai'),('mon',0,0,'juv'),('ath',2,3,'spo'),('atm',1,2,'bod'),('b04',3,0,'vil'),
+  ('bvb',0,2,'int'),('bru',3,0,'om'),('sge',0,2,'tot'),('bar',4,1,'cop'),('liv',6,0,'qar'),('mci',2,0,'gal'),
+  ('paf',4,1,'sla'),('psg',1,1,'new'),('psv',1,2,'bay'),('usg',1,0,'ata'),('ben',4,2,'rma'),('nap',2,3,'che')]),
 ]
 # Starting XIs per match, keyed by (matchday, home, away): {'home': [11 names], 'away': [11 names]}, goalkeeper first.
 # Empty for now: the Missing XI game shows a placeholder until a match has line-ups.
