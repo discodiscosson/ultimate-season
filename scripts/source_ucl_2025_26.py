@@ -83,6 +83,19 @@ MATCHDAYS = [
 # Empty for now: the Missing XI game shows a placeholder until a match has line-ups.
 LINEUPS = {}
 
+# Top goalscorers (whole competition proper): rank, player, nationality, team, goals, minutes, accepted answers
+TOP_SCORERS = [
+ (1,'Kylian Mbappé','FRA','rma',15,912,['mbappe','kylian mbappe']),
+ (2,'Harry Kane','ENG','bay',14,1039,['kane','harry kane']),
+ (3,'Anthony Gordon','ENG','new',10,771,['gordon','anthony gordon']),
+ (3,'Khvicha Kvaratskhelia','GEO','psg',10,1141,['kvaratskhelia','kvara','khvicha kvaratskhelia']),
+ (3,'Julián Alvarez','ARG','atm',10,1240,['alvarez','julian alvarez']),
+ (6,'Erling Haaland','NOR','mci',8,756,['haaland','erling haaland']),
+ (6,'Ousmane Dembélé','FRA','psg',8,827,['dembele','ousmane dembele']),
+ (8,'Victor Osimhen','NGA','gal',7,841,['osimhen','victor osimhen']),
+ (8,'Luis Díaz','COL','bay',7,980,['diaz','luis diaz']),
+]
+
 LEAGUE_TEAMS = ['liv','ars','mci','che','new','tot','rma','bar','atm','ath','vil','nap','int','juv','ata',
  'bay','b04','bvb','sge','psg','om','mon','psv','aja','spo','ben','usg','bru','gal','sla','oly','cop','bod','qar','paf','kai']
 # European Cup / Champions League finals played (years of the final). Only teams with at least one final are listed.
@@ -184,6 +197,7 @@ season = {
  'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {}),
               **({'city':CITY[k][0],'lat':CITY[k][1],'lon':CITY[k][2]} if k in CITY else {})}
           for k,v in TEAMS.items()},
+ 'topScorers':[{'rank':r,'name':n,'nat':c,'team':t,'goals':g,'minutes':m,'aliases':al} for r,n,c,t,g,m,al in TOP_SCORERS],
  'leaguePhase':{'teams':LEAGUE_TEAMS,'matchdays':[{'n':n,'name':name,'matches':[
      {'home':h,'away':a,'score':[hg,ag], **({'lineups':LINEUPS[(n,h,a)]} if (n,h,a) in LINEUPS else {})} for h,hg,ag,a in ms]}
    for n,name,ms in MATCHDAYS]},

@@ -639,6 +639,117 @@
    "lon": 14.471
   }
  },
+ "topScorers": [
+  {
+   "rank": 1,
+   "name": "Kylian Mbappé",
+   "nat": "FRA",
+   "team": "rma",
+   "goals": 15,
+   "minutes": 912,
+   "aliases": [
+    "mbappe",
+    "kylian mbappe"
+   ]
+  },
+  {
+   "rank": 2,
+   "name": "Harry Kane",
+   "nat": "ENG",
+   "team": "bay",
+   "goals": 14,
+   "minutes": 1039,
+   "aliases": [
+    "kane",
+    "harry kane"
+   ]
+  },
+  {
+   "rank": 3,
+   "name": "Anthony Gordon",
+   "nat": "ENG",
+   "team": "new",
+   "goals": 10,
+   "minutes": 771,
+   "aliases": [
+    "gordon",
+    "anthony gordon"
+   ]
+  },
+  {
+   "rank": 3,
+   "name": "Khvicha Kvaratskhelia",
+   "nat": "GEO",
+   "team": "psg",
+   "goals": 10,
+   "minutes": 1141,
+   "aliases": [
+    "kvaratskhelia",
+    "kvara",
+    "khvicha kvaratskhelia"
+   ]
+  },
+  {
+   "rank": 3,
+   "name": "Julián Alvarez",
+   "nat": "ARG",
+   "team": "atm",
+   "goals": 10,
+   "minutes": 1240,
+   "aliases": [
+    "alvarez",
+    "julian alvarez"
+   ]
+  },
+  {
+   "rank": 6,
+   "name": "Erling Haaland",
+   "nat": "NOR",
+   "team": "mci",
+   "goals": 8,
+   "minutes": 756,
+   "aliases": [
+    "haaland",
+    "erling haaland"
+   ]
+  },
+  {
+   "rank": 6,
+   "name": "Ousmane Dembélé",
+   "nat": "FRA",
+   "team": "psg",
+   "goals": 8,
+   "minutes": 827,
+   "aliases": [
+    "dembele",
+    "ousmane dembele"
+   ]
+  },
+  {
+   "rank": 8,
+   "name": "Victor Osimhen",
+   "nat": "NGA",
+   "team": "gal",
+   "goals": 7,
+   "minutes": 841,
+   "aliases": [
+    "osimhen",
+    "victor osimhen"
+   ]
+  },
+  {
+   "rank": 8,
+   "name": "Luis Díaz",
+   "nat": "COL",
+   "team": "bay",
+   "goals": 7,
+   "minutes": 980,
+   "aliases": [
+    "diaz",
+    "luis diaz"
+   ]
+  }
+ ],
  "leaguePhase": {
   "teams": [
    "liv",

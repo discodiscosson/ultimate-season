@@ -312,6 +312,34 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .champ { font-family: var(--display); font-weight: 800; font-size: 1.6rem; display: flex; align-items: center; gap: 10px; margin: 4px 2px 14px; }
 .champ .flag { width: 34px; height: 25px; }
 
+/* Top goalscorers */
+.ts-input { display: flex; gap: 8px; margin-bottom: 8px; }
+.ts-input input { flex: 1; min-width: 0; font: inherit; font-size: 17px; padding: 11px 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
+.ts-input input:focus { outline: 2px solid var(--pick); border-color: var(--pick); }
+.ts-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: .85rem; color: var(--muted); margin: 0 2px 12px; }
+.ts-dots { display: inline-flex; gap: 4px; }
+.ts-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--pick); }
+.ts-dots i.used { background: var(--line); }
+.ts-msg { font-weight: 700; color: var(--ink); opacity: 0; transition: opacity .2s; }
+.ts-msg.show { opacity: 1; animation: fadeIn .3s ease both; }
+.ts-table { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.ts-row { display: grid; grid-template-columns: 50px minmax(0, 1.4fr) minmax(0, 1.2fr) 56px 70px; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--line); min-height: 44px; }
+.ts-row:last-child { border-bottom: 0; }
+.ts-head { font-size: .75rem; font-weight: 700; color: var(--muted); background: var(--surface2); min-height: 0; }
+.ts-rank, .ts-goals, .ts-min { text-align: center; font-variant-numeric: tabular-nums; }
+.ts-goals { font-weight: 800; }
+.ts-player, .ts-team { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.ts-player { font-weight: 700; }
+.ts-player > span:last-child, .ts-team > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ts-hidden { display: block; width: 70%; height: 14px; border-radius: 6px; background: var(--surface2); }
+.ts-row.hit { background: color-mix(in srgb, var(--good) 9%, var(--surface)); }
+.ts-row.new { animation: pop .45s cubic-bezier(.2,.9,.3,1.3) both; }
+.ts-row.missed { color: var(--muted); }
+.ts-row.missed .ts-player { font-weight: 500; }
+.ts-wrong { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ts-wrong .chip { color: var(--bad); }
+@media (max-width: 600px) { .ts-row { grid-template-columns: 38px minmax(0, 1.4fr) minmax(0, 1fr) 44px; } .ts-min, .ts-head span:last-child { display: none; } }
+
 /* Storytelling */
 .story { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 6px 22px; font-size: 1.08rem; line-height: 1.65; animation: fadeUp .5s ease both; }
 .story p { animation: fadeUp .6s ease both; }

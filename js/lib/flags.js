@@ -1,4 +1,4 @@
-// Flags for the UEFA countries, self-hosted in assets/flags (from flag-icons, MIT licence).
+// Flags for the UEFA countries (plus a few players' nationalities), self-hosted in assets/flags (from flag-icons, MIT licence).
 import { countryName } from './countries.js';
 import { esc } from './util.js';
 
@@ -8,6 +8,8 @@ const ISO = {
   HUN: 'hu', ISL: 'is', IRL: 'ie', ISR: 'il', ITA: 'it', KAZ: 'kz', KOS: 'xk', LVA: 'lv', LIE: 'li', LTU: 'lt', LUX: 'lu',
   MLT: 'mt', MDA: 'md', MNE: 'me', NED: 'nl', MKD: 'mk', NIR: 'gb-nir', NOR: 'no', POL: 'pl', POR: 'pt', ROU: 'ro', RUS: 'ru',
   SMR: 'sm', SCO: 'gb-sct', SRB: 'rs', SVK: 'sk', SVN: 'si', ESP: 'es', SWE: 'se', SUI: 'ch', TUR: 'tr', UKR: 'ua', WAL: 'gb-wls',
+  // players' nationalities outside UEFA
+  ARG: 'ar', NGA: 'ng', COL: 'co',
 };
 
 // The preview build inlines the flags in window.__US_FLAGS__; the site loads them from assets/flags.
