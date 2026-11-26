@@ -639,6 +639,149 @@
    "lon": 14.471
   }
  },
+ "awards": {
+  "teamOfSeason": [
+   {
+    "pos": "GK",
+    "players": [
+     {
+      "name": "David Raya",
+      "nat": "ESP",
+      "team": "ars",
+      "aliases": [
+       "raya",
+       "david raya"
+      ]
+     }
+    ]
+   },
+   {
+    "pos": "DF",
+    "players": [
+     {
+      "name": "Marcos Llorente",
+      "nat": "ESP",
+      "team": "atm",
+      "aliases": [
+       "llorente",
+       "marcos llorente"
+      ]
+     },
+     {
+      "name": "Marquinhos",
+      "nat": "BRA",
+      "team": "psg",
+      "aliases": [
+       "marquinhos"
+      ]
+     },
+     {
+      "name": "Gabriel",
+      "nat": "BRA",
+      "team": "ars",
+      "aliases": [
+       "gabriel",
+       "gabriel magalhaes",
+       "magalhaes"
+      ]
+     },
+     {
+      "name": "Nuno Mendes",
+      "nat": "POR",
+      "team": "psg",
+      "aliases": [
+       "nuno mendes",
+       "mendes"
+      ]
+     }
+    ]
+   },
+   {
+    "pos": "MF",
+    "players": [
+     {
+      "name": "Michael Olise",
+      "nat": "FRA",
+      "team": "bay",
+      "aliases": [
+       "olise",
+       "michael olise"
+      ]
+     },
+     {
+      "name": "Declan Rice",
+      "nat": "ENG",
+      "team": "ars",
+      "aliases": [
+       "rice",
+       "declan rice"
+      ]
+     },
+     {
+      "name": "Vitinha",
+      "nat": "POR",
+      "team": "psg",
+      "aliases": [
+       "vitinha"
+      ]
+     },
+     {
+      "name": "Khvicha Kvaratskhelia",
+      "nat": "GEO",
+      "team": "psg",
+      "aliases": [
+       "kvaratskhelia",
+       "kvara",
+       "khvicha kvaratskhelia"
+      ]
+     }
+    ]
+   },
+   {
+    "pos": "FW",
+    "players": [
+     {
+      "name": "Ousmane Dembélé",
+      "nat": "FRA",
+      "team": "psg",
+      "aliases": [
+       "dembele",
+       "ousmane dembele"
+      ]
+     },
+     {
+      "name": "Harry Kane",
+      "nat": "ENG",
+      "team": "bay",
+      "aliases": [
+       "kane",
+       "harry kane"
+      ]
+     }
+    ]
+   }
+  ],
+  "player": {
+   "name": "Khvicha Kvaratskhelia",
+   "nat": "GEO",
+   "team": "psg",
+   "aliases": [
+    "kvaratskhelia",
+    "kvara",
+    "khvicha kvaratskhelia"
+   ]
+  },
+  "young": {
+   "name": "Arda Güler",
+   "nat": "TUR",
+   "team": "rma",
+   "aliases": [
+    "guler",
+    "arda guler",
+    "arda"
+   ]
+  }
+ },
  "topScorers": [
   {
    "rank": 1,

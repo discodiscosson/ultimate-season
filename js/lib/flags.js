@@ -9,7 +9,7 @@ const ISO = {
   MLT: 'mt', MDA: 'md', MNE: 'me', NED: 'nl', MKD: 'mk', NIR: 'gb-nir', NOR: 'no', POL: 'pl', POR: 'pt', ROU: 'ro', RUS: 'ru',
   SMR: 'sm', SCO: 'gb-sct', SRB: 'rs', SVK: 'sk', SVN: 'si', ESP: 'es', SWE: 'se', SUI: 'ch', TUR: 'tr', UKR: 'ua', WAL: 'gb-wls',
   // players' nationalities outside UEFA
-  ARG: 'ar', NGA: 'ng', COL: 'co',
+  ARG: 'ar', NGA: 'ng', COL: 'co', BRA: 'br',
 };
 
 // The preview build inlines the flags in window.__US_FLAGS__; the site loads them from assets/flags.

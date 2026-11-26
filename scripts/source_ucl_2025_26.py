@@ -96,6 +96,18 @@ TOP_SCORERS = [
  (8,'Luis Díaz','COL','bay',7,980,['diaz','luis diaz']),
 ]
 
+# Awards: Team of the Season (by position) and the two individual awards. Accepted answers are lowercase.
+TEAM_OF_SEASON = [
+ ('GK', [('David Raya','ESP','ars',['raya','david raya'])]),
+ ('DF', [('Marcos Llorente','ESP','atm',['llorente','marcos llorente']),('Marquinhos','BRA','psg',['marquinhos']),
+         ('Gabriel','BRA','ars',['gabriel','gabriel magalhaes','magalhaes']),('Nuno Mendes','POR','psg',['nuno mendes','mendes'])]),
+ ('MF', [('Michael Olise','FRA','bay',['olise','michael olise']),('Declan Rice','ENG','ars',['rice','declan rice']),
+         ('Vitinha','POR','psg',['vitinha']),('Khvicha Kvaratskhelia','GEO','psg',['kvaratskhelia','kvara','khvicha kvaratskhelia'])]),
+ ('FW', [('Ousmane Dembélé','FRA','psg',['dembele','ousmane dembele']),('Harry Kane','ENG','bay',['kane','harry kane'])]),
+]
+PLAYER_OF_SEASON = ('Khvicha Kvaratskhelia','GEO','psg',['kvaratskhelia','kvara','khvicha kvaratskhelia'])
+YOUNG_PLAYER = ('Arda Güler','TUR','rma',['guler','arda guler','arda'])
+
 LEAGUE_TEAMS = ['liv','ars','mci','che','new','tot','rma','bar','atm','ath','vil','nap','int','juv','ata',
  'bay','b04','bvb','sge','psg','om','mon','psv','aja','spo','ben','usg','bru','gal','sla','oly','cop','bod','qar','paf','kai']
 # European Cup / Champions League finals played (years of the final). Only teams with at least one final are listed.
@@ -197,6 +209,11 @@ season = {
  'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {}),
               **({'city':CITY[k][0],'lat':CITY[k][1],'lon':CITY[k][2]} if k in CITY else {})}
           for k,v in TEAMS.items()},
+ 'awards':{
+   'teamOfSeason':[{'pos':pos,'players':[{'name':n,'nat':c,'team':t,'aliases':al} for n,c,t,al in ps]} for pos,ps in TEAM_OF_SEASON],
+   'player':dict(zip(['name','nat','team','aliases'],PLAYER_OF_SEASON)),
+   'young':dict(zip(['name','nat','team','aliases'],YOUNG_PLAYER)),
+ },
  'topScorers':[{'rank':r,'name':n,'nat':c,'team':t,'goals':g,'minutes':m,'aliases':al} for r,n,c,t,g,m,al in TOP_SCORERS],
  'leaguePhase':{'teams':LEAGUE_TEAMS,'matchdays':[{'n':n,'name':name,'matches':[
      {'home':h,'away':a,'score':[hg,ag], **({'lineups':LINEUPS[(n,h,a)]} if (n,h,a) in LINEUPS else {})} for h,hg,ag,a in ms]}
