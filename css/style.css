@@ -181,6 +181,21 @@ button.row:hover { border-color: var(--pick); }
 }
 @media (prefers-reduced-motion: reduce) { .mrow { transition: none; } .mrow.focus { transform: none; } }
 
+/* Third qualifying round: clickable teams in the table */
+.tbtn { display: inline-flex; align-items: center; gap: 8px; font: inherit; color: var(--ink); background: transparent; border: 1.5px solid transparent; border-radius: 9px; padding: 5px 8px; max-width: 100%; text-align: inherit; }
+button.tbtn { cursor: pointer; }
+button.tbtn:hover { border-color: var(--pick); background: var(--pick-bg); }
+button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px; }
+.tbtn.picked { border-color: var(--pick); background: var(--pick-bg); font-weight: 700; }
+.tbtn.marked { border-color: var(--pick); background: var(--pick-bg); }
+.tbtn.w .tname { font-weight: 800; }
+.mrow.done .tbtn:not(.w) .tname { font-weight: 500; color: var(--muted); }
+.tick { font-weight: 800; color: var(--pick); }
+.tick.ok { color: var(--good); } .tick.no { color: var(--bad); }
+.trophy { font-size: .95em; }
+.mtable.adv .badge { font-size: .72rem; }
+.mrow.focus .tbtn { padding: 8px 10px; }
+
 /* Storytelling */
 .story { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 6px 22px; font-size: 1.08rem; line-height: 1.65; animation: fadeUp .5s ease both; }
 .story p { animation: fadeUp .6s ease both; }

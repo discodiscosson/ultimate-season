@@ -27,6 +27,8 @@ export function play({ el, season, start = 0, onStep }) {
     const isCountry = (r) => r < COUNTRY_ROUNDS;
     const hasRival = (r) => r === LAST && !isCountry(r);
     const hasFinalists = (r) => !isCountry(r) && r !== LAST;
+    // Rounds shown as a results table (with story, draw and one tie in focus); the play-off still uses cards
+    const isTable = (r) => isCountry(r) || hasFinalists(r);
     const isFinalist = (t) => (T[t].finals || []).length > 0;
     const rivalsOf = (t) => T[t].rivals || [];
 
@@ -46,7 +48,7 @@ export function play({ el, season, start = 0, onStep }) {
     const MAX = ST.reduce((s, _, r) => s + roundMax(r), 0);
 
     const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: ST.map(() => ({})), marks: ST.map(() => new Set()), submitted: [], summary: false, touched: {}, focus: 0, editing: {},
-      phase: ST.map((st) => (st.intro ? 'intro' : 'play')), justDrew: false, justDone: null };
+      phase: ST.map((st) => (st.intro ? 'intro' : 'play')), justDrew: false, justDone: null, picksIn: [] };
     const rk = (t) => `rival:${t}`;
 
     // Per-round results (only meaningful once submitted)
@@ -63,7 +65,7 @@ export function play({ el, season, start = 0, onStep }) {
       const rivals = rivalTeams(r).filter((t) => rivalsOf(t).includes(S.sel[rk(t)])).length;
       return { total: picks * PICK_POINTS + marks + rivals * RIVAL_POINTS, picks, hit, wrong, marks, finalists: finalists.length, rivals };
     }
-    const points = () => ST.reduce((s, _, r) => s + (S.submitted[r] ? score(r).total : 0), 0);
+    const points = () => ST.reduce((s, _, r) => s + (S.submitted[r] ? score(r).total : S.picksIn[r] ? score(r).picks * PICK_POINTS : 0), 0);
 
     function progress(r) {
       if (isCountry(r)) {
@@ -91,6 +93,7 @@ export function play({ el, season, start = 0, onStep }) {
           rivalTeams(r).forEach((t) => { S.sel[rk(t)] = rivalsOf(t)[0]; S.drafts[rk(t)] = rivalsOf(t)[0]; });
         }
         S.submitted[r] = true;
+        S.picksIn[r] = true;
         S.phase[r] = 'play';
       }
       S.r = Math.min(start, LAST);
@@ -238,6 +241,77 @@ export function play({ el, season, start = 0, onStep }) {
       return h;
     }
 
+    // ---- Third qualifying round: who went through, then who has played a final ----
+    const firstUnpicked = (r) => { const i = ST[r].ties.findIndex((_, k) => !S.picks[r][k]); return i < 0 ? 0 : i; };
+    const nextUnpicked = (r, from) => {
+      const n = ST[r].ties.length;
+      for (let k = 1; k <= n; k++) { const i = (from + k) % n; if (!S.picks[r][i]) return i; }
+      return null;
+    };
+
+    function advTeam(r, i, t, tie, side) {
+      const pickIn = S.picksIn[r], fin = S.submitted[r], pick = S.picks[r][i], marked = S.marks[r].has(t);
+      const flag = flagHTML(T[t].country);
+      const cls = ['tbtn'];
+      let extra = '';
+      if (!pickIn) { if (pick === t) { cls.push('picked'); extra = '<span class="tick">✓</span>'; } }
+      else {
+        if (t === tie.winner) cls.push('w');
+        if (pick === t) extra = `<span class="tick ${t === tie.winner ? 'ok' : 'no'}">${t === tie.winner ? '✓' : '✗'}</span>`;
+        if (!fin && marked) cls.push('marked');
+        if (fin) {
+          const years = T[t].finals || [];
+          if (years.length) extra += `<span class="badge ${marked ? 'ok' : 'miss'}" title="European Cup / Champions League final">🏆 ${years.length > 3 ? `${years.length} finals` : years.join(', ')}${marked ? ' ✓' : ''}</span>`;
+          else if (marked) extra += '<span class="badge no">✗ No final</span>';
+        } else if (marked) extra += '<span class="trophy">🏆</span>';
+      }
+      const name = `<span class="tname">${esc(nm(t))}</span>`;
+      const inner = side === 0 ? `${extra}${name}${flag}` : `${flag}${name}${extra}`;
+      const act = !pickIn ? `data-act="q-pickt" data-i="${i}" data-t="${t}" aria-pressed="${pick === t}"`
+        : !fin ? `data-act="q-markt" data-t="${t}" aria-pressed="${marked}"` : '';
+      return act ? `<button class="${cls.join(' ')} t${side + 1}" ${act}>${inner}</button>` : `<div class="${cls.join(' ')} t${side + 1}">${inner}</div>`;
+    }
+
+    function advTableHTML(r) {
+      const pickIn = S.picksIn[r];
+      const rows = ST[r].ties.map((tie, i) => {
+        const [a, b] = tieTeams(r, i);
+        const focused = !pickIn && S.focus === i;
+        const [l1, l2] = pickIn ? legsOf(tie) : ['', ''];
+        const cls = [focused && 'focus', pickIn && 'done', !pickIn && S.picks[r][i] && 'filled'].filter(Boolean).join(' ');
+        return `<div class="mrow ${cls}">
+          <div class="tc t1">${advTeam(r, i, a, tie, 0)}</div>
+          <div class="agg">${pickIn ? aggText(tie) : '<span class="vs">–</span>'}${pickIn ? `<span class="legs-m">${[l1, l2].join(', ')}</span>` : ''}</div>
+          <div class="tc t2">${advTeam(r, i, b, tie, 1)}</div>
+          <div class="leg">${l1}</div><div class="leg">${l2}</div>
+        </div>`;
+      }).join('');
+      return `<div class="mtable adv"><div class="mhead"><span class="t1">Team 1</span><span class="agg">Agg.</span><span class="t2">Team 2</span><span class="leg">1st leg</span><span class="leg">2nd leg</span></div>${rows}</div>`;
+    }
+
+    function advRoundHTML(r) {
+      const pickIn = S.picksIn[r], fin = S.submitted[r], s = score(r);
+      const picked = Object.keys(S.picks[r]).length, n = ST[r].ties.length;
+      let ask, hint, foot;
+      if (!pickIn) {
+        ask = 'Who went through?';
+        hint = `Click the team that won each tie (${PICK_POINTS} pts each). The results are revealed when you submit.`;
+        foot = `<span class="hint" style="margin:0">${picked} of ${n} picks</span><button class="btn" data-act="q-subpicks" ${picked === n ? '' : 'disabled'}>Submit picks</button>`;
+      } else if (!fin) {
+        ask = 'Who has played in a final?';
+        hint = `You picked ${s.picks} of ${n} right. Now click every team that has ever played in a European Cup or Champions League final (+1 for each one found, −1 for each wrong mark).`;
+        foot = `<span class="hint" style="margin:0">${S.marks[r].size} marked</span><button class="btn" data-act="q-subfinal">Submit finalists</button>`;
+      } else {
+        ask = '';
+        hint = `${s.picks} of ${n} picks right. Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}. ${s.total} pts this round.`;
+        foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'See summary'}</button>`;
+      }
+      return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
+        ${ask ? `<h3 class="ask ${S.justDrew || S.askAnim ? 'anim' : ''}">${ask}</h3>` : ''}
+        <p class="hint">${hint}</p>${advTableHTML(r)}
+        <div class="foot" id="q-foot">${foot}</div>`;
+    }
+
     function introHTML(r) {
       return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
         <div class="story">${richText(ST[r].intro)}</div>
@@ -254,8 +328,9 @@ export function play({ el, season, start = 0, onStep }) {
 
     function roundHTML() {
       const r = S.r, st = ST[r], sub = S.submitted[r];
-      if (isCountry(r) && S.phase[r] === 'intro') return introHTML(r);
-      if (isCountry(r) && S.phase[r] === 'draw') return drawHTML(r);
+      if (isTable(r) && S.phase[r] === 'intro') return introHTML(r);
+      if (isTable(r) && S.phase[r] === 'draw') return drawHTML(r);
+      if (hasFinalists(r)) return advRoundHTML(r);
       const ties = isCountry(r) ? null : st.ties.map((tie, i) => {
         const [a, b] = tie.slots.map((s) => s.team);
         const row = isCountry(r) ? (t) => countryRow(r, t, tie) : (t) => advanceRow(r, i, t, tie);
@@ -294,7 +369,7 @@ export function play({ el, season, start = 0, onStep }) {
 
     function render() {
       el.innerHTML = S.summary ? summaryHTML() : roundHTML();
-      S.justDrew = false; S.justDone = null;
+      S.justDrew = false; S.justDone = null; S.askAnim = false;
       onStep?.(S.summary ? ST.length : S.r);
     }
 
@@ -304,7 +379,7 @@ export function play({ el, season, start = 0, onStep }) {
       clearInterval(drawTimer); drawTimer = null;
       if (S.phase[S.r] !== 'draw') return;
       S.phase[S.r] = 'play'; S.justDrew = true;
-      S.focus = firstOpenTie(S.r);
+      S.focus = isCountry(S.r) ? firstOpenTie(S.r) : firstUnpicked(S.r);
       render(); focusTie();
     }
     const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -347,7 +422,7 @@ export function play({ el, season, start = 0, onStep }) {
       const carried = teamsIn(r).filter((t) => !NEW[r].includes(t));
       const prev = ST[r - 1]?.name || 'the previous round';
       if (carried.length) await placeGroup(r, `Winners of the ${prev.toLowerCase()}`, carried, true, 180);
-      if (NEW[r].length) await placeGroup(r, 'New teams entering in this round', NEW[r], false, 300);
+      if (NEW[r].length) await placeGroup(r, 'New teams entering in this round', NEW[r], !isCountry(r), 300);
       if (drawing(r)) finishDraw();
     }
 
@@ -375,7 +450,7 @@ export function play({ el, season, start = 0, onStep }) {
 
     const focusTie = () => {
       const row = el.querySelector('.mrow.focus');
-      const input = row?.querySelector('input[data-cf]');
+      const input = row?.querySelector('input[data-cf], .tbtn');
       if (input) input.focus(); else if (row) el.querySelector('[data-act="q-submit"]')?.focus();
     };
     bindCombos(el, S, {
@@ -401,6 +476,23 @@ export function play({ el, season, start = 0, onStep }) {
       if (act === 'q-intro') { startDraw(); return; }
       if (act === 'q-skip') { finishDraw(); return; }
       if (act === 'q-focus') { S.focus = +b.dataset.i; render(); focusTie(); return; }
+      if (act === 'q-pickt') {
+        const i = +b.dataset.i;
+        S.picks[r][i] = b.dataset.t;
+        const n = nextUnpicked(r, i);
+        if (n !== null) S.focus = n;
+        render(); focusTie(); return;
+      }
+      if (act === 'q-markt') {
+        const t = b.dataset.t;
+        if (S.marks[r].has(t)) S.marks[r].delete(t); else S.marks[r].add(t);
+        render(); el.querySelector(`[data-act="q-markt"][data-t="${t}"]`)?.focus(); return;
+      }
+      if (act === 'q-subpicks') {
+        if (Object.keys(S.picks[r]).length !== ST[r].ties.length) return;
+        S.picksIn[r] = true; S.askAnim = true; render(); scrollTo(0, 0); return;
+      }
+      if (act === 'q-subfinal') { S.submitted[r] = true; render(); scrollTo(0, 0); return; }
       if (act === 'q-edit') { S.editing[b.dataset.t] = true; render(); focusField(el, b.dataset.t); return; }
       if (act === 'q-pick') {
         S.picks[r][+b.dataset.i] = b.dataset.t;
@@ -418,15 +510,15 @@ export function play({ el, season, start = 0, onStep }) {
         render(); scrollTo(0, 0);
       } else if (act === 'q-next') {
         if (S.r < LAST) {
-          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : 0; render(); scrollTo(0, 0);
-          if (S.phase[S.r] === 'play') { if (isCountry(S.r)) focusTie(); else focusField(el, nextOpen()); }
+          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : hasFinalists(S.r) ? firstUnpicked(S.r) : 0; render(); scrollTo(0, 0);
+          if (S.phase[S.r] === 'play') { if (isTable(S.r)) focusTie(); else focusField(el, nextOpen()); }
         }
         else { S.summary = true; render(); scrollTo(0, 0); }
       } else if (act === 'q-done') resolve({ score: points(), max: MAX, lines: lines() });
     });
 
-    if (isCountry(S.r)) S.focus = firstOpenTie(S.r);
+    if (isCountry(S.r)) S.focus = firstOpenTie(S.r); else if (hasFinalists(S.r)) S.focus = firstUnpicked(S.r);
     render();
-    if (!S.summary && !S.submitted[S.r] && S.phase[S.r] === 'play') { if (isCountry(S.r)) focusTie(); else focusField(el, nextOpen()); }
+    if (!S.summary && !S.submitted[S.r] && S.phase[S.r] === 'play') { if (isTable(S.r)) focusTie(); else focusField(el, nextOpen()); }
   });
 }

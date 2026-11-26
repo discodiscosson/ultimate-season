@@ -88,6 +88,12 @@ INTROS = {
        "and the second legs were played on 29 and 30 July 2025.\n\n"
        "The winners of the ties advanced to the third qualifying round. The losers were transferred to the "
        "[Europa League third qualifying round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#Third_qualifying_round).",
+ 'q3': "The draw for the third qualifying round was held on 21 July 2025. The first legs were played on 5 and 6 August, "
+       "and the second legs were played on 12 August 2025.\n\n"
+       "The winners of the ties advanced to the play-off round. The losers of the Champions Path were transferred to the "
+       "[Europa League play-off round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#Play-off_round). "
+       "The losers of the League Path were transferred to the "
+       "[Europa League league phase](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#League_phase).",
 }
 
 SEEDED = ['che','liv','mci','bay','bar','tot','spo','ars']

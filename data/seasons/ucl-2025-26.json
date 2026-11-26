@@ -980,6 +980,7 @@
    "type": "qualifying",
    "name": "Third qualifying round",
    "short": "Q3",
+   "intro": "The draw for the third qualifying round was held on 21 July 2025. The first legs were played on 5 and 6 August, and the second legs were played on 12 August 2025.\n\nThe winners of the ties advanced to the play-off round. The losers of the Champions Path were transferred to the [Europa League play-off round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#Play-off_round). The losers of the League Path were transferred to the [Europa League league phase](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#League_phase).",
    "ties": [
     {
      "path": "champions",
