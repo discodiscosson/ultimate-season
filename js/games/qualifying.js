@@ -275,7 +275,7 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         if (t === tie.winner) cls.push('w');
         if (pick === t) tick = `<span class="tick ${t === tie.winner ? 'ok' : 'no'}">${t === tie.winner ? '✓' : '✗'}</span>`;
         if (!fin && marked) { cls.push('marked'); tick += '<span class="trophy">🏆</span>'; }
-        if (fin) {
+        if (fin && hasFinalists(r)) { // final badges only belong to the "who has played in a final?" round
           const years = T[t].finals || [];
           if (years.length) badge = `<span class="badge ${marked ? 'ok' : 'miss'}" title="European Cup / Champions League final">🏆 ${years.length > 3 ? `${years.length} finals` : years.join(', ')}${marked ? ' ✓' : ''}</span>`;
           else if (marked) badge = '<span class="badge no">✗ No final</span>';
