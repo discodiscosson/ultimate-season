@@ -677,6 +677,158 @@
    "qar",
    "paf",
    "kai"
+  ],
+  "matchdays": [
+   {
+    "n": 1,
+    "name": "Matchday 1",
+    "matches": [
+     {
+      "home": "ath",
+      "away": "ars",
+      "score": [
+       0,
+       2
+      ]
+     },
+     {
+      "home": "psv",
+      "away": "usg",
+      "score": [
+       1,
+       3
+      ]
+     },
+     {
+      "home": "juv",
+      "away": "bvb",
+      "score": [
+       4,
+       4
+      ]
+     },
+     {
+      "home": "rma",
+      "away": "om",
+      "score": [
+       2,
+       1
+      ]
+     },
+     {
+      "home": "ben",
+      "away": "qar",
+      "score": [
+       2,
+       3
+      ]
+     },
+     {
+      "home": "tot",
+      "away": "vil",
+      "score": [
+       1,
+       0
+      ]
+     },
+     {
+      "home": "oly",
+      "away": "paf",
+      "score": [
+       0,
+       0
+      ]
+     },
+     {
+      "home": "sla",
+      "away": "bod",
+      "score": [
+       2,
+       2
+      ]
+     },
+     {
+      "home": "aja",
+      "away": "int",
+      "score": [
+       0,
+       2
+      ]
+     },
+     {
+      "home": "bay",
+      "away": "che",
+      "score": [
+       3,
+       1
+      ]
+     },
+     {
+      "home": "liv",
+      "away": "atm",
+      "score": [
+       3,
+       2
+      ]
+     },
+     {
+      "home": "psg",
+      "away": "ata",
+      "score": [
+       4,
+       0
+      ]
+     },
+     {
+      "home": "bru",
+      "away": "mon",
+      "score": [
+       4,
+       1
+      ]
+     },
+     {
+      "home": "cop",
+      "away": "b04",
+      "score": [
+       2,
+       2
+      ]
+     },
+     {
+      "home": "sge",
+      "away": "gal",
+      "score": [
+       5,
+       1
+      ]
+     },
+     {
+      "home": "mci",
+      "away": "nap",
+      "score": [
+       2,
+       0
+      ]
+     },
+     {
+      "home": "new",
+      "away": "bar",
+      "score": [
+       1,
+       2
+      ]
+     },
+     {
+      "home": "spo",
+      "away": "kai",
+      "score": [
+       4,
+       1
+      ]
+     }
+    ]
+   }
   ]
  },
  "leaguePosition": {

@@ -44,6 +44,17 @@ CITY = {
  'gal':('Istanbul',41.103,28.991),'sla':('Prague',50.068,14.471),'oly':('Piraeus',37.946,23.664),'cop':('Copenhagen',55.703,12.572),
  'bod':('Bodø',67.276,14.383),'qar':('Baku',40.430,49.920),'paf':('Paphos',34.772,32.424),'kai':('Almaty',43.240,76.920),
 }
+# League phase results: (home, home goals, away goals, away). Line-ups go in LINEUPS (see below) when added.
+MATCHDAYS = [
+ (1, 'Matchday 1', [
+  ('ath',0,2,'ars'),('psv',1,3,'usg'),('juv',4,4,'bvb'),('rma',2,1,'om'),('ben',2,3,'qar'),('tot',1,0,'vil'),
+  ('oly',0,0,'paf'),('sla',2,2,'bod'),('aja',0,2,'int'),('bay',3,1,'che'),('liv',3,2,'atm'),('psg',4,0,'ata'),
+  ('bru',4,1,'mon'),('cop',2,2,'b04'),('sge',5,1,'gal'),('mci',2,0,'nap'),('new',1,2,'bar'),('spo',4,1,'kai')]),
+]
+# Starting XIs per match, keyed by (matchday, home, away): {'home': [11 names], 'away': [11 names]}, goalkeeper first.
+# Empty for now: the Missing XI game shows a placeholder until a match has line-ups.
+LINEUPS = {}
+
 LEAGUE_TEAMS = ['liv','ars','mci','che','new','tot','rma','bar','atm','ath','vil','nap','int','juv','ata',
  'bay','b04','bvb','sge','psg','om','mon','psv','aja','spo','ben','usg','bru','gal','sla','oly','cop','bod','qar','paf','kai']
 # European Cup / Champions League finals played (years of the final). Only teams with at least one final are listed.
@@ -145,7 +156,9 @@ season = {
  'teams':{k:{'name':v[0],'country':v[1], **({'finals':FINALS[k]} if k in FINALS else {}), **({'rivals':RIVALS[k]} if k in RIVALS else {}),
               **({'city':CITY[k][0],'lat':CITY[k][1],'lon':CITY[k][2]} if k in CITY else {})}
           for k,v in TEAMS.items()},
- 'leaguePhase':{'teams':LEAGUE_TEAMS},
+ 'leaguePhase':{'teams':LEAGUE_TEAMS,'matchdays':[{'n':n,'name':name,'matches':[
+     {'home':h,'away':a,'score':[hg,ag], **({'lineups':LINEUPS[(n,h,a)]} if (n,h,a) in LINEUPS else {})} for h,hg,ag,a in ms]}
+   for n,name,ms in MATCHDAYS]},
  'leaguePosition':POS,
  'stages':[{'id':i,'type':'qualifying','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in Q]
          +[{'id':i,'type':'knockout','name':n,'short':s,**({'intro':INTROS[i]} if i in INTROS else {}),'ties':t} for i,n,s,t in KO],
