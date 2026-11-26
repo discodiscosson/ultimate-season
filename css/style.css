@@ -137,7 +137,8 @@ button.ok { font: inherit; font-weight: 700; border: 0; border-radius: 8px; padd
 .flag-none { background: var(--line); }
 .lb { text-align: left; }
 .lb li { display: flex; align-items: center; gap: 10px; }
-.lb li .nm { flex: 1; }
+.lb li .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb { overflow-x: hidden; }
 
 /* Country rounds: results-table layout */
 .mtable { display: grid; gap: 6px; }

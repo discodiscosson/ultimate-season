@@ -4,13 +4,13 @@ import { countryName, exactCountry, matchCountry, suggestCountries } from './cou
 import { clubCountry, exactClub, matchClub, suggestClubs } from './clubs.js';
 import { esc } from './util.js';
 import { flagHTML } from './flags.js';
-import { playerClub, searchPlayers } from './players.js';
+import { searchPlayers } from './players.js';
 
 const SOURCES = {
   country: { suggest: suggestCountries, exact: exactCountry, match: matchCountry, name: countryName, sub: () => '', icon: (c) => flagHTML(c), placeholder: 'Country' },
   club: { suggest: suggestClubs, exact: exactClub, match: matchClub, name: (c) => c, sub: (c) => countryName(clubCountry(c)), icon: (c) => flagHTML(clubCountry(c)), placeholder: 'Club' },
   // Players: suggestions come from a search (season data + the Guess the Career database); any typed name is a valid answer
-  player: { search: searchPlayers, free: true, exact: (v) => v.trim() || null, match: (v) => v.trim() || null, name: (c) => c, sub: playerClub, placeholder: 'Player' },
+  player: { search: searchPlayers, free: true, exact: (v) => v.trim() || null, match: (v) => v.trim() || null, name: (c) => c, sub: () => '', placeholder: 'Player' },
 };
 const MSG = { country: 'Pick a country from the list', club: 'Pick a club from the list', player: '' };
 const safeId = (key) => String(key).replace(/[^a-zA-Z0-9_-]/g, '_');
