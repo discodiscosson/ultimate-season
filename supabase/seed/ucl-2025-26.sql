@@ -1,62 +1,62 @@
 begin;
 
-insert into ultimate_season.countries (code, name_sv, aliases) values
-  ('ALB', 'Albanien', array['albania']::text[]),
+insert into ultimate_season.countries (code, name, aliases) values
+  ('ALB', 'Albania', array['albanien']::text[]),
   ('AND', 'Andorra', '{}'::text[]),
-  ('ARM', 'Armenien', array['armenia']::text[]),
-  ('AUT', 'Österrike', array['austria']::text[]),
-  ('AZE', 'Azerbajdzjan', array['azerbaijan','azerbajdjan','azerbajdsjan']::text[]),
-  ('BEL', 'Belgien', array['belgium']::text[]),
-  ('BIH', 'Bosnien och Hercegovina', array['bosnien','bosnia','bosnia and herzegovina','bosnien hercegovina','bosnia herzegovina']::text[]),
+  ('ARM', 'Armenia', array['armenien']::text[]),
+  ('AUT', 'Austria', array['österrike']::text[]),
+  ('AZE', 'Azerbaijan', array['azerbajdzjan','azerbajdjan','azerbaidjan']::text[]),
+  ('BEL', 'Belgium', array['belgien']::text[]),
+  ('BIH', 'Bosnia and Herzegovina', array['bosnia','bosnia herzegovina','bosnien och hercegovina','bosnien']::text[]),
   ('BLR', 'Belarus', array['vitryssland']::text[]),
-  ('BUL', 'Bulgarien', array['bulgaria']::text[]),
-  ('CRO', 'Kroatien', array['croatia']::text[]),
-  ('CYP', 'Cypern', array['cyprus']::text[]),
-  ('CZE', 'Tjeckien', array['czechia','czech republic']::text[]),
-  ('DEN', 'Danmark', array['denmark']::text[]),
+  ('BUL', 'Bulgaria', array['bulgarien']::text[]),
+  ('CRO', 'Croatia', array['kroatien']::text[]),
+  ('CYP', 'Cyprus', array['cypern']::text[]),
+  ('CZE', 'Czechia', array['czech republic','tjeckien']::text[]),
+  ('DEN', 'Denmark', array['danmark']::text[]),
   ('ENG', 'England', '{}'::text[]),
-  ('ESP', 'Spanien', array['spain']::text[]),
-  ('EST', 'Estland', array['estonia']::text[]),
+  ('ESP', 'Spain', array['spanien']::text[]),
+  ('EST', 'Estonia', array['estland']::text[]),
   ('FIN', 'Finland', '{}'::text[]),
-  ('FRA', 'Frankrike', array['france']::text[]),
-  ('FRO', 'Färöarna', array['faroe islands','faroes','faroe']::text[]),
-  ('GEO', 'Georgien', array['georgia']::text[]),
-  ('GER', 'Tyskland', array['germany']::text[]),
+  ('FRA', 'France', array['frankrike']::text[]),
+  ('FRO', 'Faroe Islands', array['faroes','faroe','färöarna']::text[]),
+  ('GEO', 'Georgia', array['georgien']::text[]),
+  ('GER', 'Germany', array['tyskland']::text[]),
   ('GIB', 'Gibraltar', '{}'::text[]),
-  ('GRE', 'Grekland', array['greece']::text[]),
-  ('HUN', 'Ungern', array['hungary']::text[]),
-  ('IRL', 'Irland', array['ireland','republic of ireland','eire']::text[]),
-  ('ISL', 'Island', array['iceland']::text[]),
+  ('GRE', 'Greece', array['grekland']::text[]),
+  ('HUN', 'Hungary', array['ungern']::text[]),
+  ('IRL', 'Ireland', array['republic of ireland','eire','irland']::text[]),
+  ('ISL', 'Iceland', array['island']::text[]),
   ('ISR', 'Israel', '{}'::text[]),
-  ('ITA', 'Italien', array['italy']::text[]),
-  ('KAZ', 'Kazakstan', array['kazakhstan','kazachstan']::text[]),
+  ('ITA', 'Italy', array['italien']::text[]),
+  ('KAZ', 'Kazakhstan', array['kazakstan']::text[]),
   ('KOS', 'Kosovo', '{}'::text[]),
   ('LIE', 'Liechtenstein', '{}'::text[]),
-  ('LTU', 'Litauen', array['lithuania']::text[]),
-  ('LUX', 'Luxemburg', array['luxembourg']::text[]),
-  ('LVA', 'Lettland', array['latvia']::text[]),
-  ('MDA', 'Moldavien', array['moldova']::text[]),
-  ('MKD', 'Nordmakedonien', array['makedonien','north macedonia','macedonia']::text[]),
+  ('LTU', 'Lithuania', array['litauen']::text[]),
+  ('LUX', 'Luxembourg', array['luxemburg']::text[]),
+  ('LVA', 'Latvia', array['lettland']::text[]),
+  ('MDA', 'Moldova', array['moldavien']::text[]),
+  ('MKD', 'North Macedonia', array['macedonia','nordmakedonien','makedonien']::text[]),
   ('MLT', 'Malta', '{}'::text[]),
   ('MNE', 'Montenegro', '{}'::text[]),
-  ('NED', 'Nederländerna', array['holland','netherlands']::text[]),
-  ('NIR', 'Nordirland', array['northern ireland']::text[]),
-  ('NOR', 'Norge', array['norway']::text[]),
-  ('POL', 'Polen', array['poland']::text[]),
+  ('NED', 'Netherlands', array['holland','nederländerna']::text[]),
+  ('NIR', 'Northern Ireland', array['nordirland']::text[]),
+  ('NOR', 'Norway', array['norge']::text[]),
+  ('POL', 'Poland', array['polen']::text[]),
   ('POR', 'Portugal', '{}'::text[]),
-  ('ROU', 'Rumänien', array['romania']::text[]),
-  ('RUS', 'Ryssland', array['russia']::text[]),
-  ('SCO', 'Skottland', array['scotland']::text[]),
+  ('ROU', 'Romania', array['rumänien']::text[]),
+  ('RUS', 'Russia', array['ryssland']::text[]),
+  ('SCO', 'Scotland', array['skottland']::text[]),
   ('SMR', 'San Marino', '{}'::text[]),
-  ('SRB', 'Serbien', array['serbia']::text[]),
-  ('SUI', 'Schweiz', array['switzerland']::text[]),
-  ('SVK', 'Slovakien', array['slovakia']::text[]),
-  ('SVN', 'Slovenien', array['slovenia']::text[]),
-  ('SWE', 'Sverige', array['sweden']::text[]),
-  ('TUR', 'Turkiet', array['turkey','turkiye']::text[]),
-  ('UKR', 'Ukraina', array['ukraine']::text[]),
+  ('SRB', 'Serbia', array['serbien']::text[]),
+  ('SUI', 'Switzerland', array['schweiz']::text[]),
+  ('SVK', 'Slovakia', array['slovakien']::text[]),
+  ('SVN', 'Slovenia', array['slovenien']::text[]),
+  ('SWE', 'Sweden', array['sverige']::text[]),
+  ('TUR', 'Turkey', array['turkiye','turkiet']::text[]),
+  ('UKR', 'Ukraine', array['ukraina']::text[]),
   ('WAL', 'Wales', '{}'::text[])
-on conflict (code) do update set name_sv = excluded.name_sv, aliases = excluded.aliases;
+on conflict (code) do update set name = excluded.name, aliases = excluded.aliases;
 
 insert into ultimate_season.competitions (id, sport, name) values ('ucl', 'football', 'Champions League') on conflict (id) do nothing;
 
@@ -215,10 +215,10 @@ insert into ultimate_season.season_teams (season_id, team_id, league_position) v
   ('ucl-2025-26', 'ars', 1)
 ;
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q1', 'qualifying', 'Första kvalomgången', 'Kval 1', 0);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 0, null, 'zal', 'ham', null, null, 'ham', '2–2', '2–0, 0–2 e.f.', 'Hamrun Spartans vann 11–10 på straffar');
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q1', 'qualifying', 'First qualifying round', 'Q1', 0);
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 0, null, 'zal', 'ham', null, null, 'ham', '2–2', '2–0, 0–2 a.e.t.', 'Hamrun Spartans won 11–10 on penalties');
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 1, null, 'kup', 'mil', null, null, 'kup', '1–0', '1–0, 0–0', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 2, null, 'tns', 'shk', null, null, 'shk', '1–2', '0–0, 1–2 e.f.', null);
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 2, null, 'tns', 'shk', null, null, 'shk', '1–2', '0–0, 1–2 a.e.t.', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 3, null, 'ibe', 'mal', null, null, 'mal', '2–6', '1–3, 1–3', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 4, null, 'lvd', 'rfs', null, null, 'rfs', '0–2', '0–1, 0–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 5, null, 'dri', 'dif', null, null, 'dri', '4–2', '1–0, 3–2', null);
@@ -229,9 +229,9 @@ insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 10, null, 'vir', 'zri', null, null, 'zri', '1–4', '0–2, 1–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 11, null, 'oli', 'kai', null, null, 'kai', '1–3', '1–1, 0–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 12, null, 'noa', 'bud', null, null, 'noa', '3–2', '1–0, 2–2', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 13, null, 'lud', 'din', null, null, 'lud', '3–2', '1–0, 2–2 e.f.', null);
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q1'), 13, null, 'lud', 'din', null, null, 'lud', '3–2', '1–0, 2–2 a.e.t.', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q2', 'qualifying', 'Andra kvalomgången', 'Kval 2', 1);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q2', 'qualifying', 'Second qualifying round', 'Q2', 1);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 0, 'champions', 'rfs', 'mal', null, null, 'mal', '1–5', '1–4, 0–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 1, 'champions', 'ham', 'dyn', null, null, 'dyn', '0–6', '0–3, 0–3', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 2, 'champions', 'paf', 'mac', null, null, 'paf', '2–1', '1–1, 1–0', null);
@@ -239,7 +239,7 @@ insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 4, 'champions', 'noa', 'fer', null, null, 'fer', '4–6', '1–2, 3–4', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 5, 'champions', 'lec', 'bre', null, null, 'lec', '8–1', '7–1, 1–0', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 6, 'champions', 'cop', 'dri', null, null, 'cop', '3–0', '2–0, 1–0', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 7, 'champions', 'rij', 'lud', null, null, 'lud', '1–3', '0–0, 1–3 e.f.', null);
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 7, 'champions', 'rij', 'lud', null, null, 'lud', '1–3', '0–0, 1–3 a.e.t.', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 8, 'champions', 'shk', 'fcs', null, null, 'shk', '3–1', '1–0, 2–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 9, 'champions', 'slo', 'zri', null, null, 'slo', '6–2', '4–0, 2–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 10, 'champions', 'she', 'qar', null, null, 'qar', '0–4', '0–3, 0–1', null);
@@ -248,9 +248,9 @@ insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 13, 'league', 'plz', 'ser', null, null, 'plz', '3–2', '0–1, 3–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q2'), 14, 'league', 'ran', 'pan', null, null, 'ran', '3–1', '2–0, 1–1', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q3', 'qualifying', 'Tredje kvalomgången', 'Kval 3', 2);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q3', 'qualifying', 'Third qualifying round', 'Q3', 2);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 0, 'champions', 'mal', 'cop', null, null, 'cop', '0–5', '0–0, 0–5', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 1, 'champions', 'kai', 'slo', null, null, 'kai', '1–1', '1–0, 0–1 e.f.', 'Kairat vann 4–3 på straffar');
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 1, 'champions', 'kai', 'slo', null, null, 'kai', '1–1', '1–0, 0–1 a.e.t.', 'Kairat won 4–3 on penalties');
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 2, 'champions', 'lec', 'rsb', null, null, 'rsb', '2–4', '1–3, 1–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 3, 'champions', 'lud', 'fer', null, null, 'fer', '0–3', '0–0, 0–3', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 4, 'champions', 'dyn', 'paf', null, null, 'paf', '0–3', '0–1, 0–2', null);
@@ -260,18 +260,18 @@ insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 8, 'league', 'nic', 'ben', null, null, 'ben', '0–4', '0–2, 0–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q3'), 9, 'league', 'fey', 'fen', null, null, 'fen', '4–6', '2–1, 2–5', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q_po', 'qualifying', 'Kvalets playoff', 'Playoff', 3);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'q_po', 'qualifying', 'Play-off round', 'PO', 3);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 0, 'champions', 'fer', 'qar', null, null, 'qar', '4–5', '1–3, 3–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 1, 'champions', 'rsb', 'paf', null, null, 'paf', '2–3', '1–2, 1–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 2, 'champions', 'bod', 'stu', null, null, 'bod', '6–2', '5–0, 1–2', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 3, 'champions', 'cel', 'kai', null, null, 'kai', '0–0', '0–0, 0–0 e.f.', 'Kairat vann 3–2 på straffar');
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 3, 'champions', 'cel', 'kai', null, null, 'kai', '0–0', '0–0, 0–0 a.e.t.', 'Kairat won 3–2 on penalties');
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 4, 'champions', 'bas', 'cop', null, null, 'cop', '1–3', '1–1, 0–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 5, 'league', 'fen', 'ben', null, null, 'ben', '0–1', '0–0, 0–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'q_po'), 6, 'league', 'ran', 'bru', null, null, 'bru', '1–9', '1–3, 0–6', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'ko_po', 'knockout', 'Utslagsfasens playoff', 'Playoff', 4);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'ko_po', 'knockout', 'Knockout phase play-offs', 'KO PO', 4);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 0, null, 'mon', 'psg', null, null, 'psg', '4–5', '2–3, 2–2', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 1, null, 'gal', 'juv', null, null, 'gal', '7–5', '5–2, 2–3 e.f.', null);
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 1, null, 'gal', 'juv', null, null, 'gal', '7–5', '5–2, 2–3 a.e.t.', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 2, null, 'ben', 'rma', null, null, 'rma', '1–3', '0–1, 1–2', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 3, null, 'bvb', 'ata', null, null, 'ata', '3–4', '2–0, 1–4', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 4, null, 'qar', 'new', null, null, 'new', '3–9', '1–6, 2–3', null);
@@ -279,27 +279,27 @@ insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 6, null, 'bod', 'int', null, null, 'bod', '5–2', '3–1, 2–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'ko_po'), 7, null, 'oly', 'b04', null, null, 'b04', '0–2', '0–2, 0–0', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'r16', 'knockout', 'Åttondelsfinal', '1/8', 5);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'r16', 'knockout', 'Round of 16', 'R16', 5);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 0, null, 'psg', 'che', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 0), null, 'psg', '8–2', '5–2, 3–0', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 1, null, 'gal', 'liv', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 1), null, 'liv', '1–4', '1–0, 0–4', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 2, null, 'rma', 'mci', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 2), null, 'rma', '5–1', '3–0, 2–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 3, null, 'ata', 'bay', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 3), null, 'bay', '2–10', '1–6, 1–4', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 4, null, 'new', 'bar', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 4), null, 'bar', '3–8', '1–1, 2–7', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 5, null, 'atm', 'tot', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 5), null, 'atm', '7–5', '5–2, 2–3', null);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 6, null, 'bod', 'spo', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 6), null, 'spo', '3–5', '3–0, 0–5 e.f.', null);
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 6, null, 'bod', 'spo', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 6), null, 'spo', '3–5', '3–0, 0–5 a.e.t.', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'r16'), 7, null, 'b04', 'ars', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'ko_po' and t.sort_order = 7), null, 'ars', '1–3', '1–1, 0–2', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'qf', 'knockout', 'Kvartsfinal', '1/4', 6);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'qf', 'knockout', 'Quarter-finals', 'QF', 6);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'qf'), 0, null, 'psg', 'liv', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 0), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 1), 'psg', '4–0', '2–0, 2–0', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'qf'), 1, null, 'rma', 'bay', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 2), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 3), 'bay', '4–6', '1–2, 3–4', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'qf'), 2, null, 'bar', 'atm', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 4), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 5), 'atm', '2–3', '0–2, 2–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'qf'), 3, null, 'spo', 'ars', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 6), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'r16' and t.sort_order = 7), 'ars', '0–1', '0–1, 0–0', null);
 
-insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'sf', 'knockout', 'Semifinal', 'Semi', 7);
+insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'sf', 'knockout', 'Semi-finals', 'SF', 7);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'sf'), 0, null, 'psg', 'bay', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'qf' and t.sort_order = 0), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'qf' and t.sort_order = 1), 'psg', '6–5', '5–4, 1–1', null);
 insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'sf'), 1, null, 'atm', 'ars', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'qf' and t.sort_order = 2), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'qf' and t.sort_order = 3), 'ars', '1–2', '1–1, 0–1', null);
 
 insert into ultimate_season.stages (season_id, code, type, name, short_name, sort_order) values ('ucl-2025-26', 'final', 'knockout', 'Final', 'Final', 8);
-insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'final'), 0, null, 'psg', 'ars', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'sf' and t.sort_order = 0), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'sf' and t.sort_order = 1), 'psg', '1–1', null, 'PSG vann 4–3 på straffar');
+insert into ultimate_season.ties (stage_id, sort_order, path, team1, team2, team1_from, team2_from, winner, agg_score, legs, note) values ((select id from ultimate_season.stages where season_id = 'ucl-2025-26' and code = 'final'), 0, null, 'psg', 'ars', (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'sf' and t.sort_order = 0), (select t.id from ultimate_season.ties t join ultimate_season.stages s on s.id = t.stage_id where s.season_id = 'ucl-2025-26' and s.code = 'sf' and t.sort_order = 1), 'psg', '1–1', null, 'PSG won 4–3 on penalties');
 
 commit;

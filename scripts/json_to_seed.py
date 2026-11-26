@@ -1,5 +1,5 @@
-# Gör seed-SQL av en säsongs-JSON, för första importen till Supabase.
-# Användning (från repots rot): python3 scripts/json_to_seed.py ucl-2025-26 > supabase/seed/ucl-2025-26.sql
+# Turns a season JSON into seed SQL for importing into Supabase.
+# Usage (from the repo root): python3 scripts/json_to_seed.py ucl-2025-26 > supabase/seed/ucl-2025-26.sql
 import json, re, sys
 
 sid = sys.argv[1]
@@ -11,9 +11,9 @@ q = lambda v: 'null' if v is None else "'" + str(v).replace("'", "''") + "'"
 arr = lambda xs: "array[" + ",".join(q(x) for x in xs) + "]::text[]" if xs else "'{}'::text[]"
 out = ['begin;', '']
 
-out.append('insert into ultimate_season.countries (code, name_sv, aliases) values')
+out.append('insert into ultimate_season.countries (code, name, aliases) values')
 out.append(',\n'.join(f"  ({q(c)}, {q(n[0])}, {arr(n[1:])})" for c, n in COUNTRIES.items()))
-out.append('on conflict (code) do update set name_sv = excluded.name_sv, aliases = excluded.aliases;\n')
+out.append('on conflict (code) do update set name = excluded.name, aliases = excluded.aliases;\n')
 
 c = S['competition']
 out.append(f"insert into ultimate_season.competitions (id, sport, name) values ({q(c['id'])}, {q(c['sport'])}, {q(c['name'])}) on conflict (id) do nothing;\n")
@@ -33,7 +33,7 @@ out.append('insert into ultimate_season.season_teams (season_id, team_id, league
 out.append(',\n'.join(f"  ({q(sid)}, {q(k)}, {pos.get(k, 'null')})" for k in S['teams']))
 out.append(';\n')
 
-# Lös upp vilka lag som faktiskt möttes i varje plats
+# Resolve which teams actually met in each slot
 winners = {st['id']: [t['winner'] for t in st['ties']] for st in S['stages']}
 def team_of(slot):
     if 'team' in slot: return slot['team']

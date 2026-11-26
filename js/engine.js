@@ -1,5 +1,5 @@
-// Säsongsmotorn: väljer vilka spel säsongens data räcker till och kör dem i ordning.
-// Ett nytt spel läggs till genom att skapa en modul i js/games/ med meta, available() och play() och lägga in den här.
+// The season engine: picks the games the season's data supports and runs them in order.
+// To add a game, create a module in js/games/ exporting meta, available() and play(), and register it here.
 import * as finalHost from './games/final-host.js';
 import * as qualifying from './games/qualifying.js';
 import * as bracket from './games/bracket.js';

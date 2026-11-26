@@ -1,8 +1,8 @@
-// Slutspelsträdet. easy: direkt facit och rätt lag går vidare. medium: dolt facit men ett antal kontroller
-// som visar svaret och skickar rätt lag vidare. hard: dina val går vidare, allt rättas i slutet.
+// The knockout bracket. easy: instant answers and the right team advances. medium: hidden answers but a number of checks
+// that reveal the answer and send the right team through. hard: your picks advance, everything is marked at the end.
 import { esc, tieResult } from '../lib/util.js';
 
-export const meta = { id: 'bracket', title: 'Slutspelet', short: 'Slutspel' };
+export const meta = { id: 'bracket', title: 'Knockout phase', short: 'Knockouts' };
 export const available = (season) => season.stages.some((s) => s.type === 'knockout');
 
 const CHECKS = 5;
@@ -43,10 +43,10 @@ export function play({ el, season, difficulty }) {
       let res = '';
       if (rev) {
         const ok = pick === real, hit = RES[key(a, b)];
-        const txt = hit && hit.tie === KS[r].ties[i] ? tieResult(hit.tie, T, hit.a, hit.b) : `Mötet spelades aldrig. ${nm(real)} gick vidare härifrån.`;
-        res = `<div class="res"><b class="${ok ? 'ok' : 'no'}">${ok ? `Rätt, +${PTS[r]} p` : 'Fel'}.</b> ${esc(txt)}</div>`;
+        const txt = hit && hit.tie === KS[r].ties[i] ? tieResult(hit.tie, T, hit.a, hit.b) : `This tie never happened. ${nm(real)} went through from here.`;
+        res = `<div class="res"><b class="${ok ? 'ok' : 'no'}">${ok ? `Correct, +${PTS[r]} pts` : 'Wrong'}.</b> ${esc(txt)}</div>`;
       } else if (difficulty === 'medium') {
-        res = `<button class="chk" data-act="b-check" data-r="${r}" data-i="${i}" ${pick && S.checks > 0 ? '' : 'disabled'}>Kolla svaret</button>`;
+        res = `<button class="chk" data-act="b-check" data-r="${r}" data-i="${i}" ${pick && S.checks > 0 ? '' : 'disabled'}>Check answer</button>`;
       }
       return `<div class="tie">${teamBtn(r, i, a, pick, rev, real)}${teamBtn(r, i, b, pick, rev, real)}${res}</div>`;
     }
@@ -54,7 +54,7 @@ export function play({ el, season, difficulty }) {
     const slotTeam = (t) => `<div class="st${t ? '' : ' unk'}">${t ? esc(nm(t)) : '?'}</div>`;
 
     function treeHTML(r, ties) {
-      let h = `<div class="thead"><span>${esc(KS[r].name)}</span><span></span><span>${r < LAST ? esc(KS[r + 1].name) : 'Mästare'}</span></div>`;
+      let h = `<div class="thead"><span>${esc(KS[r].name)}</span><span></span><span>${r < LAST ? esc(KS[r + 1].name) : 'Champion'}</span></div>`;
       if (r === LAST) {
         h += ties.map((t, i) => `<div class="grp"><div class="c1">${t}</div><div class="conn"></div><div class="slot">${slotTeam(adv(r, i))}</div></div>`).join('');
       } else {
@@ -77,22 +77,22 @@ export function play({ el, season, difficulty }) {
       const all = ms.every((_, i) => row[i]);
       const left = ms.filter((_, i) => !row[i]).length;
       const intro = {
-        easy: 'Välj vilket lag som gick vidare. Du ser svaret direkt, och rätt lag går alltid vidare.',
-        medium: `Välj vilket lag som gick vidare. Du har ${CHECKS} kontroller för hela slutspelet som visar svaret och skickar rätt lag vidare.`,
-        hard: 'Välj vilket lag som gick vidare. Dina val går vidare, och allt rättas när finalen är tippad.',
+        easy: 'Pick which team went through. You see the answer right away, and the right team always advances.',
+        medium: `Pick which team went through. You have ${CHECKS} checks for the whole knockout phase that reveal the answer and send the right team through.`,
+        hard: 'Pick which team went through. Your picks advance, and everything is marked once the final is picked.',
       }[difficulty];
-      const status = difficulty === 'easy' ? `${points()} p` : difficulty === 'medium' ? `${S.checks} av ${CHECKS} kontroller kvar` : '';
+      const status = difficulty === 'easy' ? `${points()} pts` : difficulty === 'medium' ? `${S.checks} of ${CHECKS} checks left` : '';
       return `<div class="bar"><h2>${esc(KS[r].name)}</h2><span class="score">${status}</span></div>
-        <p class="hint">${r === 0 ? intro + ' Siffran framför laget är placeringen i ligafasen.' : ''}</p>
+        <p class="hint">${r === 0 ? intro + ' The number before each team is its league phase position.' : ''}</p>
         ${treeHTML(r, ties)}
-        <div class="foot"><span class="hint" style="margin:0">${left ? `${left} kvar att tippa` : ''}</span>
-        <button class="btn" data-act="b-next" ${all ? '' : 'disabled'}>${r < LAST ? 'Nästa runda' : 'Se resultat'}</button></div>`;
+        <div class="foot"><span class="hint" style="margin:0">${left ? `${left} left to pick` : ''}</span>
+        <button class="btn" data-act="b-next" ${all ? '' : 'disabled'}>${r < LAST ? 'Next round' : 'See results'}</button></div>`;
     }
 
     function lines() {
       return KS.map((st, k) => {
         const c = S.picks[k].filter((t, i) => t === REAL[k][i]).length;
-        return [st.name, `${c}/${st.ties.length} rätt`];
+        return [st.name, `${c}/${st.ties.length} correct`];
       });
     }
 
@@ -103,15 +103,15 @@ export function play({ el, season, difficulty }) {
         detail += `<h3 class="path">${esc(st.name)}</h3>` + ms.map(([a, b], i) => {
           const pick = S.picks[k][i], real = REAL[k][i], ok = pick === real;
           const both = !ok && a !== real && b !== real;
-          return `<div class="item"><div class="m">${esc(nm(a))} – ${esc(nm(b))}${both ? '<span class="tag">Båda lagen fel</span>' : ''}${S.checked[k][i] ? '<span class="tag info">Kontrollerad</span>' : ''}</div>
-            <div class="p">Ditt val: ${esc(nm(pick))}${ok ? '' : `. Gick vidare: ${esc(nm(real))}`}</div>
-            <div class="pt ${ok ? 'ok' : 'no'}">${ok ? '+' + PTS[k] : '0'} p</div></div>`;
+          return `<div class="item"><div class="m">${esc(nm(a))} – ${esc(nm(b))}${both ? '<span class="tag">Both teams wrong</span>' : ''}${S.checked[k][i] ? '<span class="tag info">Checked</span>' : ''}</div>
+            <div class="p">Your pick: ${esc(nm(pick))}${ok ? '' : `. Went through: ${esc(nm(real))}`}</div>
+            <div class="pt ${ok ? 'ok' : 'no'}">${ok ? '+' + PTS[k] : '0'} pts</div></div>`;
         }).join('');
       });
-      return `<div class="bar"><h2>Slutspelet klart</h2><span class="score">${points()} / ${MAX} p</span></div>
-        <p class="hint">Mästare: ${esc(nm(REAL[LAST][0]))}. Din mästare: ${esc(nm(S.picks[LAST][0]))}.</p>
+      return `<div class="bar"><h2>Knockout phase done</h2><span class="score">${points()} / ${MAX} pts</span></div>
+        <p class="hint">Champion: ${esc(nm(REAL[LAST][0]))}. Your champion: ${esc(nm(S.picks[LAST][0]))}.</p>
         <div class="rounds">${lines().map(([a, b]) => `<div class="rrow"><span>${esc(a)}</span><span>${esc(b)}</span></div>`).join('')}</div>
-        <div class="foot"><span></span><button class="btn" data-act="b-done">Se säsongens resultat</button></div>${detail}`;
+        <div class="foot"><span></span><button class="btn" data-act="b-done">See season results</button></div>${detail}`;
     }
 
     function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); }

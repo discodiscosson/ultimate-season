@@ -1,5 +1,5 @@
-// Bygger en fristående HTML-fil med all kod och data inbäddad, för att testa utan server.
-// Användning: npm run preview  ->  dist/preview.html
+// Builds a standalone HTML file with all code and data inlined, for testing without a server.
+// Usage: npm run preview  ->  dist/preview.html
 import { build } from 'esbuild';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 
@@ -15,4 +15,4 @@ const html = (await readFile('index.html', 'utf8'))
   .replace('</body>', () => `<script>${js.replace(/<\/script/gi, '<\\/script')}</script>\n</body>`);
 await mkdir('dist', { recursive: true });
 await writeFile('dist/preview.html', html);
-console.log('Skrev dist/preview.html');
+console.log('Wrote dist/preview.html');

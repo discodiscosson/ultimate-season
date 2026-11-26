@@ -1,5 +1,5 @@
-// Svarsfält för "vilket land?" som används av flera spel.
-// easy: fyra svarsalternativ, medium: fritext med förslagslista, hard: fritext utan förslag.
+// Answer field for "which country?" shared by several games.
+// easy: four options, medium: free text with suggestions, hard: free text without suggestions.
 import { COUNTRIES, countryName, matchCountry } from './countries.js';
 import { esc, shuffle } from './util.js';
 
@@ -20,7 +20,7 @@ export function fieldHTML({ key, difficulty, options, draft, err, label }) {
     return `<div class="choices">${options.map((c) =>
       `<button class="choice" data-act="cf-choice" data-key="${esc(key)}" data-code="${c}">${esc(countryName(c))}</button>`).join('')}</div>`;
   }
-  return `<div><div class="inp"><input data-cf="${esc(key)}" value="${esc(draft || '')}" placeholder="Land" aria-label="${esc(label)}"
+  return `<div><div class="inp"><input data-cf="${esc(key)}" value="${esc(draft || '')}" placeholder="Country" aria-label="${esc(label)}"
     ${difficulty === 'medium' ? 'list="us-countries"' : ''} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done">
     <button class="ok" data-act="cf-submit" data-key="${esc(key)}">OK</button></div>${err ? `<div class="err">${esc(err)}</div>` : ''}</div>`;
 }
@@ -33,13 +33,13 @@ export function resultHTML(given, correct) {
 
 export const focusField = (root, key) => root.querySelector(`[data-cf="${CSS.escape(key)}"]`)?.focus();
 
-// Kopplar inmatning, Enter, OK-knapp och svarsalternativ. onAnswer(key, code) anropas med en giltig landskod.
+// Wires up typing, Enter, the OK button and options. onAnswer(key, code) is called with a valid country code.
 export function bindCountryField(root, state, onAnswer, rerender) {
   const submit = (key) => {
     const v = (state.drafts[key] || '').trim();
     if (!v) return;
     const code = matchCountry(v);
-    if (!code) { state.err[key] = 'Hittar inget land med det namnet. Prova igen.'; rerender(); focusField(root, key); return; }
+    if (!code) { state.err[key] = 'No country found with that name. Try again.'; rerender(); focusField(root, key); return; }
     delete state.err[key];
     onAnswer(key, code);
   };

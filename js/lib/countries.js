@@ -1,21 +1,21 @@
-// Länder: första namnet visas, resten är godkända alias (svenska och engelska).
+// Countries: the first name is displayed, the rest are accepted aliases (English and Swedish).
 export const COUNTRIES = {
-  ALB: ['Albanien', 'albania'], AND: ['Andorra'], ARM: ['Armenien', 'armenia'], AUT: ['Österrike', 'austria'],
-  AZE: ['Azerbajdzjan', 'azerbaijan', 'azerbajdjan', 'azerbajdsjan'], BEL: ['Belgien', 'belgium'],
-  BIH: ['Bosnien och Hercegovina', 'bosnien', 'bosnia', 'bosnia and herzegovina', 'bosnien hercegovina', 'bosnia herzegovina'],
-  BLR: ['Belarus', 'vitryssland'], BUL: ['Bulgarien', 'bulgaria'], CRO: ['Kroatien', 'croatia'], CYP: ['Cypern', 'cyprus'],
-  CZE: ['Tjeckien', 'czechia', 'czech republic'], DEN: ['Danmark', 'denmark'], ENG: ['England'], ESP: ['Spanien', 'spain'],
-  EST: ['Estland', 'estonia'], FIN: ['Finland'], FRA: ['Frankrike', 'france'], FRO: ['Färöarna', 'faroe islands', 'faroes', 'faroe'],
-  GEO: ['Georgien', 'georgia'], GER: ['Tyskland', 'germany'], GIB: ['Gibraltar'], GRE: ['Grekland', 'greece'],
-  HUN: ['Ungern', 'hungary'], IRL: ['Irland', 'ireland', 'republic of ireland', 'eire'], ISL: ['Island', 'iceland'],
-  ISR: ['Israel'], ITA: ['Italien', 'italy'], KAZ: ['Kazakstan', 'kazakhstan', 'kazachstan'], KOS: ['Kosovo'],
-  LIE: ['Liechtenstein'], LTU: ['Litauen', 'lithuania'], LUX: ['Luxemburg', 'luxembourg'], LVA: ['Lettland', 'latvia'],
-  MDA: ['Moldavien', 'moldova'], MKD: ['Nordmakedonien', 'makedonien', 'north macedonia', 'macedonia'], MLT: ['Malta'],
-  MNE: ['Montenegro'], NED: ['Nederländerna', 'holland', 'netherlands'], NIR: ['Nordirland', 'northern ireland'],
-  NOR: ['Norge', 'norway'], POL: ['Polen', 'poland'], POR: ['Portugal'], ROU: ['Rumänien', 'romania'],
-  RUS: ['Ryssland', 'russia'], SCO: ['Skottland', 'scotland'], SMR: ['San Marino'], SRB: ['Serbien', 'serbia'],
-  SUI: ['Schweiz', 'switzerland'], SVK: ['Slovakien', 'slovakia'], SVN: ['Slovenien', 'slovenia'], SWE: ['Sverige', 'sweden'],
-  TUR: ['Turkiet', 'turkey', 'turkiye'], UKR: ['Ukraina', 'ukraine'], WAL: ['Wales'],
+  ALB: ['Albania', 'albanien'], AND: ['Andorra'], ARM: ['Armenia', 'armenien'], AUT: ['Austria', 'österrike'],
+  AZE: ['Azerbaijan', 'azerbajdzjan', 'azerbajdjan', 'azerbaidjan'], BEL: ['Belgium', 'belgien'],
+  BIH: ['Bosnia and Herzegovina', 'bosnia', 'bosnia herzegovina', 'bosnien och hercegovina', 'bosnien'],
+  BLR: ['Belarus', 'vitryssland'], BUL: ['Bulgaria', 'bulgarien'], CRO: ['Croatia', 'kroatien'], CYP: ['Cyprus', 'cypern'],
+  CZE: ['Czechia', 'czech republic', 'tjeckien'], DEN: ['Denmark', 'danmark'], ENG: ['England'], ESP: ['Spain', 'spanien'],
+  EST: ['Estonia', 'estland'], FIN: ['Finland'], FRA: ['France', 'frankrike'], FRO: ['Faroe Islands', 'faroes', 'faroe', 'färöarna'],
+  GEO: ['Georgia', 'georgien'], GER: ['Germany', 'tyskland'], GIB: ['Gibraltar'], GRE: ['Greece', 'grekland'],
+  HUN: ['Hungary', 'ungern'], IRL: ['Ireland', 'republic of ireland', 'eire', 'irland'], ISL: ['Iceland', 'island'],
+  ISR: ['Israel'], ITA: ['Italy', 'italien'], KAZ: ['Kazakhstan', 'kazakstan'], KOS: ['Kosovo'],
+  LIE: ['Liechtenstein'], LTU: ['Lithuania', 'litauen'], LUX: ['Luxembourg', 'luxemburg'], LVA: ['Latvia', 'lettland'],
+  MDA: ['Moldova', 'moldavien'], MKD: ['North Macedonia', 'macedonia', 'nordmakedonien', 'makedonien'], MLT: ['Malta'],
+  MNE: ['Montenegro'], NED: ['Netherlands', 'holland', 'nederländerna'], NIR: ['Northern Ireland', 'nordirland'],
+  NOR: ['Norway', 'norge'], POL: ['Poland', 'polen'], POR: ['Portugal'], ROU: ['Romania', 'rumänien'],
+  RUS: ['Russia', 'ryssland'], SCO: ['Scotland', 'skottland'], SMR: ['San Marino'], SRB: ['Serbia', 'serbien'],
+  SUI: ['Switzerland', 'schweiz'], SVK: ['Slovakia', 'slovakien'], SVN: ['Slovenia', 'slovenien'], SWE: ['Sweden', 'sverige'],
+  TUR: ['Turkey', 'turkiye', 'turkiet'], UKR: ['Ukraine', 'ukraina'], WAL: ['Wales'],
 };
 
 export const countryName = (code) => COUNTRIES[code]?.[0] ?? code;
@@ -33,7 +33,7 @@ function lev(a, b) {
   return d[a.length][b.length];
 }
 
-// Returnerar landskod eller null. Exakt träff först, annars närmaste unika träff inom en liten stavfelsmarginal.
+// Returns a country code or null. Exact match first, otherwise the closest unique match within a small typo margin.
 export function matchCountry(input) {
   const n = norm(input || '');
   if (n.length < 3) return null;

@@ -336,8 +336,8 @@
   {
    "id": "q1",
    "type": "qualifying",
-   "name": "Första kvalomgången",
-   "short": "Kval 1",
+   "name": "First qualifying round",
+   "short": "Q1",
    "ties": [
     {
      "path": null,
@@ -351,8 +351,8 @@
      ],
      "winner": "ham",
      "agg": "2–2",
-     "legs": "2–0, 0–2 e.f.",
-     "note": "Hamrun Spartans vann 11–10 på straffar"
+     "legs": "2–0, 0–2 a.e.t.",
+     "note": "Hamrun Spartans won 11–10 on penalties"
     },
     {
      "path": null,
@@ -381,7 +381,7 @@
      ],
      "winner": "shk",
      "agg": "1–2",
-     "legs": "0–0, 1–2 e.f.",
+     "legs": "0–0, 1–2 a.e.t.",
      "note": null
     },
     {
@@ -546,7 +546,7 @@
      ],
      "winner": "lud",
      "agg": "3–2",
-     "legs": "1–0, 2–2 e.f.",
+     "legs": "1–0, 2–2 a.e.t.",
      "note": null
     }
    ]
@@ -554,8 +554,8 @@
   {
    "id": "q2",
    "type": "qualifying",
-   "name": "Andra kvalomgången",
-   "short": "Kval 2",
+   "name": "Second qualifying round",
+   "short": "Q2",
    "ties": [
     {
      "path": "champions",
@@ -674,7 +674,7 @@
      ],
      "winner": "lud",
      "agg": "1–3",
-     "legs": "0–0, 1–3 e.f.",
+     "legs": "0–0, 1–3 a.e.t.",
      "note": null
     },
     {
@@ -787,8 +787,8 @@
   {
    "id": "q3",
    "type": "qualifying",
-   "name": "Tredje kvalomgången",
-   "short": "Kval 3",
+   "name": "Third qualifying round",
+   "short": "Q3",
    "ties": [
     {
      "path": "champions",
@@ -817,8 +817,8 @@
      ],
      "winner": "kai",
      "agg": "1–1",
-     "legs": "1–0, 0–1 e.f.",
-     "note": "Kairat vann 4–3 på straffar"
+     "legs": "1–0, 0–1 a.e.t.",
+     "note": "Kairat won 4–3 on penalties"
     },
     {
      "path": "champions",
@@ -945,8 +945,8 @@
   {
    "id": "q_po",
    "type": "qualifying",
-   "name": "Kvalets playoff",
-   "short": "Playoff",
+   "name": "Play-off round",
+   "short": "PO",
    "ties": [
     {
      "path": "champions",
@@ -1005,8 +1005,8 @@
      ],
      "winner": "kai",
      "agg": "0–0",
-     "legs": "0–0, 0–0 e.f.",
-     "note": "Kairat vann 3–2 på straffar"
+     "legs": "0–0, 0–0 a.e.t.",
+     "note": "Kairat won 3–2 on penalties"
     },
     {
      "path": "champions",
@@ -1058,8 +1058,8 @@
   {
    "id": "ko_po",
    "type": "knockout",
-   "name": "Utslagsfasens playoff",
-   "short": "Playoff",
+   "name": "Knockout phase play-offs",
+   "short": "KO PO",
    "ties": [
     {
      "path": null,
@@ -1088,7 +1088,7 @@
      ],
      "winner": "gal",
      "agg": "7–5",
-     "legs": "5–2, 2–3 e.f.",
+     "legs": "5–2, 2–3 a.e.t.",
      "note": null
     },
     {
@@ -1186,8 +1186,8 @@
   {
    "id": "r16",
    "type": "knockout",
-   "name": "Åttondelsfinal",
-   "short": "1/8",
+   "name": "Round of 16",
+   "short": "R16",
    "ties": [
     {
      "path": null,
@@ -1291,7 +1291,7 @@
      ],
      "winner": "spo",
      "agg": "3–5",
-     "legs": "3–0, 0–5 e.f.",
+     "legs": "3–0, 0–5 a.e.t.",
      "note": null
     },
     {
@@ -1314,8 +1314,8 @@
   {
    "id": "qf",
    "type": "knockout",
-   "name": "Kvartsfinal",
-   "short": "1/4",
+   "name": "Quarter-finals",
+   "short": "QF",
    "ties": [
     {
      "path": null,
@@ -1382,8 +1382,8 @@
   {
    "id": "sf",
    "type": "knockout",
-   "name": "Semifinal",
-   "short": "Semi",
+   "name": "Semi-finals",
+   "short": "SF",
    "ties": [
     {
      "path": null,
@@ -1436,7 +1436,7 @@
      "winner": "psg",
      "agg": "1–1",
      "legs": null,
-     "note": "PSG vann 4–3 på straffar"
+     "note": "PSG won 4–3 on penalties"
     }
    ]
   }

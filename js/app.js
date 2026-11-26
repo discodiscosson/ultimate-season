@@ -4,9 +4,9 @@ import { saveRun } from './lib/supabase.js';
 import { esc } from './lib/util.js';
 
 const DIFF = {
-  easy: { name: 'Easy', desc: 'Svarsalternativ och facit direkt.' },
-  medium: { name: 'Medium', desc: 'Skriv själv med förslag. Fem kontroller i slutspelet.' },
-  hard: { name: 'Hard', desc: 'Fritext utan förslag. Slutspelet rättas först i slutet.' },
+  easy: { name: 'Easy', desc: 'Multiple choice and instant answers.' },
+  medium: { name: 'Medium', desc: 'Type with suggestions. Five checks in the knockout phase.' },
+  hard: { name: 'Hard', desc: 'Free text, no suggestions. Knockouts are marked at the end.' },
 };
 
 const app = document.getElementById('app');
@@ -17,7 +17,7 @@ const comp = () => INDEX.competitions.find((c) => c.id === sel.comp);
 
 function band(sub, ladder) {
   return `<header class="band">
-    <div class="band-top"><a class="home" href="https://www.disco.games">disco.games</a>${ladder ? '<button class="quit" data-act="app-quit">Avsluta</button>' : ''}</div>
+    <div class="band-top"><a class="home" href="https://www.disco.games">disco.games</a>${ladder ? '<button class="quit" data-act="app-quit">Quit</button>' : ''}</div>
     <h1 class="title">Ultimate Season</h1><p class="sub">${sub}</p>
     ${ladder ? `<div class="ladder">${ladder.map((s) => `<span class="${s.state}">${esc(s.label)}</span>`).join('')}</div>` : ''}
   </header>`;
@@ -25,29 +25,29 @@ function band(sub, ladder) {
 
 function renderStart() {
   const c = comp();
-  app.innerHTML = band('Sporttrivia där allt kretsar kring en enda säsong.') + `
+  app.innerHTML = band('Sports trivia built around a single season.') + `
     <section class="panel">
       <h3 class="lbl">Sport</h3>
-      <div class="chips"><button class="chip on" aria-pressed="true">Fotboll</button><button class="chip" disabled>Fler sporter snart</button></div>
-      <h3 class="lbl">Turnering</h3>
+      <div class="chips"><button class="chip on" aria-pressed="true">Football</button><button class="chip" disabled>More sports soon</button></div>
+      <h3 class="lbl">Competition</h3>
       <div class="chips">${INDEX.competitions.map((x) => `<button class="chip ${x.id === sel.comp ? 'on' : ''}" data-act="app-comp" data-id="${x.id}">${esc(x.name)}</button>`).join('')}</div>
-      <h3 class="lbl">Säsong</h3>
+      <h3 class="lbl">Season</h3>
       <div class="seasonrow">
-        <select id="season" aria-label="Säsong">${c.seasons.map((s) => `<option value="${s.id}" ${s.id === sel.season ? 'selected' : ''}>${esc(s.label)}</option>`).join('')}</select>
-        <button class="btn ghost" data-act="app-random">Slumpa</button>
+        <select id="season" aria-label="Season">${c.seasons.map((s) => `<option value="${s.id}" ${s.id === sel.season ? 'selected' : ''}>${esc(s.label)}</option>`).join('')}</select>
+        <button class="btn ghost" data-act="app-random">Random</button>
       </div>
-      <h3 class="lbl">Svårighet</h3>
+      <h3 class="lbl">Difficulty</h3>
       <div class="modes">${Object.entries(DIFF).map(([k, d]) => `<button class="mode ${sel.diff === k ? 'on' : ''}" data-act="app-diff" data-d="${k}" aria-pressed="${sel.diff === k}"><h4>${d.name}</h4><p>${d.desc}</p></button>`).join('')}</div>
     </section>
-    <div class="foot"><span></span><button class="btn" data-act="app-start">Starta säsongen</button></div>`;
+    <div class="foot"><span></span><button class="btn" data-act="app-start">Start the season</button></div>`;
 }
 
 async function play() {
   const myRun = ++runId;
-  app.innerHTML = band('Laddar säsongen…');
+  app.innerHTML = band('Loading the season…');
   let season;
   try { season = await loadSeason(sel.season); }
-  catch (e) { app.innerHTML = band(esc(e.message)) + '<div class="foot"><button class="btn" data-act="app-home">Tillbaka</button></div>'; return; }
+  catch (e) { app.innerHTML = band(esc(e.message)) + '<div class="foot"><button class="btn" data-act="app-home">Back</button></div>'; return; }
   if (myRun !== runId) return;
 
   const title = `${season.competition.name} ${season.label}, ${DIFF[sel.diff].name}`;
@@ -64,19 +64,19 @@ async function play() {
 async function summary(season, title, results) {
   const score = results.reduce((s, r) => s + r.score, 0), max = results.reduce((s, r) => s + r.max, 0);
   app.innerHTML = band(esc(title)) + `
-    <p class="total">${score} / ${max} p</p>
+    <p class="total">${score} / ${max} pts</p>
     <p class="hint" id="saved"></p>
-    ${results.map((r) => `<h3 class="path">${esc(r.title)} <span class="muted">${r.score} / ${r.max} p</span></h3>
+    ${results.map((r) => `<h3 class="path">${esc(r.title)} <span class="muted">${r.score} / ${r.max} pts</span></h3>
       <div class="rounds">${(r.lines || []).map(([a, b]) => `<div class="rrow"><span>${esc(a)}</span><span>${esc(b)}</span></div>`).join('')}</div>`).join('')}
     <div class="foot" style="justify-content:flex-start">
-      <button class="btn" data-act="app-again">Spela igen</button>
-      <button class="btn ghost" data-act="app-home">Byt säsong eller svårighet</button>
+      <button class="btn" data-act="app-again">Play again</button>
+      <button class="btn ghost" data-act="app-home">Change season or difficulty</button>
     </div>`;
   const res = await saveRun({
     season_id: season.id, difficulty: sel.diff, score, max_score: max,
     details: results.map(({ id, score: s, max: m, lines }) => ({ id, score: s, max: m, lines })),
   }).catch((e) => ({ status: 'error', message: e.message }));
-  const msg = { saved: 'Resultatet är sparat.', guest: 'Logga in för att spara resultatet.', error: `Kunde inte spara: ${res.message || ''}` }[res.status];
+  const msg = { saved: 'Your result has been saved.', guest: 'Sign in to save your result.', error: `Could not save: ${res.message || ''}` }[res.status];
   const el = app.querySelector('#saved');
   if (el && msg) el.textContent = msg;
 }

@@ -1,32 +1,32 @@
--- Ultimate Season: eget schema i guessthecareer-projektet.
--- Kör i SQL Editor (eller via supabase db push). Lägg sedan till "ultimate_season" under
--- Project Settings > API > Exposed schemas.
+-- Ultimate Season: its own schema in the guess-the-career project.
+-- Run in the SQL Editor (or via supabase db push). Then add "ultimate_season" under
+-- Project Settings > Data API > Exposed schemas.
 
 create schema if not exists ultimate_season;
 grant usage on schema ultimate_season to anon, authenticated, service_role;
 
--- Grunddata ---------------------------------------------------------------
+-- Reference data ---------------------------------------------------------------
 
 create table ultimate_season.countries (
-  code     text primary key,               -- t.ex. SWE, ENG
+  code     text primary key,               -- e.g. SWE, ENG
   name_sv  text not null,
   aliases  text[] not null default '{}'
 );
 
 create table ultimate_season.competitions (
-  id     text primary key,                 -- t.ex. ucl
+  id     text primary key,                 -- e.g. ucl
   sport  text not null,                    -- football
   name   text not null
 );
 
 create table ultimate_season.teams (
-  id            text primary key,          -- kort id, t.ex. psg
+  id            text primary key,          -- short id, e.g. psg
   name          text not null,
   country_code  text not null references ultimate_season.countries(code)
 );
 
 create table ultimate_season.seasons (
-  id                  text primary key,    -- t.ex. ucl-2025-26
+  id                  text primary key,    -- e.g. ucl-2025-26
   competition_id      text not null references ultimate_season.competitions(id),
   label               text not null,       -- 2025/26
   start_year          int  not null,
@@ -39,7 +39,7 @@ create table ultimate_season.seasons (
 create table ultimate_season.season_teams (
   season_id        text not null references ultimate_season.seasons(id) on delete cascade,
   team_id          text not null references ultimate_season.teams(id),
-  league_position  int,                    -- placering i liga- eller gruppfasen om den finns
+  league_position  int,                    -- league or group phase position, if any
   primary key (season_id, team_id)
 );
 
@@ -54,25 +54,25 @@ create table ultimate_season.stages (
   unique (season_id, code)
 );
 
--- Ett möte (dubbelmöte eller final). Varje plats är antingen ett fast lag eller vinnaren av ett tidigare möte.
+-- A tie (two legs or a final). Each slot is either a fixed team or the winner of an earlier tie.
 create table ultimate_season.ties (
   id           bigint generated always as identity primary key,
   stage_id     bigint not null references ultimate_season.stages(id) on delete cascade,
-  sort_order   int  not null,              -- 0-baserad, avgör trädets ordning
+  sort_order   int  not null,              -- 0-based, defines the bracket order
   path         text check (path in ('champions','league')),
   team1        text not null references ultimate_season.teams(id),
   team2        text not null references ultimate_season.teams(id),
   team1_from   bigint references ultimate_season.ties(id),
   team2_from   bigint references ultimate_season.ties(id),
   winner       text not null references ultimate_season.teams(id),
-  agg_score    text,                       -- sammanlagt, lag1–lag2
-  legs         text,                       -- matcherna, lag1–lag2
-  note         text,                       -- t.ex. straffar
+  agg_score    text,                       -- aggregate, team1–team2
+  legs         text,                       -- legs, team1–team2
+  note         text,                       -- e.g. penalties
   unique (stage_id, sort_order),
   check (winner in (team1, team2))
 );
 
--- Kommande spel: enskilda matcher, uppställningar och skytteliga ------------
+-- Upcoming games: single matches, line-ups and top scorers ------------
 
 create table ultimate_season.matches (
   id          bigint generated always as identity primary key,
@@ -94,7 +94,7 @@ create table ultimate_season.lineups (
   match_id     bigint not null references ultimate_season.matches(id) on delete cascade,
   team_id      text not null references ultimate_season.teams(id),
   player_name  text not null,
-  player_ref   bigint,                     -- kan peka på public.players.id i Guess the Career
+  player_ref   bigint,                     -- can point to public.players.id in Guess the Career
   is_starter   boolean not null default true,
   position     text,
   shirt_number int,
@@ -110,7 +110,7 @@ create table ultimate_season.top_scorers (
   primary key (season_id, player_name)
 );
 
--- Spelarnas resultat ------------------------------------------------------
+-- Player results ------------------------------------------------------
 
 create table ultimate_season.runs (
   id          bigint generated always as identity primary key,
@@ -124,8 +124,8 @@ create table ultimate_season.runs (
 );
 create index runs_season_idx on ultimate_season.runs (season_id, difficulty, score desc);
 
--- Behörigheter ------------------------------------------------------------
--- Säsongsdata är publik (den serveras ändå som statiska filer). Resultat: bara egna rader.
+-- Permissions ------------------------------------------------------------
+-- Season data is public (it is served as static files anyway). Results: own rows only.
 
 alter table ultimate_season.countries     enable row level security;
 alter table ultimate_season.competitions  enable row level security;
@@ -153,7 +153,7 @@ create policy "insert own runs" on ultimate_season.runs for insert to authentica
 create policy "read own runs"   on ultimate_season.runs for select to authenticated using (user_id = auth.uid());
 grant select, insert on ultimate_season.runs to authenticated;
 
--- Säsongen som JSON i exakt det format som frontend läser --------------------
+-- The season as JSON in exactly the format the frontend reads --------------------
 
 create or replace function ultimate_season.season_json(p_season text)
 returns jsonb

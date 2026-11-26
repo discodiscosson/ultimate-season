@@ -1,6 +1,6 @@
-// Sparar en genomspelad säsong i ultimate_season.runs om spelaren är inloggad.
-// Byt gärna ut createClient-anropet mot er gemensamma inloggningsmodul från de andra disco.games-spelen,
-// så att sessionen delas mellan subdomänerna på samma sätt.
+// Saves a completed season to ultimate_season.runs if the player is signed in.
+// Swap createClient for the shared sign-in module from the other disco.games games
+// so the session is shared across subdomains the same way.
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from '../config.js';
 
 let client = null;

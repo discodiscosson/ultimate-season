@@ -2,11 +2,11 @@ import { DATALIST, bindCountryField, fieldHTML, focusField, makeOptions, resultH
 import { countryName } from '../lib/countries.js';
 import { esc, tieResult } from '../lib/util.js';
 
-export const meta = { id: 'qualifying', title: 'Kvalet', short: 'Kval' };
+export const meta = { id: 'qualifying', title: 'Qualifying', short: 'Qualifying' };
 export const available = (season) => season.stages.some((s) => s.type === 'qualifying');
 
 const PICK_POINTS = 2;
-const PATHS = { champions: 'Mästarvägen', league: 'Ligavägen' };
+const PATHS = { champions: 'Champions Path', league: 'League Path' };
 
 export function play({ el, season, difficulty }) {
   return new Promise((resolve) => {
@@ -15,7 +15,7 @@ export function play({ el, season, difficulty }) {
     const LAST = ST.length - 1;
     const nm = (t) => T[t].name;
 
-    // Nya lag per omgång, i den ordning de dyker upp
+    // New teams per round, in the order they appear
     const NEW = [];
     const seen = new Set();
     ST.forEach((st, r) => {
@@ -40,10 +40,10 @@ export function play({ el, season, difficulty }) {
       let right;
       if (isNew && !a) {
         S.opts[t] ||= makeOptions(T[t].country, pool);
-        right = fieldHTML({ key: t, difficulty, options: S.opts[t], draft: S.drafts[t], err: S.err[t], label: `Land för ${nm(t)}` });
+        right = fieldHTML({ key: t, difficulty, options: S.opts[t], draft: S.drafts[t], err: S.err[t], label: `Country of ${nm(t)}` });
       } else if (isNew) right = resultHTML(a.code, T[t].country);
       else right = `<span class="cty">${esc(countryName(T[t].country))}</span>`;
-      const name = `<span class="tn">${esc(nm(t))}${revealed && t === tie.winner ? '<span class="adv">Vidare</span>' : ''}</span>`;
+      const name = `<span class="tn">${esc(nm(t))}${revealed && t === tie.winner ? '<span class="adv">Through</span>' : ''}</span>`;
       return pickPhase && !revealed
         ? `<button class="${cls}" data-act="q-pick" data-i="${i}" data-t="${t}">${name}${right}</button>`
         : `<div class="${cls}">${name}${right}</div>`;
@@ -64,7 +64,7 @@ export function play({ el, season, difficulty }) {
         const show = r < LAST ? done : pick !== undefined;
         let res = '';
         if (show) {
-          const verdict = r === LAST ? `<b class="${pick === tie.winner ? 'ok' : 'no'}">${pick === tie.winner ? `Rätt, +${PICK_POINTS} p` : 'Fel'}.</b> ` : '';
+          const verdict = r === LAST ? `<b class="${pick === tie.winner ? 'ok' : 'no'}">${pick === tie.winner ? `Correct, +${PICK_POINTS} pts` : 'Wrong'}.</b> ` : '';
           res = `<div class="res">${verdict}${esc(tieResult(tie, T, a, b))}</div>`;
         }
         body += `<div class="tie">${row(r, idx, a, tie)}${row(r, idx, b, tie)}${res}</div>`;
@@ -75,36 +75,36 @@ export function play({ el, season, difficulty }) {
       const nTies = st.ties.length, picked = Object.keys(S.picks).length;
       let hint, status, canNext;
       if (!done) {
-        const how = difficulty === 'easy' ? 'Välj rätt land för varje nytt lag.' : 'Skriv landet för varje nytt lag och tryck Enter eller OK.';
-        hint = r === 0 ? how : `${how} Lag du redan mött visar sitt land.`;
-        status = `${left} lag kvar`; canNext = false;
+        const how = difficulty === 'easy' ? 'Pick the right country for each new team.' : 'Type the country of each new team and press Enter or OK.';
+        hint = r === 0 ? how : `${how} Teams you have already seen show their country.`;
+        status = `${left} teams left`; canNext = false;
       } else if (r < LAST) {
-        hint = 'Alla länder klara. Här är omgångens resultat.'; status = ''; canNext = true;
+        hint = 'All countries done. Here are the results of the round.'; status = ''; canNext = true;
       } else {
-        hint = `Välj vilket lag i varje möte som gick till ligafasen. ${PICK_POINTS} p per rätt.`;
-        status = picked < nTies ? `${nTies - picked} möten kvar` : ''; canNext = picked === nTies;
+        hint = `Pick which team in each tie reached the league phase. ${PICK_POINTS} pts per correct pick.`;
+        status = picked < nTies ? `${nTies - picked} ties left` : ''; canNext = picked === nTies;
       }
       return `${DATALIST}
-        <div class="bar"><h2>${esc(st.name)}</h2><span class="score">${points()} p</span></div>
+        <div class="bar"><h2>${esc(st.name)}</h2><span class="score">${points()} pts</span></div>
         <p class="hint">${hint}</p>${body}
         <div class="foot"><span class="hint" style="margin:0">${status}</span>
-        <button class="btn" data-act="q-next" ${canNext ? '' : 'disabled'}>${r < LAST ? 'Nästa omgång' : 'Se sammanfattning'}</button></div>`;
+        <button class="btn" data-act="q-next" ${canNext ? '' : 'disabled'}>${r < LAST ? 'Next round' : 'See summary'}</button></div>`;
     }
 
     function lines() {
-      const out = ST.map((st, r) => [st.name, `${NEW[r].filter((t) => S.ans[t]?.ok).length}/${NEW[r].length} länder`]);
+      const out = ST.map((st, r) => [st.name, `${NEW[r].filter((t) => S.ans[t]?.ok).length}/${NEW[r].length} countries`]);
       const ok = ST[LAST].ties.filter((tie, i) => S.picks[i] === tie.winner).length;
-      out.push(['Till ligafasen', `${ok}/${ST[LAST].ties.length} rätt`]);
+      out.push(['To the league phase', `${ok}/${ST[LAST].ties.length} correct`]);
       return out;
     }
 
     function summaryHTML() {
       const misses = NEW.flat().filter((t) => S.ans[t] && !S.ans[t].ok)
-        .map((t) => `<div class="miss"><span><b>${esc(nm(t))}</b>: ${esc(countryName(T[t].country))}</span><span>Du svarade ${esc(countryName(S.ans[t].code))}</span></div>`).join('');
-      return `<div class="bar"><h2>Kvalet klart</h2><span class="score">${points()} / ${MAX} p</span></div>
+        .map((t) => `<div class="miss"><span><b>${esc(nm(t))}</b>: ${esc(countryName(T[t].country))}</span><span>You answered ${esc(countryName(S.ans[t].code))}</span></div>`).join('');
+      return `<div class="bar"><h2>Qualifying done</h2><span class="score">${points()} / ${MAX} pts</span></div>
         <div class="rounds">${lines().map(([k, v]) => `<div class="rrow"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join('')}</div>
-        ${misses ? `<h3 class="path">Länder du missade</h3>${misses}` : ''}
-        <div class="foot"><span></span><button class="btn" data-act="q-done">Vidare till slutspelet</button></div>`;
+        ${misses ? `<h3 class="path">Countries you missed</h3>${misses}` : ''}
+        <div class="foot"><span></span><button class="btn" data-act="q-done">On to the knockout phase</button></div>`;
     }
 
     function focusNext(after) {

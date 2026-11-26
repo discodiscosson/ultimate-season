@@ -6,9 +6,9 @@ export function shuffle(arr) {
   return a;
 }
 
-export const formatDate = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('sv-SE', { day: 'numeric', month: 'long', year: 'numeric' });
+export const formatDate = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
-// Resultatrad för ett dubbelmöte eller en final, t.ex. "Monaco 4–5 Paris Saint-Germain (2–3, 2–2)"
+// Result line for a two-legged tie or a final, e.g. "Monaco 4–5 Paris Saint-Germain (2–3, 2–2)"
 export function tieResult(tie, teams, a, b) {
   const base = tie.legs ? `${teams[a].name} ${tie.agg} ${teams[b].name} (${tie.legs})` : `${teams[a].name} ${tie.agg} ${teams[b].name}`;
   return tie.note ? `${base}. ${tie.note}` : base;
