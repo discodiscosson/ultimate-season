@@ -5,10 +5,11 @@ import { esc, formatDate } from '../lib/util.js';
 
 export const meta = { id: 'final-host', title: 'The final', short: 'Final venue' };
 export const available = (season) => !!season.final?.country;
+export const steps = () => ['Question'];
 
 const POINTS = 3;
 
-export function play({ el, season }) {
+export function play({ el, season, onStep }) {
   return new Promise((resolve) => {
     const F = season.final;
     const S = { drafts: {}, sel: {}, ans: undefined };
@@ -27,6 +28,7 @@ export function play({ el, season }) {
           : comboHTML({ key: 'final', draft: S.drafts.final, label: 'Country of the final' })}
         </div>
         <div class="foot" id="fh-foot">${footer()}</div>`;
+      onStep?.(0);
     }
     const footer = () => (S.ans !== undefined
       ? '<span></span><button class="btn" data-act="fh-next">Continue</button>'

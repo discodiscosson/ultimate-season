@@ -4,10 +4,11 @@ import { esc, tieResult } from '../lib/util.js';
 
 export const meta = { id: 'bracket', title: 'Knockout phase', short: 'Knockouts' };
 export const available = (season) => season.stages.some((s) => s.type === 'knockout');
+export const steps = (season) => [...season.stages.filter((s) => s.type === 'knockout').map((s) => s.name), 'Summary'];
 
 const CHECKS = 5;
 
-export function play({ el, season, difficulty }) {
+export function play({ el, season, difficulty, start = 0, onStep }) {
   return new Promise((resolve) => {
     const KS = season.stages.filter((s) => s.type === 'knockout');
     const LAST = KS.length - 1;
@@ -25,6 +26,12 @@ export function play({ el, season, difficulty }) {
     const MAX = KS.reduce((s, st, k) => s + st.ties.length * PTS[k], 0);
 
     const S = { r: 0, picks: KS.map(() => []), checked: KS.map(() => []), checks: CHECKS, summary: false };
+    // Starting later in the flow (review mode): earlier rounds are filled in with the real winners
+    if (start > 0) {
+      for (let k = 0; k < Math.min(start, KS.length); k++) S.picks[k] = REAL[k].slice();
+      S.r = Math.min(start, LAST);
+      S.summary = start > LAST;
+    }
     const src = () => (difficulty === 'easy' ? (k, i) => REAL[k][i] : (k, i) => (S.checked[k][i] ? REAL[k][i] : S.picks[k][i]));
     const adv = (k, i) => (S.picks[k][i] ? src()(k, i) : null);
     const points = () => S.picks.reduce((s, row, k) => s + row.filter((t, i) => t && t === REAL[k][i]).length * PTS[k], 0);
@@ -114,7 +121,7 @@ export function play({ el, season, difficulty }) {
         <div class="foot"><span></span><button class="btn" data-act="b-done">See season results</button></div>${detail}`;
     }
 
-    function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); }
+    function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); onStep?.(S.summary ? KS.length : S.r); }
 
     el.addEventListener('click', (e) => {
       const b = e.target.closest('[data-act^="b-"]');

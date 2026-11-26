@@ -37,6 +37,14 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid
 .ladder .past { background: rgba(255,255,255,.28); }
 .ladder .now { background: var(--pitch-ink); color: var(--pitch); }
 
+/* Review mode */
+.review { display: flex; gap: 8px; margin-top: 12px; position: relative; z-index: 1; }
+.review button, .review select { font: inherit; font-size: .85rem; font-weight: 600; color: var(--pitch-ink); background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); border-radius: 8px; padding: 6px 10px; }
+.review button { cursor: pointer; white-space: nowrap; }
+.review button:disabled { opacity: .4; cursor: default; }
+.review select { flex: 1; min-width: 0; cursor: pointer; }
+.review select option, .review select optgroup { color: #0f1f17; background: #fff; }
+
 /* Start page */
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 6px 18px 18px; }
 .lbl { font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--muted); margin: 14px 0 8px; }

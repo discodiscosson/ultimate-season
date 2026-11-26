@@ -6,11 +6,12 @@ import { esc, tieResult } from '../lib/util.js';
 
 export const meta = { id: 'qualifying', title: 'Qualifying', short: 'Qualifying' };
 export const available = (season) => season.stages.some((s) => s.type === 'qualifying');
+export const steps = (season) => [...season.stages.filter((s) => s.type === 'qualifying').map((s) => s.name), 'Summary'];
 
 const PICK_POINTS = 2;
 const PATHS = { champions: 'Champions Path', league: 'League Path' };
 
-export function play({ el, season }) {
+export function play({ el, season, start = 0, onStep }) {
   return new Promise((resolve) => {
     const ST = season.stages.filter((s) => s.type === 'qualifying');
     const T = season.teams;
@@ -27,6 +28,16 @@ export function play({ el, season }) {
     const MAX = NEW.flat().length + ST[LAST].ties.length * PICK_POINTS;
 
     const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: {}, submitted: [], summary: false };
+    // Starting later in the flow (review mode): earlier rounds are filled in with the right answers
+    if (start > 0) {
+      for (let r = 0; r < Math.min(start, ST.length); r++) {
+        NEW[r].forEach((t) => { const c = T[t].country; S.sel[t] = c; S.drafts[t] = countryName(c); S.ans[t] = { code: c, ok: true }; });
+        if (r === LAST) ST[LAST].ties.forEach((tie, i) => { S.picks[i] = tie.winner; });
+        S.submitted[r] = true;
+      }
+      S.r = Math.min(start, LAST);
+      S.summary = start > LAST;
+    }
     const points = () => Object.values(S.ans).filter((a) => a.ok).length
       + (S.submitted[LAST] ? ST[LAST].ties.filter((tie, i) => S.picks[i] === tie.winner).length * PICK_POINTS : 0);
     const progress = (r) => {
@@ -116,7 +127,7 @@ export function play({ el, season }) {
         <div class="foot"><span></span><button class="btn" data-act="q-done">Continue</button></div>`;
     }
 
-    function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); }
+    function render() { el.innerHTML = S.summary ? summaryHTML() : roundHTML(); onStep?.(S.summary ? ST.length : S.r); }
     const updateFooter = () => { const f = el.querySelector('#q-foot'); if (f && !S.submitted[S.r]) f.innerHTML = footer(S.r); };
     const firstOpen = (after) => {
       const list = NEW[S.r], start = after ? list.indexOf(after) + 1 : 0;
