@@ -370,7 +370,7 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         const unreal = ST[r].ties.filter((_, i) => { const [a, b] = tieTeams(r, i), re = realTeams(r, i); return !(re.includes(a) && re.includes(b)); }).length;
         ask = r === LAST ? `${nm(ST[r].ties[0].winner)} are the champions!` : `${ST[r].name}: the results`;
         hint = `${s.picks} of ${n} pick${n === 1 ? '' : 's'} right. ${s.total} pts.${unreal ? ` Dashed ties never happened, because a team you picked earlier was already out.` : ''}`;
-        foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'See summary'}</button>`;
+        foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : cfg.skipSummary ? 'See your results' : 'See summary'}</button>`;
       } else if (!fin && hasRival(r)) {
         ask = 'Who are their biggest rivals?';
         hint = `You picked ${s.picks} of ${n} right. Now name each team’s biggest rival and pick it from the list (${RIVAL_POINTS} pt each).`;
@@ -451,6 +451,16 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         ${champ && cfg.hidden && S.picks[LAST][0] ? `<p class="hint">Your champion: ${esc(nm(S.picks[LAST][0]))}${S.picks[LAST][0] === champ ? ' ✓' : ''}.</p>` : ''}
         ${misses ? `<h3 class="path">Countries you missed</h3>${misses}` : ''}
         <div class="foot"><span></span><button class="btn" data-act="q-done">Continue</button></div>`;
+    }
+
+    // Hands the result to the season; knockouts add the champion so the season summary can show it
+    function finishGame() {
+      const out = lines();
+      if (cfg.type === 'knockout') {
+        const champ = ST[LAST].ties[0]?.winner, mine = S.picks[LAST][0];
+        if (champ) out.push(['Champion', `${nm(champ)}${mine ? (mine === champ ? ' (your pick ✓)' : ` (your pick: ${nm(mine)})`) : ''}`]);
+      }
+      resolve({ score: points(), max: MAX, lines: out });
     }
 
     function render() {
@@ -613,8 +623,9 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
         render(); scrollTo(0, 0);
       } else if (act === 'q-next') {
         if (cfg.hidden && S.reveal) {
-          if (S.r < LAST) S.r++; else S.summary = true;
-          render(); scrollTo(0, 0); return;
+          if (S.r < LAST) { S.r++; render(); scrollTo(0, 0); return; }
+          if (cfg.skipSummary) { finishGame(); return; }
+          S.summary = true; render(); scrollTo(0, 0); return;
         }
         if (cfg.hidden && S.r === LAST) { S.reveal = true; S.r = 0; render(); scrollTo(0, 0); return; }
         if (S.r < LAST) {
@@ -624,8 +635,9 @@ export function playRounds(cfg, { el, season, start = 0, onStep }) {
           render(); scrollTo(0, 0);
           if (S.phase[S.r] === 'play') { if (isTable(S.r)) focusTie(); else focusField(el, nextOpen()); }
         }
+        else if (cfg.skipSummary) finishGame();
         else { S.summary = true; render(); scrollTo(0, 0); }
-      } else if (act === 'q-done') resolve({ score: points(), max: MAX, lines: lines() });
+      } else if (act === 'q-done') finishGame();
     });
 
     if (isCountry(S.r)) S.focus = firstOpenTie(S.r); else S.focus = firstUnpicked(S.r);

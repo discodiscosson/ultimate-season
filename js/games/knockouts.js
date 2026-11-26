@@ -5,7 +5,7 @@ import { playRounds } from './qualifying.js';
 
 export const meta = { id: 'knockouts', title: 'Knockout phase', short: 'Knockouts' };
 export const available = (season) => season.stages.some((s) => s.type === 'knockout');
-export const steps = (season) => [...season.stages.filter((s) => s.type === 'knockout').map((s) => s.name), 'Summary'];
+export const steps = (season) => season.stages.filter((s) => s.type === 'knockout').map((s) => s.name);
 
 export const KNOCKOUTS = {
   type: 'knockout',
@@ -17,6 +17,7 @@ export const KNOCKOUTS = {
   hidden: true, // hard mode; set to false to reveal each round and send the real winners through
   newLabel: 'Straight from the league phase',
   doneTitle: 'Knockout phase done',
+  skipSummary: true, // the season results page comes straight after the final
 };
 
 export const play = (ctx) => playRounds(KNOCKOUTS, ctx);
