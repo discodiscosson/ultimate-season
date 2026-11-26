@@ -292,6 +292,7 @@ button.tbtn:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px;
 .drawslot { display: inline-block; min-width: 2em; }
 .drawslot:empty { height: 1em; width: 7em; border-radius: 6px; background: var(--surface2); }
 .drawslot.pop { animation: pop .35s cubic-bezier(.2,.9,.3,1.4) both; }
+.drawslot.fx-team { display: inline-flex; } /* keep the gap between name and flag while the teams drop in */
 .mrow.reveal .agg, .mrow.reveal .leg, .mrow.reveal .tname.w { animation: fadeIn .7s ease both; }
 .mrow.played:not(.focus) .agg { color: var(--ink); }
 .tray { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin: 0 0 12px; min-height: 64px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; box-shadow: 0 6px 18px rgba(0,0,0,.06); }
