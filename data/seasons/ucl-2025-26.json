@@ -1,0 +1,1444 @@
+{
+ "id": "ucl-2025-26",
+ "label": "2025/26",
+ "competition": {
+  "id": "ucl",
+  "name": "Champions League",
+  "sport": "football"
+ },
+ "final": {
+  "date": "2026-05-30",
+  "city": "Budapest",
+  "country": "HUN",
+  "venue": "Puskás Aréna"
+ },
+ "teams": {
+  "zal": {
+   "name": "Žalgiris",
+   "country": "LTU"
+  },
+  "ham": {
+   "name": "Hamrun Spartans",
+   "country": "MLT"
+  },
+  "kup": {
+   "name": "KuPS",
+   "country": "FIN"
+  },
+  "mil": {
+   "name": "Milsami Orhei",
+   "country": "MDA"
+  },
+  "tns": {
+   "name": "The New Saints",
+   "country": "WAL"
+  },
+  "shk": {
+   "name": "Shkëndija",
+   "country": "MKD"
+  },
+  "ibe": {
+   "name": "Iberia 1999",
+   "country": "GEO"
+  },
+  "mal": {
+   "name": "Malmö FF",
+   "country": "SWE"
+  },
+  "lvd": {
+   "name": "FCI Levadia",
+   "country": "EST"
+  },
+  "rfs": {
+   "name": "RFS",
+   "country": "LVA"
+  },
+  "dri": {
+   "name": "Drita",
+   "country": "KOS"
+  },
+  "dif": {
+   "name": "Differdange 03",
+   "country": "LUX"
+  },
+  "vik": {
+   "name": "Víkingur Gøta",
+   "country": "FRO"
+  },
+  "lin": {
+   "name": "Lincoln Red Imps",
+   "country": "GIB"
+  },
+  "egn": {
+   "name": "Egnatia",
+   "country": "ALB"
+  },
+  "bre": {
+   "name": "Breiðablik",
+   "country": "ISL"
+  },
+  "she": {
+   "name": "Shelbourne",
+   "country": "IRL"
+  },
+  "lfd": {
+   "name": "Linfield",
+   "country": "NIR"
+  },
+  "fcs": {
+   "name": "FCSB",
+   "country": "ROU"
+  },
+  "esc": {
+   "name": "Inter Club d’Escaldes",
+   "country": "AND"
+  },
+  "vir": {
+   "name": "Virtus",
+   "country": "SMR"
+  },
+  "zri": {
+   "name": "Zrinjski Mostar",
+   "country": "BIH"
+  },
+  "oli": {
+   "name": "Olimpija Ljubljana",
+   "country": "SVN"
+  },
+  "kai": {
+   "name": "Kairat",
+   "country": "KAZ"
+  },
+  "noa": {
+   "name": "Noah",
+   "country": "ARM"
+  },
+  "bud": {
+   "name": "Budućnost Podgorica",
+   "country": "MNE"
+  },
+  "lud": {
+   "name": "Ludogorets Razgrad",
+   "country": "BUL"
+  },
+  "din": {
+   "name": "Dinamo Minsk",
+   "country": "BLR"
+  },
+  "dyn": {
+   "name": "Dynamo Kyiv",
+   "country": "UKR"
+  },
+  "paf": {
+   "name": "Pafos",
+   "country": "CYP"
+  },
+  "mac": {
+   "name": "Maccabi Tel Aviv",
+   "country": "ISR"
+  },
+  "rsb": {
+   "name": "Red Star Belgrade",
+   "country": "SRB"
+  },
+  "fer": {
+   "name": "Ferencváros",
+   "country": "HUN"
+  },
+  "lec": {
+   "name": "Lech Poznań",
+   "country": "POL"
+  },
+  "cop": {
+   "name": "Copenhagen",
+   "country": "DEN"
+  },
+  "rij": {
+   "name": "Rijeka",
+   "country": "CRO"
+  },
+  "slo": {
+   "name": "Slovan Bratislava",
+   "country": "SVK"
+  },
+  "qar": {
+   "name": "Qarabağ",
+   "country": "AZE"
+  },
+  "bra": {
+   "name": "Brann",
+   "country": "NOR"
+  },
+  "sal": {
+   "name": "Red Bull Salzburg",
+   "country": "AUT"
+  },
+  "plz": {
+   "name": "Viktoria Plzeň",
+   "country": "CZE"
+  },
+  "ser": {
+   "name": "Servette",
+   "country": "SUI"
+  },
+  "ran": {
+   "name": "Rangers",
+   "country": "SCO"
+  },
+  "pan": {
+   "name": "Panathinaikos",
+   "country": "GRE"
+  },
+  "bru": {
+   "name": "Club Brugge",
+   "country": "BEL"
+  },
+  "nic": {
+   "name": "Nice",
+   "country": "FRA"
+  },
+  "ben": {
+   "name": "Benfica",
+   "country": "POR"
+  },
+  "fey": {
+   "name": "Feyenoord",
+   "country": "NED"
+  },
+  "fen": {
+   "name": "Fenerbahçe",
+   "country": "TUR"
+  },
+  "bod": {
+   "name": "Bodø/Glimt",
+   "country": "NOR"
+  },
+  "stu": {
+   "name": "Sturm Graz",
+   "country": "AUT"
+  },
+  "cel": {
+   "name": "Celtic",
+   "country": "SCO"
+  },
+  "bas": {
+   "name": "Basel",
+   "country": "SUI"
+  },
+  "psg": {
+   "name": "Paris Saint-Germain",
+   "country": "FRA"
+  },
+  "mon": {
+   "name": "Monaco",
+   "country": "FRA"
+  },
+  "gal": {
+   "name": "Galatasaray",
+   "country": "TUR"
+  },
+  "juv": {
+   "name": "Juventus",
+   "country": "ITA"
+  },
+  "rma": {
+   "name": "Real Madrid",
+   "country": "ESP"
+  },
+  "bvb": {
+   "name": "Borussia Dortmund",
+   "country": "GER"
+  },
+  "ata": {
+   "name": "Atalanta",
+   "country": "ITA"
+  },
+  "new": {
+   "name": "Newcastle United",
+   "country": "ENG"
+  },
+  "atm": {
+   "name": "Atlético Madrid",
+   "country": "ESP"
+  },
+  "int": {
+   "name": "Inter",
+   "country": "ITA"
+  },
+  "oly": {
+   "name": "Olympiacos",
+   "country": "GRE"
+  },
+  "b04": {
+   "name": "Bayer Leverkusen",
+   "country": "GER"
+  },
+  "che": {
+   "name": "Chelsea",
+   "country": "ENG"
+  },
+  "liv": {
+   "name": "Liverpool",
+   "country": "ENG"
+  },
+  "mci": {
+   "name": "Manchester City",
+   "country": "ENG"
+  },
+  "bay": {
+   "name": "Bayern München",
+   "country": "GER"
+  },
+  "bar": {
+   "name": "Barcelona",
+   "country": "ESP"
+  },
+  "tot": {
+   "name": "Tottenham Hotspur",
+   "country": "ENG"
+  },
+  "spo": {
+   "name": "Sporting CP",
+   "country": "POR"
+  },
+  "ars": {
+   "name": "Arsenal",
+   "country": "ENG"
+  }
+ },
+ "leaguePosition": {
+  "ars": 1,
+  "bay": 2,
+  "liv": 3,
+  "tot": 4,
+  "bar": 5,
+  "che": 6,
+  "spo": 7,
+  "mci": 8,
+  "rma": 9,
+  "int": 10,
+  "psg": 11,
+  "new": 12,
+  "juv": 13,
+  "atm": 14,
+  "ata": 15,
+  "b04": 16,
+  "bvb": 17,
+  "oly": 18,
+  "bru": 19,
+  "gal": 20,
+  "mon": 21,
+  "qar": 22,
+  "bod": 23,
+  "ben": 24
+ },
+ "stages": [
+  {
+   "id": "q1",
+   "type": "qualifying",
+   "name": "Första kvalomgången",
+   "short": "Kval 1",
+   "ties": [
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "zal"
+      },
+      {
+       "team": "ham"
+      }
+     ],
+     "winner": "ham",
+     "agg": "2–2",
+     "legs": "2–0, 0–2 e.f.",
+     "note": "Hamrun Spartans vann 11–10 på straffar"
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "kup"
+      },
+      {
+       "team": "mil"
+      }
+     ],
+     "winner": "kup",
+     "agg": "1–0",
+     "legs": "1–0, 0–0",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "tns"
+      },
+      {
+       "team": "shk"
+      }
+     ],
+     "winner": "shk",
+     "agg": "1–2",
+     "legs": "0–0, 1–2 e.f.",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "ibe"
+      },
+      {
+       "team": "mal"
+      }
+     ],
+     "winner": "mal",
+     "agg": "2–6",
+     "legs": "1–3, 1–3",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "lvd"
+      },
+      {
+       "team": "rfs"
+      }
+     ],
+     "winner": "rfs",
+     "agg": "0–2",
+     "legs": "0–1, 0–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "dri"
+      },
+      {
+       "team": "dif"
+      }
+     ],
+     "winner": "dri",
+     "agg": "4–2",
+     "legs": "1–0, 3–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "vik"
+      },
+      {
+       "team": "lin"
+      }
+     ],
+     "winner": "lin",
+     "agg": "2–4",
+     "legs": "2–3, 0–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "egn"
+      },
+      {
+       "team": "bre"
+      }
+     ],
+     "winner": "bre",
+     "agg": "1–5",
+     "legs": "1–0, 0–5",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "she"
+      },
+      {
+       "team": "lfd"
+      }
+     ],
+     "winner": "she",
+     "agg": "2–1",
+     "legs": "1–0, 1–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "fcs"
+      },
+      {
+       "team": "esc"
+      }
+     ],
+     "winner": "fcs",
+     "agg": "4–3",
+     "legs": "3–1, 1–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "vir"
+      },
+      {
+       "team": "zri"
+      }
+     ],
+     "winner": "zri",
+     "agg": "1–4",
+     "legs": "0–2, 1–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "oli"
+      },
+      {
+       "team": "kai"
+      }
+     ],
+     "winner": "kai",
+     "agg": "1–3",
+     "legs": "1–1, 0–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "noa"
+      },
+      {
+       "team": "bud"
+      }
+     ],
+     "winner": "noa",
+     "agg": "3–2",
+     "legs": "1–0, 2–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "lud"
+      },
+      {
+       "team": "din"
+      }
+     ],
+     "winner": "lud",
+     "agg": "3–2",
+     "legs": "1–0, 2–2 e.f.",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "q2",
+   "type": "qualifying",
+   "name": "Andra kvalomgången",
+   "short": "Kval 2",
+   "ties": [
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "rfs"
+      },
+      {
+       "team": "mal"
+      }
+     ],
+     "winner": "mal",
+     "agg": "1–5",
+     "legs": "1–4, 0–1",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "ham"
+      },
+      {
+       "team": "dyn"
+      }
+     ],
+     "winner": "dyn",
+     "agg": "0–6",
+     "legs": "0–3, 0–3",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "paf"
+      },
+      {
+       "team": "mac"
+      }
+     ],
+     "winner": "paf",
+     "agg": "2–1",
+     "legs": "1–1, 1–0",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "lin"
+      },
+      {
+       "team": "rsb"
+      }
+     ],
+     "winner": "rsb",
+     "agg": "1–6",
+     "legs": "0–1, 1–5",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "noa"
+      },
+      {
+       "team": "fer"
+      }
+     ],
+     "winner": "fer",
+     "agg": "4–6",
+     "legs": "1–2, 3–4",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "lec"
+      },
+      {
+       "team": "bre"
+      }
+     ],
+     "winner": "lec",
+     "agg": "8–1",
+     "legs": "7–1, 1–0",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "cop"
+      },
+      {
+       "team": "dri"
+      }
+     ],
+     "winner": "cop",
+     "agg": "3–0",
+     "legs": "2–0, 1–0",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "rij"
+      },
+      {
+       "team": "lud"
+      }
+     ],
+     "winner": "lud",
+     "agg": "1–3",
+     "legs": "0–0, 1–3 e.f.",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "shk"
+      },
+      {
+       "team": "fcs"
+      }
+     ],
+     "winner": "shk",
+     "agg": "3–1",
+     "legs": "1–0, 2–1",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "slo"
+      },
+      {
+       "team": "zri"
+      }
+     ],
+     "winner": "slo",
+     "agg": "6–2",
+     "legs": "4–0, 2–2",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "she"
+      },
+      {
+       "team": "qar"
+      }
+     ],
+     "winner": "qar",
+     "agg": "0–4",
+     "legs": "0–3, 0–1",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "kup"
+      },
+      {
+       "team": "kai"
+      }
+     ],
+     "winner": "kai",
+     "agg": "2–3",
+     "legs": "2–0, 0–3",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "bra"
+      },
+      {
+       "team": "sal"
+      }
+     ],
+     "winner": "sal",
+     "agg": "2–5",
+     "legs": "1–4, 1–1",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "plz"
+      },
+      {
+       "team": "ser"
+      }
+     ],
+     "winner": "plz",
+     "agg": "3–2",
+     "legs": "0–1, 3–1",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "ran"
+      },
+      {
+       "team": "pan"
+      }
+     ],
+     "winner": "ran",
+     "agg": "3–1",
+     "legs": "2–0, 1–1",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "q3",
+   "type": "qualifying",
+   "name": "Tredje kvalomgången",
+   "short": "Kval 3",
+   "ties": [
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "mal"
+      },
+      {
+       "team": "cop"
+      }
+     ],
+     "winner": "cop",
+     "agg": "0–5",
+     "legs": "0–0, 0–5",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "kai"
+      },
+      {
+       "team": "slo"
+      }
+     ],
+     "winner": "kai",
+     "agg": "1–1",
+     "legs": "1–0, 0–1 e.f.",
+     "note": "Kairat vann 4–3 på straffar"
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "lec"
+      },
+      {
+       "team": "rsb"
+      }
+     ],
+     "winner": "rsb",
+     "agg": "2–4",
+     "legs": "1–3, 1–1",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "lud"
+      },
+      {
+       "team": "fer"
+      }
+     ],
+     "winner": "fer",
+     "agg": "0–3",
+     "legs": "0–0, 0–3",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "dyn"
+      },
+      {
+       "team": "paf"
+      }
+     ],
+     "winner": "paf",
+     "agg": "0–3",
+     "legs": "0–1, 0–2",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "shk"
+      },
+      {
+       "team": "qar"
+      }
+     ],
+     "winner": "qar",
+     "agg": "1–6",
+     "legs": "0–1, 1–5",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "sal"
+      },
+      {
+       "team": "bru"
+      }
+     ],
+     "winner": "bru",
+     "agg": "2–4",
+     "legs": "0–1, 2–3",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "ran"
+      },
+      {
+       "team": "plz"
+      }
+     ],
+     "winner": "ran",
+     "agg": "4–2",
+     "legs": "3–0, 1–2",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "nic"
+      },
+      {
+       "team": "ben"
+      }
+     ],
+     "winner": "ben",
+     "agg": "0–4",
+     "legs": "0–2, 0–2",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "fey"
+      },
+      {
+       "team": "fen"
+      }
+     ],
+     "winner": "fen",
+     "agg": "4–6",
+     "legs": "2–1, 2–5",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "q_po",
+   "type": "qualifying",
+   "name": "Kvalets playoff",
+   "short": "Playoff",
+   "ties": [
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "fer"
+      },
+      {
+       "team": "qar"
+      }
+     ],
+     "winner": "qar",
+     "agg": "4–5",
+     "legs": "1–3, 3–2",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "rsb"
+      },
+      {
+       "team": "paf"
+      }
+     ],
+     "winner": "paf",
+     "agg": "2–3",
+     "legs": "1–2, 1–1",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "bod"
+      },
+      {
+       "team": "stu"
+      }
+     ],
+     "winner": "bod",
+     "agg": "6–2",
+     "legs": "5–0, 1–2",
+     "note": null
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "cel"
+      },
+      {
+       "team": "kai"
+      }
+     ],
+     "winner": "kai",
+     "agg": "0–0",
+     "legs": "0–0, 0–0 e.f.",
+     "note": "Kairat vann 3–2 på straffar"
+    },
+    {
+     "path": "champions",
+     "slots": [
+      {
+       "team": "bas"
+      },
+      {
+       "team": "cop"
+      }
+     ],
+     "winner": "cop",
+     "agg": "1–3",
+     "legs": "1–1, 0–2",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "fen"
+      },
+      {
+       "team": "ben"
+      }
+     ],
+     "winner": "ben",
+     "agg": "0–1",
+     "legs": "0–0, 0–1",
+     "note": null
+    },
+    {
+     "path": "league",
+     "slots": [
+      {
+       "team": "ran"
+      },
+      {
+       "team": "bru"
+      }
+     ],
+     "winner": "bru",
+     "agg": "1–9",
+     "legs": "1–3, 0–6",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "ko_po",
+   "type": "knockout",
+   "name": "Utslagsfasens playoff",
+   "short": "Playoff",
+   "ties": [
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "mon"
+      },
+      {
+       "team": "psg"
+      }
+     ],
+     "winner": "psg",
+     "agg": "4–5",
+     "legs": "2–3, 2–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "gal"
+      },
+      {
+       "team": "juv"
+      }
+     ],
+     "winner": "gal",
+     "agg": "7–5",
+     "legs": "5–2, 2–3 e.f.",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "ben"
+      },
+      {
+       "team": "rma"
+      }
+     ],
+     "winner": "rma",
+     "agg": "1–3",
+     "legs": "0–1, 1–2",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "bvb"
+      },
+      {
+       "team": "ata"
+      }
+     ],
+     "winner": "ata",
+     "agg": "3–4",
+     "legs": "2–0, 1–4",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "qar"
+      },
+      {
+       "team": "new"
+      }
+     ],
+     "winner": "new",
+     "agg": "3–9",
+     "legs": "1–6, 2–3",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "bru"
+      },
+      {
+       "team": "atm"
+      }
+     ],
+     "winner": "atm",
+     "agg": "4–7",
+     "legs": "3–3, 1–4",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "bod"
+      },
+      {
+       "team": "int"
+      }
+     ],
+     "winner": "bod",
+     "agg": "5–2",
+     "legs": "3–1, 2–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "team": "oly"
+      },
+      {
+       "team": "b04"
+      }
+     ],
+     "winner": "b04",
+     "agg": "0–2",
+     "legs": "0–2, 0–0",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "r16",
+   "type": "knockout",
+   "name": "Åttondelsfinal",
+   "short": "1/8",
+   "ties": [
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:0"
+      },
+      {
+       "team": "che"
+      }
+     ],
+     "winner": "psg",
+     "agg": "8–2",
+     "legs": "5–2, 3–0",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:1"
+      },
+      {
+       "team": "liv"
+      }
+     ],
+     "winner": "liv",
+     "agg": "1–4",
+     "legs": "1–0, 0–4",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:2"
+      },
+      {
+       "team": "mci"
+      }
+     ],
+     "winner": "rma",
+     "agg": "5–1",
+     "legs": "3–0, 2–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:3"
+      },
+      {
+       "team": "bay"
+      }
+     ],
+     "winner": "bay",
+     "agg": "2–10",
+     "legs": "1–6, 1–4",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:4"
+      },
+      {
+       "team": "bar"
+      }
+     ],
+     "winner": "bar",
+     "agg": "3–8",
+     "legs": "1–1, 2–7",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:5"
+      },
+      {
+       "team": "tot"
+      }
+     ],
+     "winner": "atm",
+     "agg": "7–5",
+     "legs": "5–2, 2–3",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:6"
+      },
+      {
+       "team": "spo"
+      }
+     ],
+     "winner": "spo",
+     "agg": "3–5",
+     "legs": "3–0, 0–5 e.f.",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "ko_po:7"
+      },
+      {
+       "team": "ars"
+      }
+     ],
+     "winner": "ars",
+     "agg": "1–3",
+     "legs": "1–1, 0–2",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "qf",
+   "type": "knockout",
+   "name": "Kvartsfinal",
+   "short": "1/4",
+   "ties": [
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "r16:0"
+      },
+      {
+       "from": "r16:1"
+      }
+     ],
+     "winner": "psg",
+     "agg": "4–0",
+     "legs": "2–0, 2–0",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "r16:2"
+      },
+      {
+       "from": "r16:3"
+      }
+     ],
+     "winner": "bay",
+     "agg": "4–6",
+     "legs": "1–2, 3–4",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "r16:4"
+      },
+      {
+       "from": "r16:5"
+      }
+     ],
+     "winner": "atm",
+     "agg": "2–3",
+     "legs": "0–2, 2–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "r16:6"
+      },
+      {
+       "from": "r16:7"
+      }
+     ],
+     "winner": "ars",
+     "agg": "0–1",
+     "legs": "0–1, 0–0",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "sf",
+   "type": "knockout",
+   "name": "Semifinal",
+   "short": "Semi",
+   "ties": [
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "qf:0"
+      },
+      {
+       "from": "qf:1"
+      }
+     ],
+     "winner": "psg",
+     "agg": "6–5",
+     "legs": "5–4, 1–1",
+     "note": null
+    },
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "qf:2"
+      },
+      {
+       "from": "qf:3"
+      }
+     ],
+     "winner": "ars",
+     "agg": "1–2",
+     "legs": "1–1, 0–1",
+     "note": null
+    }
+   ]
+  },
+  {
+   "id": "final",
+   "type": "knockout",
+   "name": "Final",
+   "short": "Final",
+   "ties": [
+    {
+     "path": null,
+     "slots": [
+      {
+       "from": "sf:0"
+      },
+      {
+       "from": "sf:1"
+      }
+     ],
+     "winner": "psg",
+     "agg": "1–1",
+     "legs": null,
+     "note": "PSG vann 4–3 på straffar"
+    }
+   ]
+  }
+ ]
+}

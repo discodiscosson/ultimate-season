@@ -1,0 +1,15 @@
+{
+ "competitions": [
+  {
+   "id": "ucl",
+   "sport": "football",
+   "name": "Champions League",
+   "seasons": [
+    {
+     "id": "ucl-2025-26",
+     "label": "2025/26"
+    }
+   ]
+  }
+ ]
+}
