@@ -247,6 +247,7 @@ export function play({ el, season, start = 0, onStep }) {
     function drawHTML(r) {
       return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
         <h3 class="ask small">The draw</h3>
+        ${r > 0 ? '<div class="tray" aria-live="polite"><div class="traylbl" id="tray-lbl"></div><div class="chips" id="tray"></div></div>' : ''}
         ${countryTableHTML(r, true)}
         <div class="foot"><span></span><button class="btn ghost" data-act="q-skip">Skip draw</button></div>`;
     }
@@ -306,9 +307,54 @@ export function play({ el, season, start = 0, onStep }) {
       S.focus = firstOpenTie(S.r);
       render(); focusTie();
     }
+    const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+    const drawing = (r) => el.isConnected && S.phase[r] === 'draw' && S.r === r;
+
+    // Later rounds: winners from the previous round move into their ties, then the new teams are placed one by one
+    function fly(chip, slot, name) {
+      const fill = () => { slot.textContent = name; slot.classList.add('pop'); chip.classList.add('gone'); };
+      if (!chip.animate || !slot.isConnected) { fill(); return; }
+      const a = chip.getBoundingClientRect(), b = slot.getBoundingClientRect();
+      const ghost = chip.cloneNode(true);
+      ghost.classList.add('flyer');
+      Object.assign(ghost.style, { left: `${a.left}px`, top: `${a.top}px`, width: `${a.width}px` });
+      el.appendChild(ghost);
+      chip.classList.add('gone');
+      const dx = b.left - a.left + (slot.closest('.t1') ? b.width - a.width : 0), dy = b.top - a.top;
+      ghost.animate([{ transform: 'translate(0, 0)' }, { transform: `translate(${dx}px, ${dy}px)` }],
+        { duration: 520, easing: 'cubic-bezier(.3,.7,.2,1)' }).onfinish = () => { ghost.remove(); fill(); };
+    }
+
+    async function placeGroup(r, label, teams, withFlags, gap) {
+      if (!drawing(r)) return;
+      const tray = el.querySelector('#tray'), lbl = el.querySelector('#tray-lbl');
+      lbl.textContent = label;
+      tray.innerHTML = teams.map((t) => `<span class="chip" data-chip="${t}">${withFlags ? flagHTML(T[t].country) : ''}${esc(nm(t))}</span>`).join('');
+      await sleep(900);
+      for (const t of teams) {
+        if (!drawing(r)) return;
+        const i = ST[r].ties.findIndex((tie) => tie.slots.some((s) => s.team === t));
+        const side = tieTeams(r, i).indexOf(t);
+        const slot = el.querySelector(`[data-slot="${i}-${side}"]`);
+        const chip = tray.querySelector(`[data-chip="${t}"]`);
+        if (slot && chip) fly(chip, slot, nm(t));
+        await sleep(gap);
+      }
+      await sleep(700);
+    }
+
+    async function transitionDraw(r) {
+      const carried = teamsIn(r).filter((t) => !NEW[r].includes(t));
+      const prev = ST[r - 1]?.name || 'the previous round';
+      if (carried.length) await placeGroup(r, `Winners of the ${prev.toLowerCase()}`, carried, true, 180);
+      if (NEW[r].length) await placeGroup(r, 'New teams entering in this round', NEW[r], false, 300);
+      if (drawing(r)) finishDraw();
+    }
+
     function startDraw() {
       const r = S.r;
       S.phase[r] = 'draw'; render(); scrollTo(0, 0);
+      if (r > 0) { if (prefersReducedMotion()) finishDraw(); else transitionDraw(r); return; }
       const slots = shuffle(ST[r].ties.flatMap((tie, i) => [[i, 0], [i, 1]]));
       if (prefersReducedMotion()) { finishDraw(); return; }
       drawTimer = setInterval(() => {

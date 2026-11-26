@@ -84,6 +84,10 @@ INTROS = {
        "transferred to the [Conference League second qualifying round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Conference_League#Second_qualifying_round), "
        "and the other two losing teams (selected via a draw) were transferred to the "
        "[Conference League third qualifying round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Conference_League#Third_qualifying_round).",
+ 'q2': "The draw for the second qualifying round was held on 18 June 2025. The first legs were played on 22 and 23 July, "
+       "and the second legs were played on 29 and 30 July 2025.\n\n"
+       "The winners of the ties advanced to the third qualifying round. The losers were transferred to the "
+       "[Europa League third qualifying round](https://en.wikipedia.org/wiki/2025%E2%80%9326_UEFA_Europa_League#Third_qualifying_round).",
 }
 
 SEEDED = ['che','liv','mci','bay','bar','tot','spo','ars']

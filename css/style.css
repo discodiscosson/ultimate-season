@@ -198,6 +198,14 @@ button.row:hover { border-color: var(--pick); }
 .drawslot.pop { animation: pop .35s cubic-bezier(.2,.9,.3,1.4) both; }
 .mrow.reveal .agg, .mrow.reveal .leg, .mrow.reveal .tname.w { animation: fadeIn .7s ease both; }
 .mrow.played:not(.focus) .agg { color: var(--ink); }
+.tray { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin: 0 0 12px; min-height: 64px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+.traylbl { font-size: .82rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; min-height: 1.2em; }
+.traylbl:not(:empty) { animation: fadeIn .4s ease both; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: var(--surface2); border: 1px solid var(--line); font-weight: 600; font-size: .88rem; white-space: nowrap; animation: pop .3s ease both; }
+.chip .flag { width: 18px; height: 13px; }
+.chip.gone { visibility: hidden; }
+.flyer { position: fixed; z-index: 60; margin: 0; pointer-events: none; background: var(--pick-bg); border-color: var(--pick); box-shadow: 0 8px 20px rgba(0,0,0,.18); animation: none; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pop { 0% { opacity: 0; transform: scale(.6); } 100% { opacity: 1; transform: none; } }
