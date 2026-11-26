@@ -1,7 +1,8 @@
 // Qualifying.
 // Country rounds (the first two): type the country of every new team.
-// Advance rounds (the rest): pick who went through and mark every team that has played a European Cup / Champions League final.
-// The last round also asks for each team's biggest rival.
+// Advance rounds (the rest): pick who went through.
+// Third qualifying round: also mark every team that has played a European Cup / Champions League final.
+// Last round (play-off): also name each team's biggest rival instead.
 // Nothing is revealed until the round is submitted.
 import { answerHTML, bindCombos, comboHTML, focusField } from '../lib/combo.js';
 import { countryName } from '../lib/countries.js';
@@ -23,6 +24,7 @@ export function play({ el, season, start = 0, onStep }) {
     const nm = (t) => T[t].name;
     const isCountry = (r) => r < COUNTRY_ROUNDS;
     const hasRival = (r) => r === LAST && !isCountry(r);
+    const hasFinalists = (r) => !isCountry(r) && r !== LAST;
     const isFinalist = (t) => (T[t].finals || []).length > 0;
     const rivalsOf = (t) => T[t].rivals || [];
 
@@ -38,7 +40,7 @@ export function play({ el, season, start = 0, onStep }) {
 
     const roundMax = (r) => (isCountry(r)
       ? NEW[r].length
-      : ST[r].ties.length * PICK_POINTS + teamsIn(r).filter(isFinalist).length + rivalTeams(r).length * RIVAL_POINTS);
+      : ST[r].ties.length * PICK_POINTS + (hasFinalists(r) ? teamsIn(r).filter(isFinalist).length : 0) + rivalTeams(r).length * RIVAL_POINTS);
     const MAX = ST.reduce((s, _, r) => s + roundMax(r), 0);
 
     const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: ST.map(() => ({})), marks: ST.map(() => new Set()), submitted: [], summary: false, touched: {} };
@@ -51,7 +53,7 @@ export function play({ el, season, start = 0, onStep }) {
         return { total: ok, countries: ok };
       }
       const picks = ST[r].ties.filter((tie, i) => S.picks[r][i] === tie.winner).length;
-      const finalists = teamsIn(r).filter(isFinalist);
+      const finalists = hasFinalists(r) ? teamsIn(r).filter(isFinalist) : [];
       const hit = finalists.filter((t) => S.marks[r].has(t)).length;
       const wrong = [...S.marks[r]].filter((t) => !isFinalist(t)).length;
       const marks = Math.max(0, hit - wrong);
@@ -82,7 +84,7 @@ export function play({ el, season, start = 0, onStep }) {
         if (isCountry(r)) NEW[r].forEach((t) => { const c = T[t].country; S.sel[t] = c; S.drafts[t] = countryName(c); S.ans[t] = { code: c, ok: true }; });
         else {
           ST[r].ties.forEach((tie, i) => { S.picks[r][i] = tie.winner; });
-          teamsIn(r).filter(isFinalist).forEach((t) => S.marks[r].add(t));
+          if (hasFinalists(r)) teamsIn(r).filter(isFinalist).forEach((t) => S.marks[r].add(t));
           rivalTeams(r).forEach((t) => { S.sel[rk(t)] = rivalsOf(t)[0]; S.drafts[rk(t)] = rivalsOf(t)[0]; });
         }
         S.submitted[r] = true;
@@ -111,11 +113,11 @@ export function play({ el, season, start = 0, onStep }) {
       let ctrls;
       if (!sub) {
         ctrls = `<div class="ctrls">
-          <button class="togbtn ${marked ? 'on' : ''}" data-act="q-mark" data-t="${t}" aria-pressed="${marked}" title="Has played a European Cup or Champions League final">🏆 ${marked ? 'Finalist' : 'Finalist?'}</button>
+          ${hasFinalists(r) ? `<button class="togbtn ${marked ? 'on' : ''}" data-act="q-mark" data-t="${t}" aria-pressed="${marked}" title="Has played a European Cup or Champions League final">🏆 ${marked ? 'Finalist' : 'Finalist?'}</button>` : ''}
           <button class="pickbtn ${pick === t ? 'on' : ''}" data-act="q-pick" data-i="${i}" data-t="${t}" aria-pressed="${pick === t}">${pick === t ? '✓ Through' : 'Through?'}</button>
         </div>`;
       } else {
-        const fin = T[t].finals || [];
+        const fin = hasFinalists(r) ? T[t].finals || [] : [];
         let badge = '';
         if (fin.length && marked) badge = `<span class="badge ok">🏆 Final ${fin.join(', ')} ✓</span>`;
         else if (fin.length) badge = `<span class="badge miss">🏆 Missed: final ${fin.join(', ')}</span>`;
@@ -150,7 +152,8 @@ export function play({ el, season, start = 0, onStep }) {
       if (S.submitted[r]) {
         const s = score(r);
         if (isCountry(r)) return `You got ${s.countries} of ${NEW[r].length} countries right.`;
-        let h = `${s.picks} of ${ST[r].ties.length} picks right. Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}.`;
+        let h = `${s.picks} of ${ST[r].ties.length} picks right.`;
+        if (hasFinalists(r)) h += ` Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}.`;
         if (hasRival(r)) h += ` Rivals: ${s.rivals} of ${rivalTeams(r).length}.`;
         return `${h} ${s.total} pts this round.`;
       }
@@ -159,7 +162,8 @@ export function play({ el, season, start = 0, onStep }) {
           ? 'Type the country of every team and pick it from the list. Answers are revealed when you submit the round.'
           : 'Type the country of every new team. Teams you have already seen show their country.';
       }
-      let h = `Pick which team went through in each tie (${PICK_POINTS} pts). Mark every team that has ever played in a European Cup or Champions League final (+1 for each one found, −1 for each wrong mark).`;
+      let h = `Pick which team went through in each tie (${PICK_POINTS} pts).`;
+      if (hasFinalists(r)) h += ' Mark every team that has ever played in a European Cup or Champions League final (+1 for each one found, −1 for each wrong mark).';
       if (hasRival(r)) h += ` Also name each team’s biggest rival (${RIVAL_POINTS} pt each).`;
       return h;
     }
@@ -185,7 +189,8 @@ export function play({ el, season, start = 0, onStep }) {
       return ST.map((st, r) => {
         const s = score(r);
         if (isCountry(r)) return [st.name, `${s.countries}/${NEW[r].length} countries`];
-        let v = `${s.picks}/${st.ties.length} through, ${s.hit}/${s.finalists} finalists`;
+        let v = `${s.picks}/${st.ties.length} through`;
+        if (hasFinalists(r)) v += `, ${s.hit}/${s.finalists} finalists`;
         if (hasRival(r)) v += `, ${s.rivals}/${rivalTeams(r).length} rivals`;
         return [st.name, v];
       });
