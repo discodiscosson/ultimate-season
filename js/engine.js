@@ -2,10 +2,10 @@
 // To add a game, create a module in js/games/ exporting meta, available(), steps() and play(), and register it here.
 import * as finalHost from './games/final-host.js';
 import * as qualifying from './games/qualifying.js';
-import * as bracket from './games/bracket.js';
+import * as knockouts from './games/knockouts.js';
 import * as league from './games/league-phase.js';
 
-const GAMES = [qualifying, finalHost, league, bracket];
+const GAMES = [qualifying, finalHost, league, knockouts];
 
 export const momentsFor = (season) => GAMES.filter((g) => g.available(season));
 

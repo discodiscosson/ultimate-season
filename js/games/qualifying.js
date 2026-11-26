@@ -14,25 +14,41 @@ export const meta = { id: 'qualifying', title: 'Qualifying', short: 'Qualifying'
 export const available = (season) => season.stages.some((s) => s.type === 'qualifying');
 export const steps = (season) => [...season.stages.filter((s) => s.type === 'qualifying').map((s) => s.name), 'Summary'];
 
-const COUNTRY_ROUNDS = 2;
-const PICK_POINTS = 2;
 const RIVAL_POINTS = 1;
 
-export function play({ el, season, start = 0, onStep }) {
+// The qualifying set-up. The knockout phase reuses the same rounds engine with its own settings (see knockouts.js).
+export const QUALIFYING = {
+  type: 'qualifying',
+  countryRounds: 2,
+  pickPoints: () => 2,
+  finalists: (r, last) => r !== last,
+  rivals: (r, last) => r === last,
+  autoDraw: false,
+  doneTitle: 'Qualifying done',
+};
+
+export const play = (ctx) => playRounds(QUALIFYING, ctx);
+
+export function playRounds(cfg, { el, season, start = 0, onStep }) {
   return new Promise((resolve) => {
-    const ST = season.stages.filter((s) => s.type === 'qualifying');
+    const ST = season.stages.filter((s) => s.type === cfg.type);
     const T = season.teams;
     const LAST = ST.length - 1;
     const nm = (t) => T[t].name;
+    const COUNTRY_ROUNDS = cfg.countryRounds;
+    const pickPts = (r) => cfg.pickPoints(r);
     const isCountry = (r) => r < COUNTRY_ROUNDS;
-    const hasRival = (r) => r === LAST && !isCountry(r);
-    const hasFinalists = (r) => !isCountry(r) && r !== LAST;
+    const hasRival = (r) => !isCountry(r) && cfg.rivals(r, LAST);
+    const hasFinalists = (r) => !isCountry(r) && cfg.finalists(r, LAST);
+    // A slot is a fixed team or the winner of an earlier tie ("r16:0"); the real winner always goes through
+    const STAGE = Object.fromEntries(season.stages.map((st) => [st.id, st]));
+    const slotTeam = (s) => { if (s.team) return s.team; const [id, i] = s.from.split(':'); return STAGE[id].ties[+i].winner; };
     // Rounds shown as a results table (with story, draw and one tie in focus); the play-off still uses cards
     const isTable = () => true;
     const isFinalist = (t) => (T[t].finals || []).length > 0;
     const rivalsOf = (t) => T[t].rivals || [];
 
-    const teamsIn = (r) => ST[r].ties.flatMap((tie) => tie.slots.map((s) => s.team));
+    const teamsIn = (r) => ST[r].ties.flatMap((tie) => tie.slots.map(slotTeam));
     // New teams per country round, in the order they appear
     const NEW = [];
     const seen = new Set();
@@ -44,7 +60,7 @@ export function play({ el, season, start = 0, onStep }) {
 
     const roundMax = (r) => (isCountry(r)
       ? NEW[r].length
-      : ST[r].ties.length * PICK_POINTS + (hasFinalists(r) ? teamsIn(r).filter(isFinalist).length : 0) + rivalTeams(r).length * RIVAL_POINTS);
+      : ST[r].ties.length * pickPts(r) + (hasFinalists(r) ? teamsIn(r).filter(isFinalist).length : 0) + rivalTeams(r).length * RIVAL_POINTS);
     const MAX = ST.reduce((s, _, r) => s + roundMax(r), 0);
 
     const S = { r: 0, drafts: {}, sel: {}, ans: {}, picks: ST.map(() => ({})), marks: ST.map(() => new Set()), submitted: [], summary: false, touched: {}, focus: 0, editing: {},
@@ -63,9 +79,9 @@ export function play({ el, season, start = 0, onStep }) {
       const wrong = [...S.marks[r]].filter((t) => !isFinalist(t)).length;
       const marks = Math.max(0, hit - wrong);
       const rivals = rivalTeams(r).filter((t) => rivalsOf(t).includes(S.sel[rk(t)])).length;
-      return { total: picks * PICK_POINTS + marks + rivals * RIVAL_POINTS, picks, hit, wrong, marks, finalists: finalists.length, rivals };
+      return { total: picks * pickPts(r) + marks + rivals * RIVAL_POINTS, picks, hit, wrong, marks, finalists: finalists.length, rivals };
     }
-    const points = () => ST.reduce((s, _, r) => s + (S.submitted[r] ? score(r).total : S.picksIn[r] ? score(r).picks * PICK_POINTS : 0), 0);
+    const points = () => ST.reduce((s, _, r) => s + (S.submitted[r] ? score(r).total : S.picksIn[r] ? score(r).picks * pickPts(r) : 0), 0);
 
     function progress(r) {
       if (isCountry(r)) {
@@ -148,7 +164,7 @@ export function play({ el, season, start = 0, onStep }) {
     }
 
     // ---- Country rounds: one horizontal row per tie, like a results table, with one tie in focus ----
-    const tieTeams = (r, i) => ST[r].ties[i].slots.map((s) => s.team);
+    const tieTeams = (r, i) => ST[r].ties[i].slots.map(slotTeam);
     const tieDone = (r, i) => tieTeams(r, i).every((t) => !NEW[r].includes(t) || (S.sel[t] && !S.editing[t]));
     const nextOpenTie = (r, from) => {
       const n = ST[r].ties.length;
@@ -162,10 +178,10 @@ export function play({ el, season, start = 0, onStep }) {
       const m = tie.note && tie.note.match(/(\d+)–(\d+) on penalties/);
       if (!m) return esc(tie.agg);
       const [hi, lo] = [m[1], m[2]];
-      const p = tie.winner === tie.slots[0].team ? `${hi}–${lo}` : `${lo}–${hi}`;
+      const p = tie.winner === slotTeam(tie.slots[0]) ? `${hi}–${lo}` : `${lo}–${hi}`;
       return `${esc(tie.agg)} <span class="pens">(${p} p)</span>`;
     }
-    const legsOf = (tie) => (tie.legs || '').split(', ').map((l) => l.replace(' a.e.t.', ' <span class="aet">a.e.t.</span>'));
+    const legsOf = (tie) => (tie.legs ? tie.legs.split(', ') : []).concat(['', '']).slice(0, 2).map((l) => l.replace(' a.e.t.', ' <span class="aet">a.e.t.</span>'));
 
     function flagCell(r, i, t, focused) {
       const isNew = NEW[r].includes(t), sub = S.submitted[r];
@@ -205,7 +221,7 @@ export function play({ el, season, start = 0, onStep }) {
         const cls = [focused && 'focus', sub && 'done', !sub && played && 'filled played', S.justDone === i && 'reveal'].filter(Boolean).join(' ');
         return `<div class="mrow ${cls}"${attrs}>
           <div class="tc t1">${name(a)}${flagCell(r, i, a, focused)}</div>
-          <div class="agg">${played ? aggText(tie) : '<span class="vs">–</span>'}${played ? `<span class="legs-m">${[l1, l2].join(', ')}</span>` : ''}</div>
+          <div class="agg">${played ? aggText(tie) : '<span class="vs">–</span>'}${played ? `<span class="legs-m">${[l1, l2].filter(Boolean).join(', ')}</span>` : ''}</div>
           <div class="tc t2">${flagCell(r, i, b, focused)}${name(b)}</div>
           <div class="leg">${l1}</div><div class="leg">${l2}</div>
         </div>`;
@@ -235,7 +251,7 @@ export function play({ el, season, start = 0, onStep }) {
           ? 'Pick the country of both teams in a tie to see how the tie ended. Click any tie to jump to it, or a flag to change it. Whether your countries were right is revealed when you submit the round.'
           : 'Pick the country of every new team. Teams you have already seen show their flag.';
       }
-      let h = `Pick which team went through in each tie (${PICK_POINTS} pts).`;
+      let h = `Pick which team went through in each tie (${pickPts(r)} pts).`;
       if (hasFinalists(r)) h += ' Mark every team that has ever played in a European Cup or Champions League final (+1 for each one found, −1 for each wrong mark).';
       if (hasRival(r)) h += ` Also name each team’s biggest rival (${RIVAL_POINTS} pt each).`;
       return h;
@@ -302,7 +318,7 @@ export function play({ el, season, start = 0, onStep }) {
         const attrs = rp && !focused ? ` data-act="q-focus" data-i="${i}" role="button" tabindex="0"` : '';
         return `<div class="mrow ${cls}"${attrs}>
           <div class="tc t1">${advTeam(r, i, a, tie, 0)}</div>
-          <div class="agg">${pickIn ? aggText(tie) : '<span class="vs">–</span>'}${pickIn ? `<span class="legs-m">${[l1, l2].join(', ')}</span>` : ''}</div>
+          <div class="agg">${pickIn ? aggText(tie) : '<span class="vs">–</span>'}${pickIn ? `<span class="legs-m">${[l1, l2].filter(Boolean).join(', ')}</span>` : ''}</div>
           <div class="tc t2">${advTeam(r, i, b, tie, 1)}</div>
           <div class="leg">${l1}</div><div class="leg">${l2}</div>
         </div>`;
@@ -320,8 +336,8 @@ export function play({ el, season, start = 0, onStep }) {
       const picked = Object.keys(S.picks[r]).length, n = ST[r].ties.length;
       let ask, hint, foot;
       if (!pickIn) {
-        ask = 'Who went through?';
-        hint = `Click the team that won each tie (${PICK_POINTS} pts each). The results are revealed when you submit.`;
+        ask = n === 1 && cfg.type === 'knockout' ? 'Who won the final?' : 'Who went through?';
+        hint = `Click the team that won each tie (${pickPts(r)} pts each). The results are revealed when you submit.`;
         foot = `<span class="hint" style="margin:0">${picked} of ${n} picks</span><button class="btn" data-act="q-subpicks" ${picked === n ? '' : 'disabled'}>Submit picks</button>`;
       } else if (!fin && hasRival(r)) {
         ask = 'Who are their biggest rivals?';
@@ -335,7 +351,10 @@ export function play({ el, season, start = 0, onStep }) {
         ask = '';
         hint = hasRival(r)
           ? `${s.picks} of ${n} picks right. Rivals: ${s.rivals} of ${rivalTeams(r).length}. ${s.total} pts this round.`
-          : `${s.picks} of ${n} picks right. Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}. ${s.total} pts this round.`;
+          : hasFinalists(r)
+            ? `${s.picks} of ${n} picks right. Finalists: ${s.hit} of ${s.finalists} found${s.wrong ? `, ${s.wrong} wrongly marked` : ''}. ${s.total} pts this round.`
+            : `${s.picks} of ${n} pick${n === 1 ? '' : 's'} right. ${s.total} pts this round.`;
+        if (cfg.type === 'knockout' && r === LAST) ask = `${nm(ST[r].ties[0].winner)} are the champions!`;
         foot = `<span></span><button class="btn" data-act="q-next">${r < LAST ? 'Next round' : 'See summary'}</button>`;
       }
       return `<div class="bar"><h2>${esc(ST[r].name)}</h2><span class="score">${points()} pts</span></div>
@@ -368,7 +387,7 @@ export function play({ el, season, start = 0, onStep }) {
         const row = isCountry(r) ? (t) => countryRow(r, t, tie) : (t) => advanceRow(r, i, t, tie);
         let res = '';
         if (sub) {
-          const verdict = isCountry(r) ? '' : `<b class="${S.picks[r][i] === tie.winner ? 'ok' : 'no'}">${S.picks[r][i] === tie.winner ? `Correct pick, +${PICK_POINTS} pts` : 'Wrong pick'}.</b> `;
+          const verdict = isCountry(r) ? '' : `<b class="${S.picks[r][i] === tie.winner ? 'ok' : 'no'}">${S.picks[r][i] === tie.winner ? `Correct pick, +${pickPts(r)} pts` : 'Wrong pick'}.</b> `;
           res = `<div class="res">${verdict}${esc(tieResult(tie, T, a, b))}</div>`;
         }
         return `<div class="tie">${row(a)}${row(b)}${res}</div>`;
@@ -393,8 +412,10 @@ export function play({ el, season, start = 0, onStep }) {
     function summaryHTML() {
       const misses = NEW.slice(0, COUNTRY_ROUNDS).flat().filter((t) => !S.ans[t]?.ok)
         .map((t) => `<div class="miss"><span><b>${esc(nm(t))}</b>: ${esc(countryName(T[t].country))}</span><span>You answered ${esc(S.ans[t]?.code ? countryName(S.ans[t].code) : 'nothing')}</span></div>`).join('');
-      return `<div class="bar"><h2>Qualifying done</h2><span class="score">${points()} / ${MAX} pts</span></div>
+      const champ = cfg.type === 'knockout' ? ST[LAST].ties[0]?.winner : null;
+      return `<div class="bar"><h2>${esc(cfg.doneTitle)}</h2><span class="score">${points()} / ${MAX} pts</span></div>
         <div class="rounds">${lines().map(([k, v]) => `<div class="rrow"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join('')}</div>
+        ${champ ? `<p class="champ">${flagHTML(T[champ].country)} ${esc(nm(champ))} are the champions.</p>` : ''}
         ${misses ? `<h3 class="path">Countries you missed</h3>${misses}` : ''}
         <div class="foot"><span></span><button class="btn" data-act="q-done">Continue</button></div>`;
     }
@@ -440,7 +461,7 @@ export function play({ el, season, start = 0, onStep }) {
       await sleep(900);
       for (const t of teams) {
         if (!drawing(r)) return;
-        const i = ST[r].ties.findIndex((tie) => tie.slots.some((s) => s.team === t));
+        const i = ST[r].ties.findIndex((_, k) => tieTeams(r, k).includes(t));
         const side = tieTeams(r, i).indexOf(t);
         const slot = el.querySelector(`[data-slot="${i}-${side}"]`);
         const chip = tray.querySelector(`[data-chip="${t}"]`);
@@ -454,7 +475,7 @@ export function play({ el, season, start = 0, onStep }) {
       const carried = teamsIn(r).filter((t) => !NEW[r].includes(t));
       const prev = ST[r - 1]?.name || 'the previous round';
       if (carried.length) await placeGroup(r, `Winners of the ${prev.toLowerCase()}`, carried, true, 180);
-      if (NEW[r].length) await placeGroup(r, 'New teams entering in this round', NEW[r], !isCountry(r), 300);
+      if (NEW[r].length) await placeGroup(r, cfg.newLabel || 'New teams entering in this round', NEW[r], !isCountry(r), 300);
       if (drawing(r)) finishDraw();
     }
 
@@ -532,6 +553,8 @@ export function play({ el, season, start = 0, onStep }) {
       if (act === 'q-subpicks') {
         if (Object.keys(S.picks[r]).length !== ST[r].ties.length) return;
         S.picksIn[r] = true; S.askAnim = true;
+        // Rounds with no second question are done as soon as the picks are in
+        if (!hasRival(r) && !hasFinalists(r)) S.submitted[r] = true;
         if (hasRival(r)) S.focus = firstRivalOpen(r);
         render(); scrollTo(0, 0); if (hasRival(r)) focusTie(); return;
       }
@@ -557,7 +580,10 @@ export function play({ el, season, start = 0, onStep }) {
         render(); scrollTo(0, 0);
       } else if (act === 'q-next') {
         if (S.r < LAST) {
-          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : firstUnpicked(S.r); render(); scrollTo(0, 0);
+          S.r++; S.focus = isCountry(S.r) ? firstOpenTie(S.r) : firstUnpicked(S.r);
+          // Knockouts: the winners move into the next round with the draw animation, even without a story text
+          if (cfg.autoDraw && S.phase[S.r] === 'play' && !S.submitted[S.r]) { startDraw(); return; }
+          render(); scrollTo(0, 0);
           if (S.phase[S.r] === 'play') { if (isTable(S.r)) focusTie(); else focusField(el, nextOpen()); }
         }
         else { S.summary = true; render(); scrollTo(0, 0); }
